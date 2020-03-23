@@ -4,6 +4,6 @@ resource "kubernetes_namespace" "deployment" {
       mylabel = "deployment"
     }
 
-    name = "terraform-deployment-namespace"
+    name = "deployment"
   }
 }
