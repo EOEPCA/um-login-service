@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 
 # Install minikube and kubectl
