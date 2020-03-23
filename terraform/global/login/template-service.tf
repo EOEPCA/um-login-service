@@ -1,6 +1,6 @@
 resource "kubernetes_pod" "gluu" {
   metadata {
-    name = "terraform-example"
+    name = "gluu-pod"
   }
 
   spec {
@@ -20,7 +20,7 @@ resource "kubernetes_pod" "gluu" {
 
 resource "kubernetes_pod" "login-engine" {
   metadata {
-    name = "terraform-example"
+    name = "login-pod"
   }
 
   spec {
