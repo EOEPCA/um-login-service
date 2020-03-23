@@ -1,7 +1,7 @@
 resource "kubernetes_pod" "gluu" {
   metadata {
     name = "gluu-pod"
-    namespace = "deployment"
+    #namespace = "deployment"
   }
 
   spec {
@@ -27,7 +27,7 @@ resource "kubernetes_pod" "gluu" {
 resource "kubernetes_pod" "login-engine" {
   metadata {
     name = "login-pod"
-    namespace = "deployment"
+    #namespace = "deployment"
   }
 
   spec {
