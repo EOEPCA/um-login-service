@@ -20,15 +20,15 @@ if ($debug == "true"); then
     kubectl get nodes
     kubectl get namespaces
     kubectl get pods --all-namespaces
-    kubectl get deployments login-engine
+    kubectl get deployments --namespace=deployment login-engine
 
-    kubectl logs deployment/login-engine --all-containers=true
-    kubectl logs deployment/gluu --all-containers=true
-    kubectl get service login-engine -o json
-    kubectl describe deployment login-engine
+    kubectl logs --namespace=deployment deployment/login-engine --all-containers=true
+    kubectl logs --namespace=deployment deployment/gluu --all-containers=true
+    kubectl get service --namespace=deployment login-engine -o json
+    kubectl describe deployment --namespace=deployment login-engine
     
     for i in $SERVICES; do
-    kubectl describe service  $i
+    kubectl describe service --namespace=deployment $i
     done
 
 
@@ -41,8 +41,8 @@ echo "MiniKube Master IP is ${minikubeIP}"
 
 echo Testing connectivity with the services
 for i in $SERVICES; do
-    ip=$(kubectl get svc  $i -o json | jq -r '.spec.clusterIP')
-    port=$(kubectl get service  $i --output=jsonpath='{.spec.ports[0].port}')
+    ip=$(kubectl get svc --namespace=deployment $i -o json | jq -r '.spec.clusterIP')
+    port=$(kubectl get service --namespace=deployment $i --output=jsonpath='{.spec.ports[0].port}')
     echo Cluster IP of $i is ${ip}:${port}
 
     # curl echoes both ports to check connectivity.  The second set echoes the server headers should report nginx and javalin
@@ -52,16 +52,16 @@ done
 
 
 if ($debug == "true"); then
-    kubectl logs deployment/gluu --all-containers=true
-    kubectl logs deployment/login-engine --all-containers=true
+    kubectl logs --namespace=deployment deployment/gluu --all-containers=true
+    kubectl logs --namespace=deployment deployment/login-engine --all-containers=true
     
     # Namespace: deployment
-    kubectl describe deployments 
-    kubectl describe services    
-    kubectl describe jobs        
+    kubectl describe deployments --namespace=deployment
+    kubectl describe services    --namespace=deployment
+    kubectl describe jobs        --namespace=deployment
 
     # Debug Persistent Volumes, PV Claims and Storage Classes
     kubectl describe pv
-    kubectl describe pvc 
+    kubectl describe pvc --namespace=deployment
     kubectl get storageclass
 fi
