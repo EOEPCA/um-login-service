@@ -3,7 +3,5 @@ provider "kubernetes" {
 }
 
 module "template-svce" {
-  source = "../global/template-svce"
-  db_username = var.db_username
-  db_password = var.db_password
+  source = "../global/login"
 }
