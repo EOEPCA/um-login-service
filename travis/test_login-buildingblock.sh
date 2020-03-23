@@ -4,30 +4,29 @@
 TRAVIS_BUILD_DIR="${TRAVIS_BUILD_DIR:-.}"
 
 # Create the K8S environment
-cd ${TRAVIS_BUILD_DIR}/terraform/test && terraform apply -input=false -auto-approve #-var='db_username=$DB_USER' -var='db_password=$DB_PASSWORD' 
+cd ${TRAVIS_BUILD_DIR}/terraform/test && terraform apply -input=false -auto-approve
 
 # Various debug statements
 debug=false
 
-SERVICES="user-login-engine user-common-gluu"
+SERVICES="login-engine gluu"
 
 if ($debug == "true"); then
 
     # View cluster (kubectl) config in ~/.kube/config
     kubectl config view
     kubectl get nodes
-    kubectl get secret db-user-pass -o yaml --namespace=eo-services
     kubectl get namespaces
     kubectl get pods --all-namespaces
-    kubectl get deployments --namespace=eo-services user-login-engine-deployment
+    kubectl get deployments --namespace=deployment login-engine
 
-    kubectl logs --namespace=eo-services deployment/user-login-engine-deployment --all-containers=true
-    kubectl logs --namespace=eo-services deployment/user-common-gluu --all-containers=true
-    kubectl get service --namespace=eo-services user-login-engine -o json
-    kubectl describe deployment --namespace=eo-services user-login-engine-deployment
+    kubectl logs --namespace=deployment deployment/login-engine --all-containers=true
+    kubectl logs --namespace=deployment deployment/gluu --all-containers=true
+    kubectl get service --namespace=deployment login-engine -o json
+    kubectl describe deployment --namespace=deployment login-engine
     
     for i in $SERVICES; do
-    kubectl describe service --namespace=eo-services $i
+    kubectl describe service --namespace=deployment $i
     done
 
 
@@ -40,8 +39,8 @@ echo "MiniKube Master IP is ${minikubeIP}"
 
 echo Testing connectivity with the services
 for i in $SERVICES; do
-    ip=$(kubectl get svc --namespace=eo-services $i -o json | jq -r '.spec.clusterIP')
-    port=$(kubectl get service --namespace=eo-services $i --output=jsonpath='{.spec.ports[0].port}')
+    ip=$(kubectl get svc --namespace=deployment $i -o json | jq -r '.spec.clusterIP')
+    port=$(kubectl get service --namespace=deployment $i --output=jsonpath='{.spec.ports[0].port}')
     echo Cluster IP of $i is ${ip}:${port}
 
     # curl echoes both ports to check connectivity.  The second set echoes the server headers should report nginx and javalin
@@ -51,22 +50,16 @@ done
 
 
 if ($debug == "true"); then
-    kubectl logs --namespace=eo-services deployment/user-common-gluu --all-containers=true
-    kubectl logs --namespace=eo-services deployment/user-login-engine-deployment --all-containers=true
+    kubectl logs --namespace=deployment deployment/gluu --all-containers=true
+    kubectl logs --namespace=deployment deployment/login-engine --all-containers=true
     
-    # Namespace: eo-services
-    kubectl describe deployments --namespace=eo-services
-    kubectl describe services    --namespace=eo-services
-    kubectl describe jobs        --namespace=eo-services
-
-    # Namespace: eo-user-compute
-    kubectl describe deployments --namespace=eo-user-compute
-    kubectl describe services    --namespace=eo-user-compute
-    kubectl describe jobs        --namespace=eo-user-compute
-    kubectl describe quota --namespace=eo-user-compute
+    # Namespace: deployment
+    kubectl describe deployments --namespace=deployment
+    kubectl describe services    --namespace=deployment
+    kubectl describe jobs        --namespace=deployment
 
     # Debug Persistent Volumes, PV Claims and Storage Classes
     kubectl describe pv
-    kubectl describe pvc --namespace=eo-user-compute
+    kubectl describe pvc --namespace=deployment
     kubectl get storageclass
 fi
