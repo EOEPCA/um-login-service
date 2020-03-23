@@ -18,7 +18,7 @@ resource "kubernetes_pod" "gluu" {
   }
 
   depends_on = [
-    kubernetes_namespace.deployment
+    kubernetes_namespace.terraform-deployment-namespace
   ]
 
 }

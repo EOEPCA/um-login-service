@@ -7,7 +7,7 @@ TRAVIS_BUILD_DIR="${TRAVIS_BUILD_DIR:-.}"
 cd ${TRAVIS_BUILD_DIR}/terraform/test && terraform apply -input=false -auto-approve
 
 # Various debug statements
-debug=false
+debug=true
 
 SERVICES="login-engine gluu"
 
