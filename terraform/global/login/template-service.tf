@@ -16,6 +16,11 @@ resource "kubernetes_pod" "gluu" {
       #TODO: liveness_probe
     }
   }
+
+  depends_on = [
+    kubernetes_namespace.deployment
+  ]
+
 }
 
 
@@ -37,4 +42,9 @@ resource "kubernetes_pod" "login-engine" {
       #TODO: liveness_probe
     }
   }
+
+  depends_on = [
+    kubernetes_namespace.deployment,
+  ]
+
 }
