@@ -1,7 +1,7 @@
 <!--
 ***
 *** To avoid retyping too much info. Do a search and replace for the following:
-*** template-svce, twitter_handle, email
+*** um-login-builldingblock, twitter_handle, email
 -->
 
 <!-- PROJECT SHIELDS -->
@@ -21,7 +21,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/EOEPCA/template-svce">
+  <a href="https://github.com/EOEPCA/um-login-builldingblock">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -30,13 +30,13 @@
   <p align="center">
     Template for developing an EOEPCA Service
     <br />
-    <a href="https://github.com/EOEPCA/template-svce"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/EOEPCA/um-login-builldingblock"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="https://github.com/EOEPCA/template-svce">View Demo</a>
+    <a href="https://github.com/EOEPCA/um-login-builldingblock">View Demo</a>
     ·
-    <a href="https://github.com/EOEPCA/template-svce/issues">Report Bug</a>
+    <a href="https://github.com/EOEPCA/um-login-builldingblock/issues">Report Bug</a>
     ·
-    <a href="https://github.com/EOEPCA/template-svce/issues">Request Feature</a>
+    <a href="https://github.com/EOEPCA/um-login-builldingblock/issues">Request Feature</a>
   </p>
 </p>
 
@@ -66,7 +66,7 @@
 
 Here's a blank template to get started:
 **To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`template-svce`, `twitter_handle`, `email`
+`um-login-builldingblock`, `twitter_handle`, `email`
 
 ### Built With
 
@@ -98,7 +98,7 @@ vagrant ssh
 3. Clone the repo
 
 ```sh
-git clone https://github.com/EOEPCA/template-svce.git
+git clone https://github.com/EOEPCA/um-login-builldingblock.git
 ```
 
 4. Change local directory
@@ -115,7 +115,7 @@ cd template-service
 
 ## Documentation
 
-The component documentation can be found at https://eoepca.github.io/template-svce/.
+The component documentation can be found at https://eoepca.github.io/um-login-builldingblock/.
 
 <!-- USAGE EXAMPLES -->
 
@@ -145,7 +145,7 @@ Change the version number in the `build.gradle` wrapper task then run:
 
 ## Roadmap
 
-See the [open issues](https://github.com/EOEPCA/template-svce/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/EOEPCA/um-login-builldingblock/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 
@@ -171,7 +171,7 @@ Distributed under the Apache-2.0 License. See `LICENSE` for more information.
 
 Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
 
-Project Link: [https://github.com/EOEPCA/template-svce](https://github.com/EOEPCA/template-svce)
+Project Link: [https://github.com/EOEPCA/um-login-builldingblock](https://github.com/EOEPCA/um-login-builldingblock)
 
 <!-- ACKNOWLEDGEMENTS -->
 
@@ -184,15 +184,15 @@ Project Link: [https://github.com/EOEPCA/template-svce](https://github.com/EOEPC
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/EOEPCA/template-svce.svg?style=flat-square
-[contributors-url]: https://github.com/EOEPCA/template-svce/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/EOEPCA/template-svce.svg?style=flat-square
-[forks-url]: https://github.com/EOEPCA/template-svce/network/members
-[stars-shield]: https://img.shields.io/github/stars/EOEPCA/template-svce.svg?style=flat-square
-[stars-url]: https://github.com/EOEPCA/template-svce/stargazers
-[issues-shield]: https://img.shields.io/github/issues/EOEPCA/template-svce.svg?style=flat-square
-[issues-url]: https://github.com/EOEPCA/template-svce/issues
-[license-shield]: https://img.shields.io/github/license/EOEPCA/template-svce.svg?style=flat-square
-[license-url]: https://github.com/EOEPCA/template-svce/blob/master/LICENSE
-[build-shield]: https://www.travis-ci.com/EOEPCA/template-svce.svg?branch=master
+[contributors-shield]: https://img.shields.io/github/contributors/EOEPCA/um-login-builldingblock.svg?style=flat-square
+[contributors-url]: https://github.com/EOEPCA/um-login-builldingblock/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/EOEPCA/um-login-builldingblock.svg?style=flat-square
+[forks-url]: https://github.com/EOEPCA/um-login-builldingblock/network/members
+[stars-shield]: https://img.shields.io/github/stars/EOEPCA/um-login-builldingblock.svg?style=flat-square
+[stars-url]: https://github.com/EOEPCA/um-login-builldingblock/stargazers
+[issues-shield]: https://img.shields.io/github/issues/EOEPCA/um-login-builldingblock.svg?style=flat-square
+[issues-url]: https://github.com/EOEPCA/um-login-builldingblock/issues
+[license-shield]: https://img.shields.io/github/license/EOEPCA/um-login-builldingblock.svg?style=flat-square
+[license-url]: https://github.com/EOEPCA/um-login-builldingblock/blob/master/LICENSE
+[build-shield]: https://www.travis-ci.com/EOEPCA/um-login-builldingblock.svg?branch=master
 [product-screenshot]: images/screenshot.png
