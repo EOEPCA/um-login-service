@@ -5,7 +5,7 @@ resource "kubernetes_config_map" "nginx-config" {
   }
 
   data = {   
-    "nginx.conf" = "${file("${path.module}/cfg/snginx.cfg")}"
+    "nginx.conf" = "${file("${path.module}/nginx.cfg")}"
   }
   depends_on = [
     kubernetes_namespace.eo-services,
