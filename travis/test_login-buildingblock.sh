@@ -47,15 +47,15 @@ minikubeIP=$(kubectl cluster-info | sed 's/\r$//' | grep 'master' | grep -oE '[0
 echo "MiniKube Master IP is ${minikubeIP}"
 
 echo Testing connectivity with the services
-for i in $SERVICES; do
-    ip=$(kubectl get svc --namespace=deployment $i -o json | jq -r '.spec.clusterIP')
-    port=$(kubectl get service --namespace=deployment $i --output=jsonpath='{.spec.ports[0].port}')
-    echo Cluster IP of $i is ${ip}:${port}
+#for i in $SERVICES; do
+#    ip=$(kubectl get svc --namespace=deployment $i -o json | jq -r '.spec.clusterIP')
+#    port=$(kubectl get service --namespace=deployment $i --output=jsonpath='{.spec.ports[0].port}')
+#    echo Cluster IP of $i is ${ip}:${port}
 
-    # curl echoes both ports to check connectivity.  The second set echoes the server headers should report nginx and javalin
-    curl http://${ip}:${port}/search | jq '.'
-    curl -si http://${ip}:${port}/search
-done
+#    # curl echoes both ports to check connectivity.  The second set echoes the server headers should report nginx and javalin
+#    curl http://${ip}:${port}/search | jq '.'
+#    curl -si http://${ip}:${port}/search
+#done
 
 
 if ($debug == "true"); then
