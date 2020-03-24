@@ -16,8 +16,6 @@ SERVICES="login-engine gluu"
 
 if ($debug == "true"); then
 
-    echo  "debug"
-    docker ps
 
     # View cluster (kubectl) config in ~/.kube/config
     kubectl config view
@@ -26,10 +24,9 @@ if ($debug == "true"); then
     kubectl get pods --all-namespaces
     # kubectl get deployments --namespace=deployment login-engine
 
-echo "logs"
     #kubectl logs --namespace=deployment deployment/login-engine --all-containers=true
     #kubectl logs --namespace=deployment deployment/gluu --all-containers=true
-echo "get service"
+
     #kubectl get service --namespace=deployment login-engine -o json
     #kubectl describe deployment --namespace=deployment login-engine
     
@@ -72,3 +69,5 @@ if ($debug == "true"); then
     kubectl describe pvc --namespace=deployment
     kubectl get storageclass
 fi
+
+docker ps
