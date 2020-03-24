@@ -27,11 +27,11 @@ if ($debug == "true"); then
     # kubectl get deployments --namespace=deployment login-engine
 
 echo "logs"
-    kubectl logs --namespace=deployment deployment/login-engine --all-containers=true
-    kubectl logs --namespace=deployment deployment/gluu --all-containers=true
+    #kubectl logs --namespace=deployment deployment/login-engine --all-containers=true
+    #kubectl logs --namespace=deployment deployment/gluu --all-containers=true
 echo "get service"
-    kubectl get service --namespace=deployment login-engine -o json
-    kubectl describe deployment --namespace=deployment login-engine
+    #kubectl get service --namespace=deployment login-engine -o json
+    #kubectl describe deployment --namespace=deployment login-engine
     
     for i in $SERVICES; do
     echo $i
@@ -59,8 +59,8 @@ done
 
 
 if ($debug == "true"); then
-    kubectl logs --namespace=deployment deployment/gluu --all-containers=true
-    kubectl logs --namespace=deployment deployment/login-engine --all-containers=true
+    #kubectl logs --namespace=deployment deployment/gluu --all-containers=true
+    #kubectl logs --namespace=deployment deployment/login-engine --all-containers=true
     
     # Namespace: deployment
     kubectl describe deployments --namespace=deployment
