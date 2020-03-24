@@ -22,9 +22,9 @@ if ($debug == "true"); then
     kubectl get nodes
     kubectl get namespaces
     kubectl get pods --all-namespaces
-    kubectl get deployments --namespace=deployment login-engine
+    #kubectl get deployments --namespace=deployment login-engine
 
-    #kubectl logs --namespace=deployment deployment/login-engine --all-containers=true
+    kubectl logs --namespace=deployment deployment/login-engine --all-containers=true
     #kubectl logs --namespace=deployment deployment/gluu --all-containers=true
 
     #kubectl get service --namespace=deployment login-engine -o json
