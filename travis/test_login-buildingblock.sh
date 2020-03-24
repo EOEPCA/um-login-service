@@ -35,7 +35,7 @@ echo "get service"
     
     for i in $SERVICES; do
     echo $i
-    kubectl describe service --namespace=deployment $i
+    #kubectl describe service --namespace=deployment $i
     done
 
 
