@@ -6,7 +6,7 @@ resource "kubernetes_pod" "ldap" {
 
   spec {
     container {
-      image = "eoepca/um-login-gluu-ldap:latest"
+      image = "eoepca/um-login-gluu-ldap:travis_10"
       name  = "ldap"
 
       env {
