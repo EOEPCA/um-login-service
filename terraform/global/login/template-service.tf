@@ -1,13 +1,13 @@
-resource "kubernetes_pod" "ldap" {
+resource "kubernetes_pod" "gluu" {
   metadata {
-    name = "ldap"
+    name = "gluu"
     namespace = "deployment"
   }
 
   spec {
     container {
-      image = "eoepca/um-login-gluu-ldap:travis_10"
-      name  = "ldap"
+      image = "eoepca/um-common-gluu:latest"
+      name  = "gluu"
 
       env {
         name  = "environment"
