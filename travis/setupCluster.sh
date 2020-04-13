@@ -41,6 +41,17 @@ chmod +x /tmp/terraform
 mv /tmp/terraform /usr/local/bin/
 export PATH="~/bin:$PATH"
 
+# Setup ubuntu firewall
+sudo ufw allow 80
+sudo ufw allow 443
+sudo ufw allow 22
+sudo ufw allow 8081
+sudo ufw allow 8080
+sudo ufw allow 8082
+sudo ufw allow 8084
+sudo ufw allow 8085
+sudo ufw allow 8086
+   
 # Setup /etc/hosts
 echo "$(minikube ip)      eoepca-dev.gluu.org" | sudo tee -a /etc/hosts
 
