@@ -1,6 +1,5 @@
 #!/bin/bash -x
 
-
 # Install minikube and kubectl
 K8S_VER=v1.12.0
 TF_VER=0.12.16
@@ -41,3 +40,49 @@ unzip /tmp/terraform.zip -d /tmp
 chmod +x /tmp/terraform
 mv /tmp/terraform /usr/local/bin/
 export PATH="~/bin:$PATH"
+
+# Setup /etc/hosts
+echo "$(minikube ip)      eoepca-dev.gluu.org" | sudo tee -a /etc/hosts
+
+# Apply config
+echo "Applying config..."
+kubectl apply -f ../src/config/config-roles.yaml
+kubectl apply -f ../src/config/config-volumes.yaml
+kubectl apply -f ../src/config/generate-config.yaml
+echo "##### Waiting for config pod to complete:"
+until kubectl get pod config-init-8zgth | grep "Completed"; do sleep 1; done
+echo "Done!"
+
+# Apply LDAP
+echo "Applying LDAP..."
+kubectl apply -f ../ldap/opendj-volumes.yaml
+kubectl apply -f ../ldap/opendj-init.yaml
+echo "##### Waiting for LDAP to start:"
+until kubectl logs service/opendj | grep "The Directory Server has started successfully"; do sleep 1; done
+echo "Done!"
+
+# Enable Ingress
+minikube addons enable ingress
+sh ../nginx/tls-secrets.sh
+kubectl apply -f ../nginx/nginx.yaml
+
+# Apply oxAuth
+echo "Applying oxAuth"
+kubectl apply -f ../oxauth/oxauth-volumes.yaml
+NGINX_IP=$(minikube ip) sh ../oxauth/deploy-pod.sh
+echo "##### Waiting for oxAuth to start:"
+until kubectl logs service/oxauth | grep "Server:main: Started"; do sleep 1; done
+echo "Done!"
+
+# Apply oxTrust
+echo "Applying oxTrust"
+kubectl apply -f ../oxtrust/oxtrust-volumes.yaml
+NGINX_IP=$(minikube ip) sh ../oxtrust/deploy-pod.sh
+echo "##### Waiting for oxTrust to start:"
+until kubectl logs service/oxtrust | grep "Server:main: Started"; do sleep 1; done
+echo "Done!"
+
+# Apply Passport
+echo "Applying Passport"
+NGINX_IP=$(minikube ip) sh ../oxpassport/deploy-pod.sh
+echo "Done!"
