@@ -14,15 +14,16 @@ jobs:
       # Minikube installation taken from: https://github.com/LiliC/travis-minikube/blob/minikube-30-kube-1.12/.travis.yml
       # We need the systemd for the kubeadm and it's default from 16.04+
       dist: xenial
-      before_script: sudo bash -x travis/setupCluster.sh
-      script: cd terraform/test && terraform init -input=false
+      #before_script: cd travis && sh setupCluster.sh
+      #script: cd terraform/test && terraform init -input=false
+      script: cd travis && sh setupCluster.sh
 
-      deploy:
-        - provider: script
-          skip_cleanup: true
-          script: sh ${TRAVIS_BUILD_DIR}/travis/test_login-buildingblock.sh
-          on:
-            branch: develop
+      # deploy:
+        # - provider: script
+          # skip_cleanup: true
+          # script: sh ${TRAVIS_BUILD_DIR}/travis/test_login-buildingblock.sh
+          # on:
+            # branch: develop
 
 import:
   - docs/.travis.yml

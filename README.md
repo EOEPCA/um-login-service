@@ -1,9 +1,3 @@
-<!--
-***
-*** To avoid retyping too much info. Do a search and replace for the following:
-*** um-login-builldingblock, twitter_handle, email
--->
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** See the bottom of this document for the declaration of the reference variables
@@ -21,22 +15,21 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/EOEPCA/um-login-builldingblock">
+  <a href="https://github.com/EOEPCA/um-login-service">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">template-service</h3>
+  <h3 align="center">um-login-service</h3>
 
   <p align="center">
-    Template for developing an EOEPCA Service
     <br />
-    <a href="https://github.com/EOEPCA/um-login-builldingblock"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/EOEPCA/um-login-service"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="https://github.com/EOEPCA/um-login-builldingblock">View Demo</a>
+    <a href="https://github.com/EOEPCA/um-login-service">View Demo</a>
     ·
-    <a href="https://github.com/EOEPCA/um-login-builldingblock/issues">Report Bug</a>
+    <a href="https://github.com/EOEPCA/um-login-service/issues">Report Bug</a>
     ·
-    <a href="https://github.com/EOEPCA/um-login-builldingblock/issues">Request Feature</a>
+    <a href="https://github.com/EOEPCA/um-login-service/issues">Request Feature</a>
   </p>
 </p>
 
@@ -64,9 +57,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`um-login-builldingblock`, `twitter_handle`, `email`
+This building block aims at deploying a Gluu 3.1.6 instance.
 
 ### Built With
 
@@ -98,54 +89,51 @@ vagrant ssh
 3. Clone the repo
 
 ```sh
-git clone https://github.com/EOEPCA/um-login-builldingblock.git
+git clone https://github.com/EOEPCA/um-login-service.git
 ```
 
 4. Change local directory
 
 ```sh
-cd template-service
+cd um-login-service\src
+```
+
+5. Open setupCluster.sh and change configuration variables at the start.
+
+6. Run the script
+
+```sh
+sh ./setupCluster.sh
 ```
 
 ### Testing
 
-- `./gradlew build` runs only the unit tests
-- `./gradlew integrationTest` runs only the integration tests (it compiles all source code beforehand). It does not package or deploy a build.
-  This is assumed to have been done in a prior build pipeline step.
+Access the following endpoints to check functionality:
+```sh
+curl -XGET https://eoepca-dev.gluu.org/.well-known/openid-configuration -k
+```
+```sh
+curl -XGET https://eoepca-dev.gluu.org/.well-known/scim-configuration -k
+```
+
+If you wish to access the UI via browser, run the following command from inside the VM:
+```sh
+sudo apt install firefox xorg
+```
+
+Then, using MobaXterm on the host machine and connecting to the VM, open firefox and access the following links:
+https://eoepca-dev.gluu.org/.well-known/openid-configuration
+https://eoepca-dev.gluu.org/.well-known/scim-configuration
 
 ## Documentation
 
-The component documentation can be found at https://eoepca.github.io/um-login-builldingblock/.
-
-<!-- USAGE EXAMPLES -->
-
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-### Running the template service
-
-Just execute the run task in Gradle
-
-```sh
-./gradlew run
-```
-
-### Upgrading Gradle Wrapper
-
-Change the version number in the `build.gradle` wrapper task then run:
-
-```sh
-./gradlew wrapper --gradle-version=4.10.2 --distribution-type=bin
-```
+The component documentation can be found at https://eoepca.github.io/um-login-service/.
 
 <!-- ROADMAP -->
 
 ## Roadmap
 
-See the [open issues](https://github.com/EOEPCA/um-login-builldingblock/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/EOEPCA/um-login-service/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 
@@ -169,9 +157,9 @@ Distributed under the Apache-2.0 License. See `LICENSE` for more information.
 
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
+Tiago Mendonça Fernandes - eoepca.systemteam@telespazio.com
 
-Project Link: [https://github.com/EOEPCA/um-login-builldingblock](https://github.com/EOEPCA/um-login-builldingblock)
+Project Link: [https://github.com/EOEPCA/um-login-service](https://github.com/EOEPCA/um-login-service)
 
 <!-- ACKNOWLEDGEMENTS -->
 
@@ -184,15 +172,15 @@ Project Link: [https://github.com/EOEPCA/um-login-builldingblock](https://github
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/EOEPCA/um-login-builldingblock.svg?style=flat-square
-[contributors-url]: https://github.com/EOEPCA/um-login-builldingblock/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/EOEPCA/um-login-builldingblock.svg?style=flat-square
-[forks-url]: https://github.com/EOEPCA/um-login-builldingblock/network/members
-[stars-shield]: https://img.shields.io/github/stars/EOEPCA/um-login-builldingblock.svg?style=flat-square
-[stars-url]: https://github.com/EOEPCA/um-login-builldingblock/stargazers
-[issues-shield]: https://img.shields.io/github/issues/EOEPCA/um-login-builldingblock.svg?style=flat-square
-[issues-url]: https://github.com/EOEPCA/um-login-builldingblock/issues
-[license-shield]: https://img.shields.io/github/license/EOEPCA/um-login-builldingblock.svg?style=flat-square
-[license-url]: https://github.com/EOEPCA/um-login-builldingblock/blob/master/LICENSE
-[build-shield]: https://www.travis-ci.com/EOEPCA/um-login-builldingblock.svg?branch=master
+[contributors-shield]: https://img.shields.io/github/contributors/EOEPCA/um-login-service.svg?style=flat-square
+[contributors-url]: https://github.com/EOEPCA/um-login-service/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/EOEPCA/um-login-service.svg?style=flat-square
+[forks-url]: https://github.com/EOEPCA/um-login-service/network/members
+[stars-shield]: https://img.shields.io/github/stars/EOEPCA/um-login-service.svg?style=flat-square
+[stars-url]: https://github.com/EOEPCA/um-login-service/stargazers
+[issues-shield]: https://img.shields.io/github/issues/EOEPCA/um-login-service.svg?style=flat-square
+[issues-url]: https://github.com/EOEPCA/um-login-service/issues
+[license-shield]: https://img.shields.io/github/license/EOEPCA/um-login-service.svg?style=flat-square
+[license-url]: https://github.com/EOEPCA/um-login-service/blob/master/LICENSE
+[build-shield]: https://www.travis-ci.com/EOEPCA/um-login-service.svg?branch=master
 [product-screenshot]: images/screenshot.png
