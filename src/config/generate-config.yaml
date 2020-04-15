@@ -3,16 +3,16 @@ kind: ConfigMap
 metadata:
   name: config-cm
 data:
-  GLUU_SECRET_ADAPTER: "kubernetes"
-  ADMIN_PW: "admin_Abcd1234#"
-  EMAIL: "support@gluu.org"
-  DOMAIN: "eoepca-dev.gluu.org"
-  ORG_NAME: "Deimos"
-  COUNTRY_CODE: "PT"
-  STATE: "NA"
-  CITY: "Lisbon"
-  GLUU_CONFIG_ADAPTER: "kubernetes"
-  LDAP_TYPE: "opendj"
+  GLUU_SECRET_ADAPTER: "{{GLUU_SECRET_ADAPTER}}"
+  ADMIN_PW: "{{ADMIN_PW}}"
+  EMAIL: "{{EMAIL}}"
+  DOMAIN: "{{DOMAIN}}"
+  ORG_NAME: "{{ORG_NAME}}"
+  COUNTRY_CODE: "{{COUNTRY_CODE}}"
+  STATE: "{{STATE}}"
+  CITY: "{{CITY}}"
+  GLUU_CONFIG_ADAPTER: "{{GLUU_CONFIG_ADAPTER}}"
+  LDAP_TYPE: "{{LDAP_TYPE}}"
   
 ---
 

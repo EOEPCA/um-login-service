@@ -1,5 +1,17 @@
 #!/bin/bash -x
 
+### CONFIGURATION VARIABLES
+GLUU_SECRET_ADAPTER="kubernetes"
+ADMIN_PW="admin_Abcd1234#"
+EMAIL="support@gluu.org"
+DOMAIN="eoepca-dev.gluu.org"
+ORG_NAME="Deimos"
+COUNTRY_CODE="PT"
+STATE="NA"
+CITY="Lisbon"
+GLUU_CONFIG_ADAPTER="kubernetes"
+LDAP_TYPE="opendj"
+
 # Install minikube and kubectl
 K8S_VER=v1.12.0
 TF_VER=0.12.16
@@ -60,7 +72,18 @@ echo "$(minikube ip)      eoepca-dev.gluu.org" | sudo tee -a /etc/hosts
 echo "Applying config..."
 kubectl apply -f ../src/config/config-roles.yaml
 kubectl apply -f ../src/config/config-volumes.yaml
-kubectl apply -f ../src/config/generate-config.yaml
+#kubectl apply -f ../src/config/generate-config.yaml
+cat ../src/config/generate-config.yaml | sed "s/{{GLUU_SECRET_ADAPTER}}/$GLUU_SECRET_ADAPTER/g" \
+                                       | sed "s/{{ADMIN_PW}}/$ADMIN_PW/g" \
+                                       | sed "s/{{EMAIL}}/$EMAIL/g" \
+                                       | sed "s/{{DOMAIN}}/$DOMAIN/g" \
+                                       | sed "s/{{ORG_NAME}}/$ORG_NAME/g" \
+                                       | sed "s/{{COUNTRY_CODE}}/$COUNTRY_CODE/g" \
+                                       | sed "s/{{STATE}}/$STATE/g" \
+                                       | sed "s/{{CITY}}/$CITY/g" \
+                                       | sed "s/{{GLUU_CONFIG_ADAPTER}}/$GLUU_CONFIG_ADAPTER/g" \
+                                       | sed "s/{{LDAP_TYPE}}/$LDAP_TYPE/g" \
+                                       | kubectl apply -f -
 echo "##### Waiting for config pod to complete (will take around 5 minutes):"
 until kubectl get pods | grep "config-init" | grep "Completed"; do sleep 1; done
 echo "Done!"
@@ -77,7 +100,8 @@ echo "Done!"
 # Enable Ingress
 minikube addons enable ingress
 sh ../src/nginx/tls-secrets.sh
-kubectl apply -f ../src/nginx/nginx.yaml
+#kubectl apply -f ../src/nginx/nginx.yaml
+cat ../src/nginx/nginx.yaml | sed "s/{{GLUU_DOMAIN}}/$DOMAIN/g" | kubectl apply -f -
 
 # Apply oxAuth
 echo "Applying oxAuth"

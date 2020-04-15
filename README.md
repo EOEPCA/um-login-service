@@ -98,7 +98,9 @@ git clone https://github.com/EOEPCA/um-login-service.git
 cd um-login-service\src
 ```
 
-5. Run the script
+5. Open setupCluster.sh and change configuration variables at the start.
+
+6. Run the script
 
 ```sh
 sh ./setupCluster.sh
@@ -155,7 +157,7 @@ Distributed under the Apache-2.0 License. See `LICENSE` for more information.
 
 ## Contact
 
-Tiago Mendonça Fernandes - tiago.fernandes@elecnor.es
+Tiago Mendonça Fernandes - eoepca.systemteam@telespazio.com
 
 Project Link: [https://github.com/EOEPCA/um-login-service](https://github.com/EOEPCA/um-login-service)
 
