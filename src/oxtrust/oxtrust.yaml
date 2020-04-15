@@ -8,7 +8,7 @@ data:
   GLUU_OXAUTH_BACKEND: "oxauth:8080"
   GLUU_LDAP_URL: "opendj:1636"
   GLUU_MAX_RAM_FRACTION: "1"
-  DOMAIN: "eoepca-dev.gluu.org"
+  DOMAIN: {{GLUU_DOMAIN}}
 
 ---
 
@@ -88,7 +88,7 @@ spec:
       hostAliases:
       - ip: NGINX_IP
         hostnames:
-        - eoepca-dev.gluu.org
+        - {{GLUU_DOMAIN}}
       volumes:
       # - name: shared-shib
         # persistentVolumeClaim:
