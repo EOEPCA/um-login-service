@@ -1,0 +1,10 @@
+{
+    "hostname": "demoexample.gluu.org",
+    "country_code": "ES",
+    "state": "Madrid",
+    "city": "Tres Cantos",
+    "admin_pw": "3o3pca+Mpwd",
+    "ldap_pw": "3o3pca+Mpwd",
+    "email": "eoepca@deimos-space.com",
+    "org_name": "Deimos Space S.L.U."
+}
