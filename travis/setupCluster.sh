@@ -1,16 +1,16 @@
 #!/bin/bash -x
 
 ### CONFIGURATION VARIABLES
-GLUU_SECRET_ADAPTER="kubernetes"
-ADMIN_PW="admin_Abcd1234#"
-EMAIL="support@gluu.org"
-DOMAIN="eoepca-dev.gluu.org"
-ORG_NAME="Deimos"
-COUNTRY_CODE="PT"
-STATE="NA"
-CITY="Lisbon"
-GLUU_CONFIG_ADAPTER="kubernetes"
-LDAP_TYPE="opendj"
+#GLUU_SECRET_ADAPTER="kubernetes"
+#ADMIN_PW="admin_Abcd1234#"
+#EMAIL="support@gluu.org"
+#DOMAIN="eoepca-dev.gluu.org"
+##ORG_NAME="Deimos"
+#COUNTRY_CODE="PT"
+#STATE="NA"
+#CITY="Lisbon"
+#GLUU_CONFIG_ADAPTER="kubernetes"
+#LDAP_TYPE="opendj"
 
 # Install minikube and kubectl
 K8S_VER=v1.12.0
@@ -66,62 +66,56 @@ sudo ufw allow 8086
    
 # Setup /etc/hosts
 echo "Applying following entry to /etc/hosts"
-echo "$(minikube ip)      eoepca-dev.gluu.org" | sudo tee -a /etc/hosts
+echo "$(minikube ip)      demoexample.gluu.org" | sudo tee -a /etc/hosts
 
 # Apply config
 echo "Applying config..."
 kubectl apply -f ../src/config/config-roles.yaml
 kubectl apply -f ../src/config/config-volumes.yaml
-#kubectl apply -f ../src/config/generate-config.yaml
-cat ../src/config/generate-config.yaml | sed "s/{{GLUU_SECRET_ADAPTER}}/$GLUU_SECRET_ADAPTER/g" \
-                                       | sed "s/{{ADMIN_PW}}/$ADMIN_PW/g" \
-                                       | sed "s/{{EMAIL}}/$EMAIL/g" \
-                                       | sed "s/{{DOMAIN}}/$DOMAIN/g" \
-                                       | sed "s/{{ORG_NAME}}/$ORG_NAME/g" \
-                                       | sed "s/{{COUNTRY_CODE}}/$COUNTRY_CODE/g" \
-                                       | sed "s/{{STATE}}/$STATE/g" \
-                                       | sed "s/{{CITY}}/$CITY/g" \
-                                       | sed "s/{{GLUU_CONFIG_ADAPTER}}/$GLUU_CONFIG_ADAPTER/g" \
-                                       | sed "s/{{LDAP_TYPE}}/$LDAP_TYPE/g" \
-                                       | kubectl apply -f -
-echo "##### Waiting for config pod to complete (will take around 5 minutes):"
-until kubectl get pods | grep "config-init" | grep "Completed"; do sleep 1; done
+kubectl create cm config-cm --from-file=../src/config/generate.json
+kubectl apply -f ../src/config/load-config.yaml
+
+#echo "##### Waiting for config pod to complete (will take around 5 minutes):"
+#until kubectl get pods | grep "config-init" | grep "Completed"; do sleep 1; done
 echo "Done!"
 
 # Apply LDAP
 echo "Applying LDAP..."
 kubectl apply -f ../src/ldap/opendj-volumes.yaml
 kubectl apply -f ../src/ldap/opendj-init.yaml
-echo "##### Waiting for LDAP to start (will take around 10 minutes, ContainerCreating errors are expected):"
-sleep 20
-until kubectl logs service/opendj | grep "The Directory Server has started successfully"; do sleep 1; done
+# Populate LDAP
+echo "Waiting..."
+#until kubectl logs service/opendj | grep "The Directory Server has started successfully"; do sleep 1; done
+kubectl run --image=eoepca/um-login-persistence:latest persistence --env="GLUU_CONFIG_ADAPTER=kubernetes"     --env="GLUU_SECRET_ADAPTER=kubernetes"     --env="GLUU_OXTRUST_CONFIG_GENERATION=false"     --env="GLUU_LDAP_URL=opendj:1636"     --env="GLUU_PASSPORT_ENABLED=true" --env="GLUU_PERSISTENCE_TYPE=ldap"
+#echo "##### Waiting for LDAP to start (will take around 10 minutes, ContainerCreating errors are expected):"
+#sleep 20
 echo "Done!"
 
 # Enable Ingress
 minikube addons enable ingress
 sh ../src/nginx/tls-secrets.sh
-#kubectl apply -f ../src/nginx/nginx.yaml
+kubectl apply -f ../src/nginx/nginx.yaml
 cat ../src/nginx/nginx.yaml | sed "s/{{GLUU_DOMAIN}}/$DOMAIN/g" | kubectl apply -f -
 
 # Apply oxAuth
 echo "Applying oxAuth"
 kubectl apply -f ../src/oxauth/oxauth-volumes.yaml
-NGINX_IP=$(minikube ip) sh ../src/oxauth/deploy-pod.sh
-echo "##### Waiting for oxAuth to start (will take around 5 minutes, ContainerCreating errors are expected):"
-sleep 20
-until kubectl logs service/oxauth | grep "Server:main: Started"; do sleep 1; done
+NGINX_IP=$(minikube ip) sh ../src/oxauth/deploy-pod.sh ../src/oxauth/oxauth.yaml
+#echo "##### Waiting for oxAuth to start (will take around 5 minutes, ContainerCreating errors are expected):"
+#sleep 20
+#until kubectl logs service/oxauth | grep "Server:main: Started"; do sleep 1; done
 echo "Done!"
 
 # Apply oxTrust
 echo "Applying oxTrust"
 kubectl apply -f ../src/oxtrust/oxtrust-volumes.yaml
-NGINX_IP=$(minikube ip) sh ../src/oxtrust/deploy-pod.sh
-echo "##### Waiting for oxTrust to start (will take around 5 minutes, ContainerCreating errors are expected):"
-sleep 20
-until kubectl logs service/oxtrust | grep "Server:main: Started"; do sleep 1; done
+NGINX_IP=$(minikube ip) sh ../src/oxtrust/deploy-pod.sh ../src/oxtrust/oxtrust.yaml
+#echo "##### Waiting for oxTrust to start (will take around 5 minutes, ContainerCreating errors are expected):"
+#sleep 20
+#until kubectl logs service/oxtrust | grep "Server:main: Started"; do sleep 1; done
 echo "Done!"
 
 # Apply Passport
 echo "Applying Passport"
-NGINX_IP=$(minikube ip) sh ../src/oxpassport/deploy-pod.sh
+NGINX_IP=$(minikube ip) sh ../src/oxpassport/deploy-pod.sh ../src/oxpassport/oxpassport.yaml
 echo "Done!"

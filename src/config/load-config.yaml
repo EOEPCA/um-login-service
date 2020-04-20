@@ -17,6 +17,11 @@ spec:
             - mountPath: /opt/config-init/db/generate.json
               name: config-cm
               subPath: generate.json
+          env:
+            - name: GLUU_CONFIG_ADAPTER
+              value: "kubernetes"
+            - name: GLUU_SECRET_ADAPTER
+              value: "kubernetes"
           envFrom:
           - configMapRef:
               name: config-cm

@@ -3,8 +3,10 @@
     "country_code": "ES",
     "state": "Madrid",
     "city": "Tres Cantos",
-    "admin_pw": "3o3pca+Mpwd",
-    "ldap_pw": "3o3pca+Mpwd",
+    "admin_pw": "admin_Abcd1234#",
+    "ldap_pw": "admin_Abcd1234#",
     "email": "eoepca@deimos-space.com",
-    "org_name": "Deimos Space S.L.U."
+    "org_name": "Deimos Space S.L.U.",
+    "gluu_config_adapter": "kubernetes",
+    "ldap_type": "opendj"
 }
