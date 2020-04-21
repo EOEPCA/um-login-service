@@ -75,8 +75,8 @@ kubectl apply -f ../src/config/config-volumes.yaml
 kubectl create cm config-cm --from-file=../src/config/generate.json
 kubectl apply -f ../src/config/load-config.yaml
 
-#echo "##### Waiting for config pod to complete (will take around 5 minutes):"
-#until kubectl get pods | grep "config-init" | grep "Completed"; do sleep 1; done
+echo "##### Waiting for config pod to complete (will take around 5 minutes):"
+until kubectl get pods | grep "config-init" | grep "Completed"; do sleep 1; done
 echo "Done!"
 
 # Apply LDAP
@@ -85,7 +85,7 @@ kubectl apply -f ../src/ldap/opendj-volumes.yaml
 kubectl apply -f ../src/ldap/opendj-init.yaml
 # Populate LDAP
 echo "Waiting..."
-#until kubectl logs service/opendj | grep "The Directory Server has started successfully"; do sleep 1; done
+until kubectl logs opendj-init-0 | grep "Started listening for new connections on LDAPS Connection Handler"; do sleep 1; done
 kubectl run --image=eoepca/um-login-persistence:latest persistence --env="GLUU_CONFIG_ADAPTER=kubernetes"     --env="GLUU_SECRET_ADAPTER=kubernetes"     --env="GLUU_OXTRUST_CONFIG_GENERATION=false"     --env="GLUU_LDAP_URL=opendj:1636"     --env="GLUU_PASSPORT_ENABLED=true" --env="GLUU_PERSISTENCE_TYPE=ldap"
 #echo "##### Waiting for LDAP to start (will take around 10 minutes, ContainerCreating errors are expected):"
 #sleep 20
