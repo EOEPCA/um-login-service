@@ -5,6 +5,7 @@ metadata:
 data:
   GLUU_CONFIG_ADAPTER: "kubernetes"
   GLUU_SECRET_ADAPTER: "kubernetes"
+  GLUU_SYNC_CASA_MANIFESTS: "false"
   DOMAIN: {{GLUU_DOMAIN}}
   GLUU_LDAP_URL: "opendj:1636"
   GLUU_MAX_RAM_FRACTION: "1"
@@ -45,12 +46,7 @@ spec:
       containers:
       - name: oxauth
         imagePullPolicy: Always
-        image: gluufederation/oxauth:3.1.6_03
-        resources:
-          requests:
-            memory: "1000Mi"
-          limits:
-            memory: "1536Mi"
+        image: gluufederation/oxauth:4.1.1_03
         ports:
         - containerPort: 8080
         envFrom:
@@ -64,19 +60,7 @@ spec:
           - mountPath: /opt/gluu/jetty/oxauth/custom/static
             name: oxauth-custom-static
           - mountPath: /opt/gluu/jetty/oxauth/custom/pages
-            name: oxauth-custom-pages
-        # livenessProbe:
-          # httpGet:
-            # path: /oxauth/.well-known/openid-configuration
-            # port: 8080
-          # initialDelaySeconds: 30
-          # periodSeconds: 30
-        # readinessProbe:
-          # httpGet:
-            # path: /oxauth/.well-known/openid-configuration
-            # port: 8080
-          # initialDelaySeconds: 25
-          # periodSeconds: 25
+            name: oxauth-custom-pages       
       hostAliases:
       - ip: NGINX_IP
         hostnames:
