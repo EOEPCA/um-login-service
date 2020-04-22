@@ -66,7 +66,7 @@ sudo ufw allow 8086
    
 # Setup /etc/hosts
 echo "Applying following entry to /etc/hosts"
-echo "$(minikube ip)      demoexample.gluu.org" | sudo tee -a /etc/hosts
+echo "$(minikube ip)      $DOMAIN" | sudo tee -a /etc/hosts
 
 # Apply config
 echo "Applying config..."
@@ -100,22 +100,20 @@ cat ../src/nginx/nginx.yaml | sed "s/{{GLUU_DOMAIN}}/$DOMAIN/g" | kubectl apply 
 # Apply oxAuth
 echo "Applying oxAuth"
 kubectl apply -f ../src/oxauth/oxauth-volumes.yaml
-NGINX_IP=$(minikube ip) sh ../src/oxauth/deploy-pod.sh ../src/oxauth/oxauth.yaml
-#echo "##### Waiting for oxAuth to start (will take around 5 minutes, ContainerCreating errors are expected):"
-#sleep 20
-#until kubectl logs service/oxauth | grep "Server:main: Started"; do sleep 1; done
+cat ../src/oxauth/oxauth.yaml | sed "s/{{GLUU_DOMAIN}}/$DOMAIN/g" | sed -s "s@NGINX_IP@$(minikube ip)@g" | kubectl apply -f -
+echo "##### Waiting for oxAuth to start (will take around 5 minutes, ContainerCreating errors are expected):"
+until kubectl logs service/oxauth | grep "Server:main: Started"; do sleep 1; done
 echo "Done!"
 
 # Apply oxTrust
 echo "Applying oxTrust"
 kubectl apply -f ../src/oxtrust/oxtrust-volumes.yaml
-NGINX_IP=$(minikube ip) sh ../src/oxtrust/deploy-pod.sh ../src/oxtrust/oxtrust.yaml
-#echo "##### Waiting for oxTrust to start (will take around 5 minutes, ContainerCreating errors are expected):"
-#sleep 20
-#until kubectl logs service/oxtrust | grep "Server:main: Started"; do sleep 1; done
+cat ../src/oxtrust/oxtrust.yaml | sed "s/{{GLUU_DOMAIN}}/$DOMAIN/g" | sed -s "s@NGINX_IP@$(minikube ip)@g" | kubectl apply -f -
+echo "##### Waiting for oxTrust to start (will take around 5 minutes, ContainerCreating errors are expected):"
+until kubectl logs service/oxtrust | grep "Server:main: Started"; do sleep 1; done
 echo "Done!"
 
 # Apply Passport
 echo "Applying Passport"
-NGINX_IP=$(minikube ip) sh ../src/oxpassport/deploy-pod.sh ../src/oxpassport/oxpassport.yaml
+cat ../src/oxpassport/oxpassport.yaml | sed "s/{{GLUU_DOMAIN}}/$DOMAIN/g" | sed -s "s@NGINX_IP@$(minikube ip)@g" | kubectl apply -f -
 echo "Done!"
