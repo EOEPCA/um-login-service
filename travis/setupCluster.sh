@@ -31,7 +31,7 @@ sudo mv minikube /usr/local/bin/
 
 echo "##### (Re)start Minikube cluster"
 minikube delete
-minikube start --mount=/data:/data --bootstrapper=kubeadm --kubernetes-version=${K8S_VER} --extra-config=apiserver.authorization-mode=RBAC
+minikube start --bootstrapper=kubeadm --kubernetes-version=${K8S_VER} --extra-config=apiserver.authorization-mode=RBAC
 
 # Fix the kubectl context, as it's often stale.
 minikube update-context
