@@ -31,7 +31,7 @@ sudo mv minikube /usr/local/bin/
 
 echo "##### (Re)start Minikube cluster"
 minikube delete
-minikube start --bootstrapper=kubeadm --kubernetes-version=${K8S_VER} --extra-config=apiserver.authorization-mode=RBAC
+minikube start --mount-string='/data:/data' --bootstrapper=kubeadm --kubernetes-version=${K8S_VER} --extra-config=apiserver.authorization-mode=RBAC
 
 # Fix the kubectl context, as it's often stale.
 minikube update-context
@@ -101,6 +101,8 @@ kubectl apply -f ../src/nginx/nginx.yaml
 # Apply oxAuth
 echo "Applying oxAuth"
 kubectl apply -f ../src/oxauth/oxauth-volumes.yaml
+mkdir -p /data/oxauth/custom
+cp -rp ../src/oxauth/custom/pages /data/oxauth/custom/
 cat ../src/oxauth/oxauth.yaml | sed "s/{{GLUU_DOMAIN}}/$DOMAIN/g" | sed -s "s@NGINX_IP@$(minikube ip)@g" | kubectl apply -f -
 echo "##### Waiting for oxAuth to start (will take around 5 minutes, ContainerCreating errors are expected):"
 until kubectl logs service/oxauth | grep "Server:main: Started"; do sleep 1; done
