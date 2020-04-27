@@ -8,7 +8,7 @@ spec:
       containers:
       - name: um-login-persistence
         image: eoepca/um-login-persistence:latest
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         env:
             - name: GLUU_CONFIG_ADAPTER
               value: "kubernetes"
@@ -22,5 +22,7 @@ spec:
               value: "ldap"
             - name: GLUU_OXTRUST_CONFIG_GENERATION
               value: "false"
+            - name: GLUU_CACHE_TYPE
+              value: "NATIVE_PERSISTENCE"
       restartPolicy: Never
-  backoffLimit: 4
+  backoffLimit: 1

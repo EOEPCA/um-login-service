@@ -8,5 +8,6 @@
     "email": "eoepca@deimos-space.com",
     "org_name": "Deimos Space S.L.U.",
     "gluu_config_adapter": "kubernetes",
-    "ldap_type": "opendj"
+    "ldap_type": "opendj",
+    "redis_pw": "aaaa"
 }
