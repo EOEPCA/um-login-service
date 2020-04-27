@@ -105,8 +105,8 @@ kubectl apply -f ../src/oxauth/oxauth-volumes.yaml
 #cp -rp ../src/oxauth/custom/pages /data/oxauth/custom/
 cat ../src/oxauth/oxauth.yaml | sed "s/{{GLUU_DOMAIN}}/$DOMAIN/g" | sed -s "s@NGINX_IP@$(minikube ip)@g" | kubectl apply -f -
 echo "##### Waiting for oxAuth to start (will take around 5 minutes, ContainerCreating errors are expected):"
-counter=0
-until [ `kubectl logs service/oxauth | grep "Server:main: Started" | wc -l` -ge 1 ] || [ $counter -gt 6 ]; do ((counter++)); sleep 15; done
+#counter=0
+#until [ `kubectl logs service/oxauth | grep "Server:main: Started" | wc -l` -ge 1 ] || [ $counter -gt 6 ]; do ((counter++)); sleep 15; done
 echo "Done!"
 
 # Apply oxTrust
@@ -114,8 +114,8 @@ echo "Applying oxTrust"
 kubectl apply -f ../src/oxtrust/oxtrust-volumes.yaml
 cat ../src/oxtrust/oxtrust.yaml | sed "s/{{GLUU_DOMAIN}}/$DOMAIN/g" | sed -s "s@NGINX_IP@$(minikube ip)@g" | kubectl apply -f -
 echo "##### Waiting for oxTrust to start (will take around 5 minutes, ContainerCreating errors are expected):"
-counter=0
-until [ `kubectl logs service/oxtrust | grep "Server:main: Started" | wc -l` -ge 1 ] || [ $counter -gt 6 ]; do ((counter++)); sleep 15; done
+#counter=0
+#until [ `kubectl logs service/oxtrust | grep "Server:main: Started" | wc -l` -ge 1 ] || [ $counter -gt 6 ]; do ((counter++)); sleep 15; done
 echo "Done!"
 
 # Apply Passport
