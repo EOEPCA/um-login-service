@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: um-login-persistence
+spec:
+  template:
+    spec:
+      containers:
+      - name: um-login-persistence
+        image: eoepca/um-login-persistence:latest
+        imagePullPolicy: Never
+        env:
+            - name: GLUU_CONFIG_ADAPTER
+              value: "kubernetes"
+            - name: GLUU_SECRET_ADAPTER
+              value: "kubernetes"
+            - name: GLUU_PASSPORT_ENABLED
+              value: "true"
+            - name: GLUU_LDAP_URL
+              value: "opendj:1636"
+            - name: GLUU_PERSISTENCE_TYPE
+              value: "ldap"
+            - name: GLUU_OXTRUST_CONFIG_GENERATION
+              value: "false"
+      restartPolicy: Never
+  backoffLimit: 4

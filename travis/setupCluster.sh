@@ -4,7 +4,7 @@
 #GLUU_SECRET_ADAPTER="kubernetes"
 #ADMIN_PW="admin_Abcd1234#"
 #EMAIL="support@gluu.org"
-#DOMAIN="eoepca-dev.gluu.org"
+DOMAIN="demoexample.gluu.org"
 ##ORG_NAME="Deimos"
 #COUNTRY_CODE="PT"
 #STATE="NA"
@@ -86,7 +86,9 @@ kubectl apply -f ../src/ldap/opendj-init.yaml
 # Populate LDAP
 echo "Waiting..."
 until kubectl logs opendj-init-0 | grep "Started listening for new connections on LDAPS Connection Handler"; do sleep 1; done
-kubectl run --image=eoepca/um-login-persistence:latest persistence --env="GLUU_CONFIG_ADAPTER=kubernetes"     --env="GLUU_SECRET_ADAPTER=kubernetes"     --env="GLUU_OXTRUST_CONFIG_GENERATION=false"     --env="GLUU_LDAP_URL=opendj:1636"     --env="GLUU_PASSPORT_ENABLED=true" --env="GLUU_PERSISTENCE_TYPE=ldap"
+kubectl apply -f ../src/ldap/persistence.yaml
+until kubectl get pods | grep "persistence" | grep "Completed"; do sleep 1; done
+
 #echo "##### Waiting for LDAP to start (will take around 10 minutes, ContainerCreating errors are expected):"
 #sleep 20
 echo "Done!"
@@ -95,7 +97,6 @@ echo "Done!"
 minikube addons enable ingress
 sh ../src/nginx/tls-secrets.sh
 kubectl apply -f ../src/nginx/nginx.yaml
-cat ../src/nginx/nginx.yaml | sed "s/{{GLUU_DOMAIN}}/$DOMAIN/g" | kubectl apply -f -
 
 # Apply oxAuth
 echo "Applying oxAuth"
