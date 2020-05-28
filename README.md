@@ -25,8 +25,6 @@
     <br />
     <a href="https://github.com/EOEPCA/um-login-service"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="https://github.com/EOEPCA/um-login-service">View Demo</a>
-    ·
     <a href="https://github.com/EOEPCA/um-login-service/issues">Report Bug</a>
     ·
     <a href="https://github.com/EOEPCA/um-login-service/issues">Request Feature</a>
@@ -37,46 +35,32 @@
 
 ## Table of Contents
 
-- [About the Project](#about-the-project)
+- [Table of Contents](#table-of-contents)
   - [Built With](#built-with)
 - [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Testing](#testing)
 - [Documentation](#documentation)
-- [Usage](#usage)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
 
-<!-- ABOUT THE PROJECT -->
-
-## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-This building block aims at deploying a Gluu 3.1.6 instance.
 
 ### Built With
 
-- [Javalin framework](https://javalin.io/)
-- [Log4j2](https://logging.apache.org/log4j/2.x/) + [YAML](https://yaml.org/)
-- [Junit 5](https://junit.org/junit5/)
+- [Python](https://www.python.org//)
+- [YAML](https://yaml.org/)
+- [Travis CI](https://travis-ci.com/)
+- [Docker](https://docker.com)
+- [Kubernetes](https://kubernetes.io)
 
 <!-- GETTING STARTED -->
 
 ## Getting Started
 
 To get a local copy up and running follow these simple steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-
-- [Vagrant](https://www.vagrantup.com/docs/installation/)
-- [EOEPCA Development Environment](https://github.com/EOEPCA/dev-env)
 
 ### Installation
 
@@ -157,7 +141,7 @@ Distributed under the Apache-2.0 License. See `LICENSE` for more information.
 
 ## Contact
 
-Tiago Mendonça Fernandes - eoepca.systemteam@telespazio.com
+EOEPCA mailbox - eoepca.systemteam@telespazio.com
 
 Project Link: [https://github.com/EOEPCA/um-login-service](https://github.com/EOEPCA/um-login-service)
 
@@ -165,8 +149,6 @@ Project Link: [https://github.com/EOEPCA/um-login-service](https://github.com/EO
 
 ## Acknowledgements
 
-- []()
-- []()
 - README.md is based on [this template](https://github.com/othneildrew/Best-README-Template) by [Othneil Drew](https://github.com/othneildrew).
 
 <!-- MARKDOWN LINKS & IMAGES -->
