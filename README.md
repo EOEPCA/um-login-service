@@ -23,7 +23,7 @@
 
   <p align="center">
     <br />
-    <a href="https://github.com/EOEPCA/um-login-service"><strong>Explore the docs »</strong></a>
+    <a href="https://eoepca.github.io/um-login-service/"><strong>Explore the docs »</strong></a>
     <br />
     <a href="https://github.com/EOEPCA/um-login-service/issues">Report Bug</a>
     ·
