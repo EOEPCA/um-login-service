@@ -16,18 +16,18 @@
 <br />
 <p align="center">
   <a href="https://github.com/EOEPCA/um-login-service">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+* <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">um-login-service</h3>
 
   <p align="center">
-    <br />
-    <a href="https://eoepca.github.io/um-login-service/"><strong>Explore the docs »</strong></a>
-    <br />
-    <a href="https://github.com/EOEPCA/um-login-service/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/EOEPCA/um-login-service/issues">Request Feature</a>
+* <br />
+* <a href="https://eoepca.github.io/um-login-service/"><strong>Explore the docs »</strong></a>
+* <br />
+* <a href="https://github.com/EOEPCA/um-login-service/issues">Report Bug</a>
+* ·
+* <a href="https://github.com/EOEPCA/um-login-service/issues">Request Feature</a>
   </p>
 </p>
 
@@ -40,6 +40,8 @@
 - [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Testing](#testing)
+- [Configuration](#configuration)
+  - [Generate.json](#generatejson)
 - [Documentation](#documentation)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
@@ -79,16 +81,19 @@ git clone https://github.com/EOEPCA/um-login-service.git
 4. Change local directory
 
 ```sh
-cd um-login-service\src
+cd um-login-service
 ```
 
-5. Open setupCluster.sh and change configuration variables at the start.
+5. Open the configuration files at `src/config` and change them as you need (see [Configuration](#configuration) for more information )
 
-6. Run the script
+6. Execute the setup for the whole cluster. This process will take about 15-30min, depending on your system and configuration
 
 ```sh
+cd travis
 sh ./setupCluster.sh
 ```
+
+Note that after the script is done it is possible the cluster is still propagating information and won't be available until some 5-15m after this.
 
 ### Testing
 
@@ -108,6 +113,25 @@ sudo apt install firefox xorg
 Then, using MobaXterm on the host machine and connecting to the VM, open firefox and access the following links:
 https://eoepca-dev.gluu.org/.well-known/openid-configuration
 https://eoepca-dev.gluu.org/.well-known/scim-configuration
+
+## Configuration
+All config should be changed **before** executing setupCluster.
+
+### Generate.json
+File located under `src/config/generate.json`.
+
+The parameters that are accepted, and their meaning, are as follows:
+* **hostname**: Hostname given to the service.
+* **country_code**: 2-letter country code for the configuration of the server
+* **state**: State for the configuration of the server
+* **city**: City for the configuration of the server
+* **admin_pw**: Password upon installation for admin user
+* **ldap_pw**: Password for admin in LDAP
+* **email**: Email of the owner of the platform
+* **org_name**: Organization name of the owner of the platform
+* **gluu_config_adapter**: Internal config adapter for the images. Currently only "kubernetes" is supported
+* **ldap_type**: Internal config adaptar for the database. Currently only "opendj" is supported
+* **redis_pw**: Password for Redis instance.
 
 ## Documentation
 
