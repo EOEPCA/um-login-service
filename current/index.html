@@ -5,16 +5,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<meta name="description" content="&lt;Template Service&gt; Design Document for the Common Architecture">
+<meta name="description" content="Login Service Design Document for the Common Architecture">
 <meta name="keywords" content="common architecture design">
 <meta name="author" content="TVUK System Team">
-<title>&lt;Template Service&gt; Design Document: EOEPCA.SDD.xxx</title>
+<title>Login Service Design Document: EOEPCA.SDD.xxx</title>
 <link rel="stylesheet" href="stylesheets/eoepca.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>&lt;Template Service&gt; Design Document: EOEPCA.SDD.xxx</h1>
+<h1>Login Service Design Document: EOEPCA.SDD.xxx</h1>
 <div class="details">
 <span id="author" class="author">TVUK System Team</span><br>
 <span id="email" class="email">&lt;<a href="mailto:Eoepca.SystemTeam@telespazio.com">Eoepca.SystemTeam@telespazio.com</a>&gt;</span><br>
@@ -23,7 +23,7 @@
 <br><span id="revremark"></span>
 </div>
 <div id="toc" class="toc2">
-<div id="toctitle">&lt;Template Service&gt; Design Document</div>
+<div id="toctitle">Login Service Design Document</div>
 <ul class="sectlevel1">
 <li><a href="#_introduction">1. Introduction</a>
 <ul class="sectlevel2">
@@ -121,7 +121,7 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>EO Exploitation Platform Common Architecture<br>
-<em>&lt;Template Service&gt; Design Document</em><br>
+<em>Login Service Design Document</em><br>
 EOEPCA.SDD.xxx</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -132,9 +132,9 @@ EOEPCA.SDD.xxx</p>
 <tbody>
 <tr>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><strong>COMMENTS and ISSUES</strong><br>
-If you would like to raise comments or issues on this document, please do so by raising an Issue at the following URL <a href="https://github.com/EOEPCA/template-svce/issues" class="bare">https://github.com/EOEPCA/template-svce/issues</a>.</p></td>
+If you would like to raise comments or issues on this document, please do so by raising an Issue at the following URL <a href="https://github.com/EOEPCA/um-login-service/issues" class="bare">https://github.com/EOEPCA/um-login-service/issues</a>.</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><strong>PDF</strong><br>
-This document is available in PDF format <a href="EOEPCA-template-svce.pdf" target="_blank" rel="noopener">here</a>.</p></td>
+This document is available in PDF format <a href="EOEPCA-um-login-service.pdf" target="_blank" rel="noopener">here</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><strong>EUROPEAN SPACE AGENCY CONTRACT REPORT</strong><br>
@@ -189,7 +189,7 @@ The Amendment Record Sheet below records the history and issue status of this do
 <div class="sect2">
 <h3 id="_purpose_and_scope">1.1. Purpose and Scope</h3>
 <div class="paragraph">
-<p>This document presents the &lt;Template Service&gt; Design for the Common Architecture.</p>
+<p>This document presents the Login Service Design for the Common Architecture.</p>
 </div>
 </div>
 <div class="sect2">
@@ -198,11 +198,11 @@ The Amendment Record Sheet below records the history and issue status of this do
 <dl>
 <dt class="hdlist1">Section 2 - <a href="#mainOverview">Overview</a></dt>
 <dd>
-<p>Provides an over of the &lt;Template Service&gt; component, within the context of the wider Common Architecture design.</p>
+<p>Provides an over of the Login Service component, within the context of the wider Common Architecture design.</p>
 </dd>
 <dt class="hdlist1">Section 3 - <a href="#mainDesign">[mainDesign]</a></dt>
 <dd>
-<p>Provides the design of the &lt;Template Service&gt; component.</p>
+<p>Provides the design of the Login Service component.</p>
 </dd>
 </dl>
 </div>
@@ -1175,7 +1175,7 @@ OGC 08-068r2,<br>
 <div class="ulist">
 <ul>
 <li>
-<p>oxAuth - Gluu Inc. [LINK to Github]</p>
+<p>oxAuth - Gluu Inc. - <a href="https://github.com/GluuFederation/oxAuth" class="bare">https://github.com/GluuFederation/oxAuth</a></p>
 </li>
 </ul>
 </div>
@@ -1185,7 +1185,7 @@ OGC 08-068r2,<br>
 <div class="ulist">
 <ul>
 <li>
-<p>oxTrust - Gluu Inc. (Link to Github)</p>
+<p>oxTrust - Gluu Inc. - <a href="https://github.com/GluuFederation/oxTrust" class="bare">https://github.com/GluuFederation/oxTrust</a></p>
 </li>
 </ul>
 </div>
@@ -1195,7 +1195,7 @@ OGC 08-068r2,<br>
 <div class="ulist">
 <ul>
 <li>
-<p>OpenDJ/LDAP Distribution (Link to Github)</p>
+<p>OpenDJ/LDAP Distribution - <a href="https://github.com/GluuFederation/docker-opendj" class="bare">https://github.com/GluuFederation/docker-opendj</a></p>
 </li>
 </ul>
 </div>
@@ -1205,7 +1205,7 @@ OGC 08-068r2,<br>
 <div class="ulist">
 <ul>
 <li>
-<p>Passport.js (Link to Github)</p>
+<p>Passport.js - <a href="https://github.com/jaredhanson/passport" class="bare">https://github.com/jaredhanson/passport</a></p>
 </li>
 </ul>
 </div>
@@ -1215,10 +1215,10 @@ OGC 08-068r2,<br>
 <div class="ulist">
 <ul>
 <li>
-<p>Persistence system load/backup/restore components (Link to Github)</p>
+<p>Persistence system load/backup/restore components - <a href="https://github.com/EOEPCA/um-login-persistence" class="bare">https://github.com/EOEPCA/um-login-persistence</a></p>
 </li>
 <li>
-<p>Kubernetes secret and config Tooling (Link to Github)</p>
+<p>Kubernetes secret and config Tooling - <a href="https://github.com/GluuFederation/gluu-docker/tree/3.1.6/examples/kubernetes/minikube" class="bare">https://github.com/GluuFederation/gluu-docker/tree/3.1.6/examples/kubernetes/minikube</a></p>
 </li>
 <li>
 <p>Reverse Proxy exposing API interfaces - Nginx/Ingress</p>
@@ -1441,7 +1441,7 @@ OGC 08-068r2,<br>
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2020-05-28 10:33:44 UTC
+Last updated 2020-06-04 16:06:21 UTC
 </div>
 </div>
 </body>
