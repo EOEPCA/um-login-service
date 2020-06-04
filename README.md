@@ -105,6 +105,13 @@ If you wish to access the UI via browser, run the following command from inside 
 sudo apt install firefox xorg
 ```
 
+Selenium is still in progres to be integrated with travis, meanwhile in order to test the login interface you should:
+install selenium
+install google-chrome and chromedriver
+The chromedriver must match the google-chrome version
+chromdriver file must be inside tests path
+Gluu's hostname, username and password are configurables through test_settings.json
+
 Then, using MobaXterm on the host machine and connecting to the VM, open firefox and access the following links:
 https://eoepca-dev.gluu.org/.well-known/openid-configuration
 https://eoepca-dev.gluu.org/.well-known/scim-configuration

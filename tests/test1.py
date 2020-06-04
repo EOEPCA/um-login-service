@@ -4,51 +4,59 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+import json
 import time
 
+with open('test_settings.json', 'r') as config:
+    config=config.read()
+# parse x:
+y = json.loads(config)
 
+hostname = y['hostname']
+username = y['username']
+password = y['password']
+
+#Properties for the chrome driver
 caps = webdriver.DesiredCapabilities.CHROME.copy()
 caps['acceptInsecureCerts'] = True
-
-#
-
-
 chrome_options = Options()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 
-#driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
+#Set the driver with the properties above
 driver = webdriver.Chrome('chromedriver',desired_capabilities=caps, chrome_options=chrome_options)
-#driver = webdriver.Chrome(executable_path=r'chromedriver')
+#Match the gluu instance
 
-driver.get('https://demoexample.gluu.org')
+driver.get(hostname)
 
-# print messages
-#driver.get("https://www.python.org")
 try:
+    #Sleep until credentials are processed
     element = WebDriverWait(driver, 10)
-    
     print(driver.title)
-    
-    username = driver.find_element_by_id("loginForm:username")
-    password = driver.find_element_by_id("loginForm:password")
+    #Matches the login form elemnents
+    u = driver.find_element_by_id("loginForm:username")
+    p = driver.find_element_by_id("loginForm:password")
     submit   = driver.find_element_by_id("loginForm:loginButton")
-    username.send_keys("alvlDemo")
-    password.send_keys("alvl")
+    #Fill username and password with the user to test
+    u.send_keys(username)
+    p.send_keys(password)
     submit.click()
+    #Wait until the Authorization is made
     time.sleep(15)
     
 finally:
     print(driver.title)
     if driver.title == 'Gluu':
+        #The main page's title matches the expected
         print('Success')
         assert driver.title == 'Gluu'
-        page_title = driver.find_element_by_name('j_idt14')
+        driver.find_element_by_name('j_idt14')
     else:
+        #Check if the message was unauthorized
         fail = driver.find_element_by_xpath('//li[@class="text-center"]')
+        print('Wrong User or Password')
     driver.quit()
 
 
