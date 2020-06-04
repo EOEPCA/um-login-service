@@ -78,8 +78,13 @@
 <ul class="sectlevel3">
 <li><a href="#_overview_and_purpose">3.1.1. Overview and Purpose</a></li>
 <li><a href="#_software_reuse_and_dependencies">3.1.2. Software Reuse and Dependencies</a></li>
-<li><a href="#_interfaces">3.1.3. Interfaces</a></li>
-<li><a href="#_data">3.1.4. Data</a></li>
+<li><a href="#_interfaces_todo">3.1.3. Interfaces //TODO</a></li>
+<li><a href="#_data">3.1.4. Data</a>
+<ul class="sectlevel4">
+<li><a href="#_configuration">3.1.4.1. Configuration</a></li>
+<li><a href="#_data_flow">3.1.4.2. Data flow</a></li>
+</ul>
+</li>
 <li><a href="#_applicable_resources">3.1.5. Applicable Resources</a></li>
 </ul>
 </li>
@@ -87,27 +92,40 @@
 <ul class="sectlevel3">
 <li><a href="#_overview_and_purpose_2">3.2.1. Overview and Purpose</a></li>
 <li><a href="#_software_reuse_and_dependencies_2">3.2.2. Software Reuse and Dependencies</a></li>
-<li><a href="#_interfaces_2">3.2.3. Interfaces</a></li>
-<li><a href="#_data_2">3.2.4. Data</a></li>
-<li><a href="#_applicable_resources_2">3.2.5. Applicable Resources</a></li>
+<li><a href="#_interfaces_todo_2">3.2.3. Interfaces // TODO</a></li>
+<li><a href="#_data_2">3.2.4. Data</a>
+<ul class="sectlevel4">
+<li><a href="#_data_flow_2">3.2.4.1. Data flow</a></li>
+</ul>
+</li>
+<li><a href="#_applicable_resources_todo">3.2.5. Applicable Resources //TODO</a></li>
 </ul>
 </li>
 <li><a href="#_back_end_service">3.3. Back-End Service</a>
 <ul class="sectlevel3">
-<li><a href="#_overview_and_purpose_3">3.3.1. Overview and Purpose</a></li>
-<li><a href="#_software_reuse_and_dependencies_3">3.3.2. Software Reuse and Dependencies</a></li>
-<li><a href="#_interfaces_3">3.3.3. Interfaces</a></li>
-<li><a href="#_data_3">3.3.4. Data</a></li>
-<li><a href="#_applicable_resources_3">3.3.5. Applicable Resources</a></li>
+<li><a href="#_overview_and_purpose_todo">3.3.1. Overview and Purpose //TODO</a></li>
+<li><a href="#_software_reuse_and_dependencies_todo">3.3.2. Software Reuse and Dependencies //TODO</a></li>
+<li><a href="#_interfaces_todo_3">3.3.3. Interfaces //TODO</a></li>
+<li><a href="#_data_3">3.3.4. Data</a>
+<ul class="sectlevel4">
+<li><a href="#_data_flow_3">3.3.4.1. Data Flow</a></li>
+<li><a href="#_configuration_2">3.3.4.2. Configuration</a></li>
 </ul>
 </li>
-<li><a href="#_relying_party_service">3.4. Relying-Party Service</a>
+<li><a href="#_applicable_resources_todo_2">3.3.5. Applicable Resources //TODO</a></li>
+</ul>
+</li>
+<li><a href="#_relying_party_service_todo_passport_idps">3.4. Relying-Party Service //TODO (passport, IDPs)</a>
 <ul class="sectlevel3">
-<li><a href="#_overview_and_purpose_4">3.4.1. Overview and Purpose</a></li>
-<li><a href="#_software_reuse_and_dependencies_4">3.4.2. Software Reuse and Dependencies</a></li>
-<li><a href="#_interfaces_4">3.4.3. Interfaces</a></li>
-<li><a href="#_data_4">3.4.4. Data</a></li>
-<li><a href="#_applicable_resources_4">3.4.5. Applicable Resources</a></li>
+<li><a href="#_overview_and_purpose_todo_2">3.4.1. Overview and Purpose //TODO</a></li>
+<li><a href="#_software_reuse_and_dependencies_todo_2">3.4.2. Software Reuse and Dependencies //TODO</a></li>
+<li><a href="#_interfaces_todo_4">3.4.3. Interfaces //TODO</a></li>
+<li><a href="#_data_4">3.4.4. Data</a>
+<ul class="sectlevel4">
+<li><a href="#_data_flow_4">3.4.4.1. Data Flow</a></li>
+<li><a href="#_configuration_3">3.4.4.2. Configuration</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1325,19 +1343,44 @@ OGC 08-068r2,<br>
 </div>
 <div class="sect3">
 <h4 id="_software_reuse_and_dependencies">3.1.2. Software Reuse and Dependencies</h4>
-
+<div class="paragraph">
+<p>This service depends solely on oxAuth software, from gluu (see applicable resources and the overview for this building block)</p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_interfaces">3.1.3. Interfaces</h4>
+<h4 id="_interfaces_todo">3.1.3. Interfaces //TODO</h4>
 
 </div>
 <div class="sect3">
 <h4 id="_data">3.1.4. Data</h4>
-
+<div class="sect4">
+<h5 id="_configuration">3.1.4.1. Configuration</h5>
+<div class="paragraph">
+<p>Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.</p>
+</div>
+<div class="paragraph">
+<p>Direct customization without the "persistance" module is not possible at this time.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_data_flow">3.1.4.2. Data flow</h5>
+<div class="paragraph">
+<p>All information handled by this service is read/written to the LDAP instance deployed at the backend.</p>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_applicable_resources">3.1.5. Applicable Resources</h4>
-
+<div class="ulist">
+<ul>
+<li>
+<p>oxAuth (gluu) - <a href="https://gluu.org/docs/de/reference/oxauth/" class="bare">https://gluu.org/docs/de/reference/oxauth/</a></p>
+</li>
+<li>
+<p>oxAuth (gluu @ Github) - <a href="https://github.com/GluuFederation/docker-oxauth" class="bare">https://github.com/GluuFederation/docker-oxauth</a></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1386,62 +1429,100 @@ OGC 08-068r2,<br>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_interfaces_2">3.2.3. Interfaces</h4>
+<h4 id="_interfaces_todo_2">3.2.3. Interfaces // TODO</h4>
 
 </div>
 <div class="sect3">
 <h4 id="_data_2">3.2.4. Data</h4>
-
+<div class="sect4">
+<h5 id="_data_flow_2">3.2.4.1. Data flow</h5>
+<div class="paragraph">
+<p>All information handled by this service is read/written to the LDAP instance deployed at the backend.<br>
+==== Configuration</p>
+</div>
+<div class="paragraph">
+<p>Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.</p>
+</div>
+<div class="paragraph">
+<p>Direct customization without the "persistance" module is not possible at this time.</p>
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_applicable_resources_2">3.2.5. Applicable Resources</h4>
+<h4 id="_applicable_resources_todo">3.2.5. Applicable Resources //TODO</h4>
 
 </div>
 </div>
 <div class="sect2">
 <h3 id="_back_end_service">3.3. Back-End Service</h3>
 <div class="sect3">
-<h4 id="_overview_and_purpose_3">3.3.1. Overview and Purpose</h4>
+<h4 id="_overview_and_purpose_todo">3.3.1. Overview and Purpose //TODO</h4>
 
 </div>
 <div class="sect3">
-<h4 id="_software_reuse_and_dependencies_3">3.3.2. Software Reuse and Dependencies</h4>
+<h4 id="_software_reuse_and_dependencies_todo">3.3.2. Software Reuse and Dependencies //TODO</h4>
 
 </div>
 <div class="sect3">
-<h4 id="_interfaces_3">3.3.3. Interfaces</h4>
+<h4 id="_interfaces_todo_3">3.3.3. Interfaces //TODO</h4>
 
 </div>
 <div class="sect3">
 <h4 id="_data_3">3.3.4. Data</h4>
-
+<div class="sect4">
+<h5 id="_data_flow_3">3.3.4.1. Data Flow</h5>
+<div class="paragraph">
+<p>All information handled by this service is read/written to the LDAP instance deployed at the backend.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_configuration_2">3.3.4.2. Configuration</h5>
+<div class="paragraph">
+<p>Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.</p>
+</div>
+<div class="paragraph">
+<p>Direct customization without the "persistance" module is not possible at this time.</p>
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_applicable_resources_3">3.3.5. Applicable Resources</h4>
+<h4 id="_applicable_resources_todo_2">3.3.5. Applicable Resources //TODO</h4>
 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_relying_party_service">3.4. Relying-Party Service</h3>
+<h3 id="_relying_party_service_todo_passport_idps">3.4. Relying-Party Service //TODO (passport, IDPs)</h3>
 <div class="sect3">
-<h4 id="_overview_and_purpose_4">3.4.1. Overview and Purpose</h4>
+<h4 id="_overview_and_purpose_todo_2">3.4.1. Overview and Purpose //TODO</h4>
 
 </div>
 <div class="sect3">
-<h4 id="_software_reuse_and_dependencies_4">3.4.2. Software Reuse and Dependencies</h4>
+<h4 id="_software_reuse_and_dependencies_todo_2">3.4.2. Software Reuse and Dependencies //TODO</h4>
 
 </div>
 <div class="sect3">
-<h4 id="_interfaces_4">3.4.3. Interfaces</h4>
+<h4 id="_interfaces_todo_4">3.4.3. Interfaces //TODO</h4>
 
 </div>
 <div class="sect3">
 <h4 id="_data_4">3.4.4. Data</h4>
-
+<div class="sect4">
+<h5 id="_data_flow_4">3.4.4.1. Data Flow</h5>
+<div class="paragraph">
+<p>All information handled by this service is read/written to the LDAP instance deployed at the backend.</p>
 </div>
-<div class="sect3">
-<h4 id="_applicable_resources_4">3.4.5. Applicable Resources</h4>
+</div>
+<div class="sect4">
+<h5 id="_configuration_3">3.4.4.2. Configuration</h5>
+<div class="paragraph">
+<p>Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.</p>
+</div>
+<div class="paragraph">
+<p>Direct customization without the "persistance" module is not possible at this time.<br>
+=== Applicable Resources //TODO</p>
+</div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 </div>
@@ -1481,7 +1562,7 @@ OGC 08-068r2,<br>
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2020-06-04 16:15:14 UTC
+Last updated 2020-06-04 17:14:52 UTC
 </div>
 </div>
 </body>
