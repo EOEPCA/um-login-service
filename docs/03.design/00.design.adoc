@@ -19,14 +19,33 @@ When a breakdown is necessary, a general overview of the building block can be g
 
 == Authentication and Authorization Service
 === Overview and Purpose
+The login service provides both authentication and authorization via it's oxAuth component. This component also provides the OpenID Connect (OIDC) and UMA flows, exposed through endpoints to external clients.
+
+it also provides authentication via web service, allowing for simple login interactions with users.
+
 === Software Reuse and Dependencies
 === Interfaces
 === Data
 === Applicable Resources
-
 == Administration Service
 === Overview and Purpose
+image::../images/gluu-dashboard.png[top=5%, align=center, pdfwidth=6.5in]
+
+
+The login service provides administration functionality for users with elevated priviledges. This allows admins to have an overview of the entire system, as well as configure anything necessary from this interface.
+
+Examples of what can be configured here are:
+
+- Oauth Clients
+- UMA Scopes & Resources
+- Edit/Add/Remove Users
+- ... and many more
+
 === Software Reuse and Dependencies
+
+- **oxTrust**: A gluu component, providing the web interface and interaction
+- **opendj**: The instance of LDAP providing the backend store for information
+
 === Interfaces
 === Data
 === Applicable Resources
