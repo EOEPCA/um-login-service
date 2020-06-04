@@ -1316,7 +1316,12 @@ OGC 08-068r2,<br>
 <h3 id="_authentication_and_authorization_service">3.1. Authentication and Authorization Service</h3>
 <div class="sect3">
 <h4 id="_overview_and_purpose">3.1.1. Overview and Purpose</h4>
-
+<div class="paragraph">
+<p>The login service provides both authentication and authorization via it&#8217;s oxAuth component. This component also provides the OpenID Connect (OIDC) and UMA flows, exposed through endpoints to external clients.</p>
+</div>
+<div class="paragraph">
+<p>it also provides authentication via web service, allowing for simple login interactions with users.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_software_reuse_and_dependencies">3.1.2. Software Reuse and Dependencies</h4>
@@ -1339,11 +1344,46 @@ OGC 08-068r2,<br>
 <h3 id="_administration_service">3.2. Administration Service</h3>
 <div class="sect3">
 <h4 id="_overview_and_purpose_2">3.2.1. Overview and Purpose</h4>
-
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/gluu-dashboard.png" alt="gluu dashboard">
+</div>
+</div>
+<div class="paragraph">
+<p>The login service provides administration functionality for users with elevated priviledges. This allows admins to have an overview of the entire system, as well as configure anything necessary from this interface.</p>
+</div>
+<div class="paragraph">
+<p>Examples of what can be configured here are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Oauth Clients</p>
+</li>
+<li>
+<p>UMA Scopes &amp; Resources</p>
+</li>
+<li>
+<p>Edit/Add/Remove Users</p>
+</li>
+<li>
+<p>&#8230;&#8203; and many more</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_software_reuse_and_dependencies_2">3.2.2. Software Reuse and Dependencies</h4>
-
+<div class="ulist">
+<ul>
+<li>
+<p><strong>oxTrust</strong>: A gluu component, providing the web interface and interaction</p>
+</li>
+<li>
+<p><strong>opendj</strong>: The instance of LDAP providing the backend store for information</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_interfaces_2">3.2.3. Interfaces</h4>
@@ -1441,7 +1481,7 @@ OGC 08-068r2,<br>
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2020-06-04 16:06:21 UTC
+Last updated 2020-06-04 16:15:14 UTC
 </div>
 </div>
 </body>
