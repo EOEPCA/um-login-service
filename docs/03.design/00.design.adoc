@@ -97,9 +97,10 @@ Direct customization without the "persistance" module is not possible at this ti
 === Software Reuse and Dependencies //TODO
 === Interfaces //TODO
 === Data
-==== Data Flow
+==== Data Flow // TODO
 
-All information handled by this service is read/written to the LDAP instance deployed at the backend.
+image::../images/passport.png[top=5%, align=center, pdfwidth=6.5in]
+
 
 ==== Configuration
 
