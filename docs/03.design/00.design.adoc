@@ -76,21 +76,29 @@ Direct customization without the "persistance" module is not possible at this ti
 === Applicable Resources //TODO
 
 == Back-End Service
-=== Overview and Purpose //TODO
-=== Software Reuse and Dependencies //TODO
+=== Overview and Purpose
+
+The backend service is composed of the opendj component, which serves an LDAP service, storing all of the data and configuration of the platform.
+
+=== Software Reuse and Dependencies 
+
+- **opendj**: The instance of LDAP providing the backend store for information
+
 === Interfaces //TODO
 === Data 
 ==== Data Flow
 
-All information handled by this service is read/written to the LDAP instance deployed at the backend.
+The service itself doesn't process data, but stores it in an LDAP database.
+Thus, all flows follow the LDAP protocol for connection and exchange of data.
 
 ==== Configuration
 
-Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.
+There is no configuration available for this service at this time
 
-Direct customization without the "persistance" module is not possible at this time.
+=== Applicable Resources
 
-=== Applicable Resources //TODO
+- Persistance, LDAP - Gluu - https://gluu.org/docs/gluu-server/reference/persistence/#ldap
+- OpenDJ, docker - https://github.com/GluuFederation/docker-opendj
 
 == Relying-Party Service //TODO (passport, IDPs)
 === Overview and Purpose //TODO
@@ -107,4 +115,7 @@ image::../images/passport.png[top=5%, align=center, pdfwidth=6.5in]
 Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.
 
 Direct customization without the "persistance" module is not possible at this time.
-=== Applicable Resources //TODO
+=== Applicable Resources
+
+- Passport.js - http://www.passportjs.org/
+- Passport (Github) - https://github.com/jaredhanson/passport
