@@ -103,8 +103,8 @@
 </li>
 <li><a href="#_back_end_service">3.3. Back-End Service</a>
 <ul class="sectlevel3">
-<li><a href="#_overview_and_purpose_todo">3.3.1. Overview and Purpose //TODO</a></li>
-<li><a href="#_software_reuse_and_dependencies_todo">3.3.2. Software Reuse and Dependencies //TODO</a></li>
+<li><a href="#_overview_and_purpose_3">3.3.1. Overview and Purpose</a></li>
+<li><a href="#_software_reuse_and_dependencies_3">3.3.2. Software Reuse and Dependencies</a></li>
 <li><a href="#_interfaces_todo_3">3.3.3. Interfaces //TODO</a></li>
 <li><a href="#_data_3">3.3.4. Data</a>
 <ul class="sectlevel4">
@@ -112,13 +112,13 @@
 <li><a href="#_configuration_2">3.3.4.2. Configuration</a></li>
 </ul>
 </li>
-<li><a href="#_applicable_resources_todo_2">3.3.5. Applicable Resources //TODO</a></li>
+<li><a href="#_applicable_resources_2">3.3.5. Applicable Resources</a></li>
 </ul>
 </li>
 <li><a href="#_relying_party_service_todo_passport_idps">3.4. Relying-Party Service //TODO (passport, IDPs)</a>
 <ul class="sectlevel3">
-<li><a href="#_overview_and_purpose_todo_2">3.4.1. Overview and Purpose //TODO</a></li>
-<li><a href="#_software_reuse_and_dependencies_todo_2">3.4.2. Software Reuse and Dependencies //TODO</a></li>
+<li><a href="#_overview_and_purpose_todo">3.4.1. Overview and Purpose //TODO</a></li>
+<li><a href="#_software_reuse_and_dependencies_todo">3.4.2. Software Reuse and Dependencies //TODO</a></li>
 <li><a href="#_interfaces_todo_4">3.4.3. Interfaces //TODO</a></li>
 <li><a href="#_data_4">3.4.4. Data</a>
 <ul class="sectlevel4">
@@ -1456,12 +1456,20 @@ OGC 08-068r2,<br>
 <div class="sect2">
 <h3 id="_back_end_service">3.3. Back-End Service</h3>
 <div class="sect3">
-<h4 id="_overview_and_purpose_todo">3.3.1. Overview and Purpose //TODO</h4>
-
+<h4 id="_overview_and_purpose_3">3.3.1. Overview and Purpose</h4>
+<div class="paragraph">
+<p>The backend service is composed of the opendj component, which serves an LDAP service, storing all of the data and configuration of the platform.</p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_software_reuse_and_dependencies_todo">3.3.2. Software Reuse and Dependencies //TODO</h4>
-
+<h4 id="_software_reuse_and_dependencies_3">3.3.2. Software Reuse and Dependencies</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>opendj</strong>: The instance of LDAP providing the backend store for information</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_interfaces_todo_3">3.3.3. Interfaces //TODO</h4>
@@ -1472,32 +1480,39 @@ OGC 08-068r2,<br>
 <div class="sect4">
 <h5 id="_data_flow_3">3.3.4.1. Data Flow</h5>
 <div class="paragraph">
-<p>All information handled by this service is read/written to the LDAP instance deployed at the backend.</p>
+<p>The service itself doesn&#8217;t process data, but stores it in an LDAP database.<br>
+Thus, all flows follow the LDAP protocol for connection and exchange of data.</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="_configuration_2">3.3.4.2. Configuration</h5>
 <div class="paragraph">
-<p>Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.</p>
-</div>
-<div class="paragraph">
-<p>Direct customization without the "persistance" module is not possible at this time.</p>
+<p>There is no configuration available for this service at this time</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_applicable_resources_todo_2">3.3.5. Applicable Resources //TODO</h4>
-
+<h4 id="_applicable_resources_2">3.3.5. Applicable Resources</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Persistance, LDAP - Gluu - <a href="https://gluu.org/docs/gluu-server/reference/persistence/#ldap" class="bare">https://gluu.org/docs/gluu-server/reference/persistence/#ldap</a></p>
+</li>
+<li>
+<p>OpenDJ, docker - <a href="https://github.com/GluuFederation/docker-opendj" class="bare">https://github.com/GluuFederation/docker-opendj</a></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_relying_party_service_todo_passport_idps">3.4. Relying-Party Service //TODO (passport, IDPs)</h3>
 <div class="sect3">
-<h4 id="_overview_and_purpose_todo_2">3.4.1. Overview and Purpose //TODO</h4>
+<h4 id="_overview_and_purpose_todo">3.4.1. Overview and Purpose //TODO</h4>
 
 </div>
 <div class="sect3">
-<h4 id="_software_reuse_and_dependencies_todo_2">3.4.2. Software Reuse and Dependencies //TODO</h4>
+<h4 id="_software_reuse_and_dependencies_todo">3.4.2. Software Reuse and Dependencies //TODO</h4>
 
 </div>
 <div class="sect3">
@@ -1521,7 +1536,17 @@ OGC 08-068r2,<br>
 </div>
 <div class="paragraph">
 <p>Direct customization without the "persistance" module is not possible at this time.<br>
-=== Applicable Resources //TODO</p>
+=== Applicable Resources</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Passport.js - <a href="http://www.passportjs.org/" class="bare">http://www.passportjs.org/</a></p>
+</li>
+<li>
+<p>Passport (Github) - <a href="https://github.com/jaredhanson/passport" class="bare">https://github.com/jaredhanson/passport</a></p>
+</li>
+</ul>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1564,7 +1589,7 @@ OGC 08-068r2,<br>
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2020-06-05 10:43:25 UTC
+Last updated 2020-06-05 10:54:40 UTC
 </div>
 </div>
 </body>
