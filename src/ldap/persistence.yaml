@@ -24,5 +24,9 @@ spec:
               value: "false"
             - name: GLUU_CACHE_TYPE
               value: "NATIVE_PERSISTENCE"
+            - name: LP_CLIENT_ID
+              value: "59f1fed27153f631bc08"
+            - name: LP_CLIENT_SECRET
+              value: "640baffac0948454c48de2505726f53d11adc8a6"
       restartPolicy: Never
   backoffLimit: 1
