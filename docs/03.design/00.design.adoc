@@ -19,28 +19,103 @@ When a breakdown is necessary, a general overview of the building block can be g
 
 == Authentication and Authorization Service
 === Overview and Purpose
+The login service provides both authentication and authorization via it's oxAuth component. This component also provides the OpenID Connect (OIDC) and UMA flows, exposed through endpoints to external clients.
+
+it also provides authentication via web service, allowing for simple login interactions with users.
+
 === Software Reuse and Dependencies
-=== Interfaces
+This service depends solely on oxAuth software, from gluu (see applicable resources and the overview for this building block)
+
+=== Interfaces //TODO
 === Data
+==== Configuration
+
+Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.
+
+Direct customization without the "persistance" module is not possible at this time.
+
+==== Data flow
+
+All information handled by this service is read/written to the LDAP instance deployed at the backend.
+
 === Applicable Resources
+
+* oxAuth (gluu) - https://gluu.org/docs/de/reference/oxauth/
+* oxAuth (gluu @ Github) - https://github.com/GluuFederation/docker-oxauth
 
 == Administration Service
 === Overview and Purpose
+image::../images/gluu-dashboard.png[top=5%, align=center, pdfwidth=6.5in]
+
+
+The login service provides administration functionality for users with elevated priviledges. This allows admins to have an overview of the entire system, as well as configure anything necessary from this interface.
+
+Examples of what can be configured here are:
+
+- Oauth Clients
+- UMA Scopes & Resources
+- Edit/Add/Remove Users
+- ... and many more
+
 === Software Reuse and Dependencies
-=== Interfaces
+
+- **oxTrust**: A gluu component, providing the web interface and interaction
+- **opendj**: The instance of LDAP providing the backend store for information
+
+=== Interfaces // TODO
 === Data
-=== Applicable Resources
+==== Data flow
+
+All information handled by this service is read/written to the LDAP instance deployed at the backend.
+==== Configuration
+
+Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.
+
+Direct customization without the "persistance" module is not possible at this time.
+
+=== Applicable Resources //TODO
 
 == Back-End Service
 === Overview and Purpose
-=== Software Reuse and Dependencies
-=== Interfaces
-=== Data
+
+The backend service is composed of the opendj component, which serves an LDAP service, storing all of the data and configuration of the platform.
+
+=== Software Reuse and Dependencies 
+
+- **opendj**: The instance of LDAP providing the backend store for information
+
+=== Interfaces //TODO
+=== Data 
+==== Data Flow
+
+The service itself doesn't process data, but stores it in an LDAP database.
+Thus, all flows follow the LDAP protocol for connection and exchange of data.
+
+==== Configuration
+
+There is no configuration available for this service at this time
+
 === Applicable Resources
 
-== Relying-Party Service
-=== Overview and Purpose
-=== Software Reuse and Dependencies
-=== Interfaces
+- Persistance, LDAP - Gluu - https://gluu.org/docs/gluu-server/reference/persistence/#ldap
+- OpenDJ, docker - https://github.com/GluuFederation/docker-opendj
+
+== Relying-Party Service //TODO (passport, IDPs)
+=== Overview and Purpose //TODO
+=== Software Reuse and Dependencies //TODO
+=== Interfaces //TODO
 === Data
+==== Data Flow // TODO
+
+image::../images/passport.png[top=5%, align=center, pdfwidth=6.5in]
+
+
+==== Configuration
+
+Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.
+
+Direct customization without the "persistance" module is not possible at this time.
 === Applicable Resources
+
+- Passport.js - http://www.passportjs.org/
+- Passport (Github) - https://github.com/jaredhanson/passport
