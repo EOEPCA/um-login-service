@@ -6,12 +6,53 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import json
+from json import load, dump
 import time
+from eoepca_scim import EOEPCA_Scim, ENDPOINT_AUTH_CLIENT_POST
 
-with open('test_settings.json', 'r') as config:
-    config=config.read()
-    
-y = json.loads(config)
+
+def load_config(config_path: str) -> dict:
+    """
+    Parses and returns the config file
+
+    Returns: dict
+    """
+    config = {}
+    with open(config_path) as j:
+        config = load(j)
+
+    return config
+
+
+def save_config(config_path: str, data: dict):
+    """
+    Saves updated config file
+    """
+    with open(config_path, 'w') as j:
+        dump(data,j)
+
+
+y = load_config("config.json")
+
+
+if "client_id" not in y or "client_secret" not in y:
+    print ("NOTICE: Client not found, generating one... ")
+    scim_client = EOEPCA_Scim(y["hostname"])
+    new_client = scim_client.registerClient("Selenium Test Client",
+                                    grantTypes = ["client_credentials", "password", "urn:ietf:params:oauth:grant-type:uma-ticket"],
+                                    redirectURIs = [""],
+                                    logoutURI = "", 
+                                    responseTypes = ["code","token","id_token"],
+                                    scopes = ['openid',  'email', 'user_name ','uma_protection', 'permission'],
+                                    token_endpoint_auth_method = ENDPOINT_AUTH_CLIENT_POST)
+    print("NEW CLIENT created with ID '"+new_client["client_id"]+"', since no client config was found on config.json")
+
+    y["client_id"] = new_client["client_id"]
+    y["client_secret"] = new_client["client_secret"]
+    save_config("config.json", y)
+    print("New client saved to config!")
+else:
+    print("Client found in config, using: "+y["client_id"])
 
 
 #Properties for the chrome driver
@@ -24,9 +65,6 @@ chrome_options.add_argument('--disable-dev-shm-usage')
 
 #Set the driver with the properties above
 driver = webdriver.Chrome('/usr/local/bin/chromedriver',desired_capabilities=caps, chrome_options=chrome_options)
-
-
-
 
 def normal_login(driver, config):
     
@@ -55,7 +93,7 @@ def normal_login(driver, config):
         print(driver.title)
         if driver.title == 'Gluu':
             #The main page's title matches the expected
-            print('Success')
+            print('Reached Gluu Main Page')
             assert driver.title == 'Gluu'
             driver.find_element_by_name('j_idt14')
         else:
@@ -122,8 +160,8 @@ def from_gluu_check_user(driver):
         print('Success!')
 
 
-#normal_login(driver, y)
-git_login(driver,y)
+normal_login(driver, y)
+#git_login(driver,y)
 from_gluu_check_user(driver)
 
 driver.quit()
