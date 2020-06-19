@@ -18,6 +18,9 @@ jobs:
       #script: cd terraform/test && terraform init -input=false
       script: cd travis && sh setupCluster.sh
 
+      after_success:
+        - cd ./tests/acceptance/UserManagement/LoginService
+        - robot ./LoginService.robot
       # deploy:
         # - provider: script
           # skip_cleanup: true
