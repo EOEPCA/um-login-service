@@ -3,6 +3,6 @@
 selenium
 pyvirtualdisplay
 webdriver-manager
-eoepca-scim==2.5.0
+eoepca-scim==2.6.0
 pyjwkest
 pycryptodome==3.4.3
