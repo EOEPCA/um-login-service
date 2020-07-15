@@ -46,6 +46,11 @@
 </li>
 <li><a href="#_single_sign_on">2.1.2. Single Sign-On</a></li>
 <li><a href="#_single_log_out">2.1.3. Single Log-Out</a></li>
+<li><a href="#_authorization_scopes">2.1.4. Authorization Scopes</a>
+<ul class="sectlevel4">
+<li><a href="#_public_access">2.1.4.1. Public Access</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_static_architecture">2.2. Static Architecture</a></li>
@@ -1026,6 +1031,18 @@ OGC 08-068r2,<br>
 <p>Similar to the SSO functionality, applications can request the End-User session can be terminated across the platform, and register themselves to receive this log-out request (in order to also handle it internally).</p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_authorization_scopes">2.1.4. Authorization Scopes</h4>
+<div class="paragraph">
+<p>The authorization scopes are basically policies that dictate the kind of access a certain resource needs in order to meet the end user&#8217;s account privileges.</p>
+</div>
+<div class="sect4">
+<h5 id="_public_access">2.1.4.1. Public Access</h5>
+<div class="paragraph">
+<p>This specific scope allows for any end user or client application to freely access a resource, without any restrictions.</p>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_static_architecture">2.2. Static Architecture</h3>
@@ -1589,7 +1606,7 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2020-07-14 09:48:36 UTC
+Last updated 2020-07-15 12:00:09 UTC
 </div>
 </div>
 </body>
