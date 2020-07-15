@@ -44,6 +44,14 @@ Single Sign-On (SSO) comes as one of the main benefits of using OIDC as authenti
 
 Similar to the SSO functionality, applications can request the End-User session can be terminated across the platform, and register themselves to receive this log-out request (in order to also handle it internally).
 
+=== Authorization Scopes
+
+The authorization scopes are basically policies that dictate the kind of access a certain resource needs in order to meet the end user's account privileges.
+
+==== Public Access
+
+This specific scope allows for any end user or client application to freely access a resource, without any restrictions.
+
 == Static Architecture
 
 [NOTE]
