@@ -46,11 +46,15 @@ Similar to the SSO functionality, applications can request the End-User session 
 
 === Authorization Scopes
 
-The authorization scopes are basically policies that dictate the kind of access a certain resource needs in order to meet the end user's account privileges.
+Authorization scopes are definitions used to protect resources, by enabling associated policies that ensure a connecting client has the access permissions required for a given resource.
 
 ==== Public Access
 
 This specific scope allows for any end user or client application to freely access a resource, without any restrictions.
+
+==== Authenticated Access
+
+This scope requires the user to have an ongoing active session.
 
 == Static Architecture
 
