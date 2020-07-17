@@ -54,7 +54,7 @@ This specific scope allows for any end user or client application to freely acce
 
 ==== Authenticated Access
 
-This scope requires the user to have an ongoing active session.
+This scope is associated with a policy that verifies if the user, making the request, has an ongoing active session.
 
 == Static Architecture
 
