@@ -21,12 +21,18 @@ When a breakdown is necessary, a general overview of the building block can be g
 === Overview and Purpose
 The login service provides both authentication and authorization via it's oxAuth component. This component also provides the OpenID Connect (OIDC) and UMA flows, exposed through endpoints to external clients.
 
-it also provides authentication via web service, allowing for simple login interactions with users.
+It also provides authentication via web service, allowing for simple login interactions with users.
 
 === Software Reuse and Dependencies
 This service depends solely on oxAuth software, from gluu (see applicable resources and the overview for this building block)
 
-=== Interfaces //TODO
+=== Interfaces
+==== OIDC Endpoints
+A listing of endpoints to interact with OIDC is exposed on a .well-know URL (default is .well-known/openid-configuration).
+
+==== UMA Endpoints
+A listing of endpoints to interact with UMA is exposed on a .well-know URL (default is .well-known/uma2-configuration).
+
 === Data
 ==== Configuration
 
@@ -62,18 +68,28 @@ Examples of what can be configured here are:
 - **oxTrust**: A gluu component, providing the web interface and interaction
 - **opendj**: The instance of LDAP providing the backend store for information
 
-=== Interfaces // TODO
-=== Data
-==== Data flow
+=== Interfaces
+==== SCIM Endpoints
+A listing of endpoints to interact with SCIM is exposed on a .well-know URL (default is .well-known/scim-configuration).
 
-All information handled by this service is read/written to the LDAP instance deployed at the backend.
+==== Web Interface
+A web interface is exposed to allow administrators and local operators to login and manage configuration aspects of the Login Service.
+
+=== Data
 ==== Configuration
 
 Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.
 
 Direct customization without the "persistance" module is not possible at this time.
 
-=== Applicable Resources //TODO
+==== Data flow
+
+All information handled by this service is read/written to the LDAP instance deployed at the backend.
+
+=== Applicable Resources
+
+* oxTrust (gluu) - https://gluu.org/docs/de/reference/oxtrust/
+* oxTrust (gluu @ Github) - https://github.com/GluuFederation/docker-oxtrust
 
 == Back-End Service
 === Overview and Purpose
@@ -85,6 +101,8 @@ The backend service is composed of the opendj component, which serves an LDAP se
 - **opendj**: The instance of LDAP providing the backend store for information
 
 === Interfaces //TODO
+Not applicable.
+
 === Data 
 ==== Data Flow
 
