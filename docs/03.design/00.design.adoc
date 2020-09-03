@@ -120,20 +120,27 @@ There is no configuration available for this service at this time
 
 == Relying-Party Service //TODO (passport, IDPs)
 === Overview and Purpose //TODO
+Gluu has a bundled middleware project called Passport, the purpose of which is to facilitate authentication using an external identity provider. To this end, the OIDC interface can be called by an IDP.
+
 === Software Reuse and Dependencies //TODO
 === Interfaces //TODO
+==== OIDC Endpoints
+A listing of endpoints to interact with OIDC is exposed on a .well-know URL (default is .well-known/openid-configuration).
+
 === Data
 ==== Data Flow // TODO
 
 image::../images/passport.png[top=5%, align=center, pdfwidth=6.5in]
-
 
 ==== Configuration
 
 Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.
 
 Direct customization without the "persistance" module is not possible at this time.
+
 === Applicable Resources
 
 - Passport.js - http://www.passportjs.org/
 - Passport (Github) - https://github.com/jaredhanson/passport
+- oxPassport (gluu) - https://gluu.org/docs/de/reference/oxpassport/
+- oxPassport (gluu @ Github) - https://github.com/GluuFederation/docker-oxPassport
