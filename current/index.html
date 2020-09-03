@@ -136,13 +136,18 @@
 <ul class="sectlevel3">
 <li><a href="#_overview_and_purpose_todo">3.4.1. Overview and Purpose //TODO</a></li>
 <li><a href="#_software_reuse_and_dependencies_todo">3.4.2. Software Reuse and Dependencies //TODO</a></li>
-<li><a href="#_interfaces_todo_2">3.4.3. Interfaces //TODO</a></li>
+<li><a href="#_interfaces_todo_2">3.4.3. Interfaces //TODO</a>
+<ul class="sectlevel4">
+<li><a href="#_oidc_endpoints_2">3.4.3.1. OIDC Endpoints</a></li>
+</ul>
+</li>
 <li><a href="#_data_4">3.4.4. Data</a>
 <ul class="sectlevel4">
 <li><a href="#_data_flow_todo">3.4.4.1. Data Flow // TODO</a></li>
 <li><a href="#_configuration_4">3.4.4.2. Configuration</a></li>
 </ul>
 </li>
+<li><a href="#_applicable_resources_4">3.4.5. Applicable Resources</a></li>
 </ul>
 </li>
 </ul>
@@ -1579,7 +1584,9 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 <h3 id="_relying_party_service_todo_passport_idps">3.4. Relying-Party Service //TODO (passport, IDPs)</h3>
 <div class="sect3">
 <h4 id="_overview_and_purpose_todo">3.4.1. Overview and Purpose //TODO</h4>
-
+<div class="paragraph">
+<p>Gluu has a bundled middleware project called Passport, the purpose of which is to facilitate authentication using an external identity provider. To this end, the OIDC interface can be called by an IDP.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_software_reuse_and_dependencies_todo">3.4.2. Software Reuse and Dependencies //TODO</h4>
@@ -1587,7 +1594,12 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 </div>
 <div class="sect3">
 <h4 id="_interfaces_todo_2">3.4.3. Interfaces //TODO</h4>
-
+<div class="sect4">
+<h5 id="_oidc_endpoints_2">3.4.3.1. OIDC Endpoints</h5>
+<div class="paragraph">
+<p>A listing of endpoints to interact with OIDC is exposed on a .well-know URL (default is .well-known/openid-configuration).</p>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_data_4">3.4.4. Data</h4>
@@ -1605,9 +1617,12 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 <p>Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.</p>
 </div>
 <div class="paragraph">
-<p>Direct customization without the "persistance" module is not possible at this time.<br>
-=== Applicable Resources</p>
+<p>Direct customization without the "persistance" module is not possible at this time.</p>
 </div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_applicable_resources_4">3.4.5. Applicable Resources</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1616,10 +1631,15 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 <li>
 <p>Passport (Github) - <a href="https://github.com/jaredhanson/passport" class="bare">https://github.com/jaredhanson/passport</a></p>
 </li>
+<li>
+<p>oxPassport (gluu) - <a href="https://gluu.org/docs/de/reference/oxpassport/" class="bare">https://gluu.org/docs/de/reference/oxpassport/</a></p>
+</li>
+<li>
+<p>oxPassport (gluu @ Github) - <a href="https://github.com/GluuFederation/docker-oxPassport" class="bare">https://github.com/GluuFederation/docker-oxPassport</a></p>
+</li>
 </ul>
 </div>
 <div style="page-break-after: always;"></div>
-</div>
 </div>
 </div>
 </div>
@@ -1659,7 +1679,7 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2020-09-03 13:28:52 UTC
+Last updated 2020-09-03 17:44:55 UTC
 </div>
 </div>
 </body>
