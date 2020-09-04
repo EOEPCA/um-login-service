@@ -11,7 +11,7 @@ Section 2 - <<mainOverview>>::
 Provides an overview of the {component-name} component, within the context of the wider Common Architecture design.
 
 Section 3 - <<mainComponents>>::
-Provides the design of the {component-name} component.
+Provides the building block design of the {component-name} component.
 
 include::03.reference-docs.adoc[leveloffset=+1]
 
