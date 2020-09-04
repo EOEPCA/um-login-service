@@ -16,7 +16,7 @@ The Login Service building block provides an OIDC and UMA compliant solution ena
 
 As stated in the EOEPCA Master System Design Document (ref. [PENDING]), the Login Service establishes itself as a client (Relying Party) for external Identity Providers (IDPs) allowing users coming from external domains to authenticate into the Exploitation Platform. In addition to this functionality, the Login Service also allows any Platform component to authenticate itself (without the need for an End-User to initiate the flow) therefore facilitating security aspects of the internal workflows of a Platform.
 
-The figure below, identifies the main workflows on which the Login Service participates:
+The figure below, identifies the main workflows on which the Login Service participates: //TODO
 
 [[IMAGE]]
 
@@ -30,7 +30,7 @@ The Login Service establishes itself as a client to all supported external IDPs,
 
 The following image indicates the sequence of events necessary for a user to authenticate using an external Identity Provider (IDP).
 
-[[IMAGE]]
+image::../images/passport.png[top=5%, align=center, pdfwidth=6.5in]
 
 ==== Unique identification of End-Users
 
@@ -42,7 +42,7 @@ Single Sign-On (SSO) comes as one of the main benefits of using OIDC as authenti
 
 === Single Log-Out
 
-Similar to the SSO functionality, applications can request the End-User session can be terminated across the platform, and register themselves to receive this log-out request (in order to also handle it internally).
+Similar to the SSO functionality, applications can request the End-User session to be terminated across the platform, and register themselves to receive this log-out request (in order to also handle it internally).
 
 === Authorization Scopes
 
@@ -67,7 +67,7 @@ This section contains:
 
 ================================
 
-The Login Service, heavily relies on Free and Open Source Software that already implements the interfaces and functionality required. The following image depicts the Static Architecture of this Building Block.
+The Login Service, heavily relies on Free and Open Source Software that already implements the interfaces and functionality required. The following image depicts the Static Architecture of this Building Block. //TODO
 
 [[IMAGE]]
 
@@ -76,7 +76,7 @@ The Login Service, heavily relies on Free and Open Source Software that already 
 * The Back-End Service stores the necessary information for the other components to provide Session Management, Authorization and persists external IDP information generated or relayed during authentication.
 * The Relying Party component allows to register as a RP in any external IDP.
 
-The Section for the Building Block Design [REF] contains detailed descriptions and references to the Open Source components used in this Building Block.
+The Section for the Building Block Design [<<mainComponents>>] contains detailed descriptions and references to the Open Source components used in this Building Block.
 
 == Use Cases
 
@@ -88,6 +88,15 @@ This section contains:
 * Diagrams and definition of the use cases covered by this Building Block
 
 ================================
+
+//TODO 
+ * End-User chooses Identity Provider
+ * External Identity Provider Authentication
+ * Single Sign-on
+ * Single Log-out
+ * UMA workflow
+ * Request User Attributes through SCIM
+ * Resource registration
 
 == External Interfaces
 
