@@ -41,7 +41,7 @@
 <li><a href="#_end_user_authentication_through_external_idps">2.1.1. End-User Authentication through external IDPs</a>
 <ul class="sectlevel4">
 <li><a href="#_authentication_flow">2.1.1.1. Authentication Flow</a></li>
-<li><a href="#IMAGE">2.1.1.2. Unique identification of End-Users</a></li>
+<li><a href="#_unique_identification_of_end_users">2.1.1.2. Unique identification of End-Users</a></li>
 </ul>
 </li>
 <li><a href="#_single_sign_on">2.1.2. Single Sign-On</a></li>
@@ -1013,7 +1013,7 @@ OGC 08-068r2,<br>
 <p>As stated in the EOEPCA Master System Design Document (ref. [PENDING]), the Login Service establishes itself as a client (Relying Party) for external Identity Providers (IDPs) allowing users coming from external domains to authenticate into the Exploitation Platform. In addition to this functionality, the Login Service also allows any Platform component to authenticate itself (without the need for an End-User to initiate the flow) therefore facilitating security aspects of the internal workflows of a Platform.</p>
 </div>
 <div class="paragraph">
-<p>The figure below, identifies the main workflows on which the Login Service participates:</p>
+<p>The figure below, identifies the main workflows on which the Login Service participates: //TODO</p>
 </div>
 <div id="IMAGE" class="paragraph">
 <p>Based on this workflows, the Login Service enables the following functionality aspects</p>
@@ -1028,9 +1028,14 @@ OGC 08-068r2,<br>
 <div class="paragraph">
 <p>The following image indicates the sequence of events necessary for a user to authenticate using an external Identity Provider (IDP).</p>
 </div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/passport.png" alt="passport">
+</div>
+</div>
 </div>
 <div class="sect4">
-<h5 id="IMAGE">2.1.1.2. Unique identification of End-Users</h5>
+<h5 id="_unique_identification_of_end_users">2.1.1.2. Unique identification of End-Users</h5>
 <div class="paragraph">
 <p>By default, the Login Service extracts the email account stored in the external Identity Provider and checks that the user has not logged in previously with any other external IDP under the same email account. Whenever that&#8217;s the case, the authentication flow skips the persistence of End-User attributes to the back-end and directly considers the user authenticated.</p>
 </div>
@@ -1045,7 +1050,7 @@ OGC 08-068r2,<br>
 <div class="sect3">
 <h4 id="_single_log_out">2.1.3. Single Log-Out</h4>
 <div class="paragraph">
-<p>Similar to the SSO functionality, applications can request the End-User session can be terminated across the platform, and register themselves to receive this log-out request (in order to also handle it internally).</p>
+<p>Similar to the SSO functionality, applications can request the End-User session to be terminated across the platform, and register themselves to receive this log-out request (in order to also handle it internally).</p>
 </div>
 </div>
 <div class="sect3">
@@ -1092,7 +1097,7 @@ OGC 08-068r2,<br>
 </table>
 </div>
 <div class="paragraph">
-<p>The Login Service, heavily relies on Free and Open Source Software that already implements the interfaces and functionality required. The following image depicts the Static Architecture of this Building Block.</p>
+<p>The Login Service, heavily relies on Free and Open Source Software that already implements the interfaces and functionality required. The following image depicts the Static Architecture of this Building Block. //TODO</p>
 </div>
 <div id="IMAGE" class="ulist">
 <ul>
@@ -1111,7 +1116,7 @@ OGC 08-068r2,<br>
 </ul>
 </div>
 <div class="paragraph">
-<p>The Section for the Building Block Design [REF] contains detailed descriptions and references to the Open Source components used in this Building Block.</p>
+<p>The Section for the Building Block Design [<a href="#mainComponents">Building Block Design</a>] contains detailed descriptions and references to the Open Source components used in this Building Block.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1137,6 +1142,31 @@ OGC 08-068r2,<br>
 </td>
 </tr>
 </table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>End-User chooses Identity Provider</p>
+</li>
+<li>
+<p>External Identity Provider Authentication</p>
+</li>
+<li>
+<p>Single Sign-on</p>
+</li>
+<li>
+<p>Single Log-out</p>
+</li>
+<li>
+<p>UMA workflow</p>
+</li>
+<li>
+<p>Request User Attributes through SCIM</p>
+</li>
+<li>
+<p>Resource registration</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -1679,7 +1709,7 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2020-09-04 11:12:44 UTC
+Last updated 2020-09-04 14:06:25 UTC
 </div>
 </div>
 </body>
