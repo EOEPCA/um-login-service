@@ -54,14 +54,13 @@ All information handled by this service is read/written to the LDAP instance dep
 image::../images/gluu-dashboard.png[top=5%, align=center, pdfwidth=6.5in]
 
 
-The login service provides administration functionality for users with elevated priviledges. This allows admins to have an overview of the entire system, as well as configure anything necessary from this interface.
-
-Examples of what can be configured here are:
+The login service provides administration functionality for users with elevated priviledges. This allows admins to have an overview of the entire system, as well as configure anything necessary from this interface. Some of the configurations available from it are:
 
 - Oauth Clients
 - UMA Scopes & Resources
 - Edit/Add/Remove Users
-- ... and many more
+
+A complete description of available configurations can be found here: https://gluu.org/docs/gluu-server/4.1/admin-guide/oxtrust-ui/#oxtrust-admin-gui
 
 === Software Reuse and Dependencies
 
