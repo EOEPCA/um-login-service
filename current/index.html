@@ -127,7 +127,7 @@
 <ul class="sectlevel3">
 <li><a href="#_overview_and_purpose_3">3.3.1. Overview and Purpose</a></li>
 <li><a href="#_software_reuse_and_dependencies_3">3.3.2. Software Reuse and Dependencies</a></li>
-<li><a href="#_interfaces_todo">3.3.3. Interfaces //TODO</a></li>
+<li><a href="#_interfaces_3">3.3.3. Interfaces</a></li>
 <li><a href="#_data_3">3.3.4. Data</a>
 <ul class="sectlevel4">
 <li><a href="#_data_flow_3">3.3.4.1. Data Flow</a></li>
@@ -137,18 +137,18 @@
 <li><a href="#_applicable_resources_3">3.3.5. Applicable Resources</a></li>
 </ul>
 </li>
-<li><a href="#_relying_party_service_todo_passport_idps">3.4. Relying-Party Service //TODO (passport, IDPs)</a>
+<li><a href="#_relying_party_service">3.4. Relying-Party Service</a>
 <ul class="sectlevel3">
-<li><a href="#_overview_and_purpose_todo">3.4.1. Overview and Purpose //TODO</a></li>
-<li><a href="#_software_reuse_and_dependencies_todo">3.4.2. Software Reuse and Dependencies //TODO</a></li>
-<li><a href="#_interfaces_todo_2">3.4.3. Interfaces //TODO</a>
+<li><a href="#_overview_and_purpose_4">3.4.1. Overview and Purpose</a></li>
+<li><a href="#_software_reuse_and_dependencies_4">3.4.2. Software Reuse and Dependencies</a></li>
+<li><a href="#_interfaces_4">3.4.3. Interfaces</a>
 <ul class="sectlevel4">
 <li><a href="#_oidc_endpoints_2">3.4.3.1. OIDC Endpoints</a></li>
 </ul>
 </li>
 <li><a href="#_data_4">3.4.4. Data</a>
 <ul class="sectlevel4">
-<li><a href="#_data_flow_todo">3.4.4.1. Data Flow // TODO</a></li>
+<li><a href="#_data_flow_4">3.4.4.1. Data Flow</a></li>
 <li><a href="#_configuration_4">3.4.4.2. Configuration</a></li>
 </ul>
 </li>
@@ -1492,7 +1492,7 @@ TODO: import UMA sequence diagram</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Oauth Clients</p>
+<p>OAuth Clients</p>
 </li>
 <li>
 <p>UMA Scopes &amp; Resources</p>
@@ -1585,9 +1585,9 @@ TODO: import UMA sequence diagram</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_interfaces_todo">3.3.3. Interfaces //TODO</h4>
+<h4 id="_interfaces_3">3.3.3. Interfaces</h4>
 <div class="paragraph">
-<p>Not applicable.</p>
+<p>Not applicable, all actions are done internally on the LDAP instance.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1621,19 +1621,28 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 </div>
 </div>
 <div class="sect2">
-<h3 id="_relying_party_service_todo_passport_idps">3.4. Relying-Party Service //TODO (passport, IDPs)</h3>
+<h3 id="_relying_party_service">3.4. Relying-Party Service</h3>
 <div class="sect3">
-<h4 id="_overview_and_purpose_todo">3.4.1. Overview and Purpose //TODO</h4>
+<h4 id="_overview_and_purpose_4">3.4.1. Overview and Purpose</h4>
 <div class="paragraph">
-<p>Gluu has a bundled middleware project called Passport, the purpose of which is to facilitate authentication using an external identity provider. To this end, the OIDC interface can be called by an IDP.</p>
+<p>Gluu has a bundled middleware project called Passport.js, the purpose of which is to facilitate authentication using an external identity provider. To this end, the OIDC interface can be called by an IDP.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_software_reuse_and_dependencies_todo">3.4.2. Software Reuse and Dependencies //TODO</h4>
-
+<h4 id="_software_reuse_and_dependencies_4">3.4.2. Software Reuse and Dependencies</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>oxTrust</strong>: A gluu component, providing the web interface and interaction</p>
+</li>
+<li>
+<p><strong>passport</strong>: Gluu&#8217;s container instance of Passport.js' implementation</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_interfaces_todo_2">3.4.3. Interfaces //TODO</h4>
+<h4 id="_interfaces_4">3.4.3. Interfaces</h4>
 <div class="sect4">
 <h5 id="_oidc_endpoints_2">3.4.3.1. OIDC Endpoints</h5>
 <div class="paragraph">
@@ -1644,7 +1653,7 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 <div class="sect3">
 <h4 id="_data_4">3.4.4. Data</h4>
 <div class="sect4">
-<h5 id="_data_flow_todo">3.4.4.1. Data Flow // TODO</h5>
+<h5 id="_data_flow_4">3.4.4.1. Data Flow</h5>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/passport.png" alt="passport">
@@ -1719,7 +1728,7 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2020-09-08 18:27:30 UTC
+Last updated 2020-09-08 18:35:10 UTC
 </div>
 </div>
 </body>
