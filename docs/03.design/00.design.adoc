@@ -56,7 +56,7 @@ image::../images/gluu-dashboard.png[top=5%, align=center, pdfwidth=6.5in]
 
 The login service provides administration functionality for users with elevated priviledges. This allows admins to have an overview of the entire system, as well as configure anything necessary from this interface. Some of the configurations available from it are:
 
-- Oauth Clients
+- OAuth Clients
 - UMA Scopes & Resources
 - Edit/Add/Remove Users
 
@@ -99,8 +99,8 @@ The backend service is composed of the opendj component, which serves an LDAP se
 
 - **opendj**: The instance of LDAP providing the backend store for information
 
-=== Interfaces //TODO
-Not applicable.
+=== Interfaces
+Not applicable, all actions are done internally on the LDAP instance.
 
 === Data 
 ==== Data Flow
@@ -117,17 +117,20 @@ There is no configuration available for this service at this time
 - Persistance, LDAP - Gluu - https://gluu.org/docs/gluu-server/reference/persistence/#ldap
 - OpenDJ, docker - https://github.com/GluuFederation/docker-opendj
 
-== Relying-Party Service //TODO (passport, IDPs)
-=== Overview and Purpose //TODO
-Gluu has a bundled middleware project called Passport, the purpose of which is to facilitate authentication using an external identity provider. To this end, the OIDC interface can be called by an IDP.
+== Relying-Party Service
+=== Overview and Purpose
+Gluu has a bundled middleware project called Passport.js, the purpose of which is to facilitate authentication using an external identity provider. To this end, the OIDC interface can be called by an IDP.
 
-=== Software Reuse and Dependencies //TODO
-=== Interfaces //TODO
+=== Software Reuse and Dependencies
+- **oxTrust**: A gluu component, providing the web interface and interaction
+- **passport**: Gluu's container instance of Passport.js' implementation
+
+=== Interfaces
 ==== OIDC Endpoints
 A listing of endpoints to interact with OIDC is exposed on a .well-know URL (default is .well-known/openid-configuration).
 
 === Data
-==== Data Flow // TODO
+==== Data Flow
 
 image::../images/passport.png[top=5%, align=center, pdfwidth=6.5in]
 
