@@ -55,7 +55,17 @@
 </ul>
 </li>
 <li><a href="#_static_architecture">2.2. Static Architecture</a></li>
-<li><a href="#_use_cases">2.3. Use Cases</a></li>
+<li><a href="#_use_cases">2.3. Use Cases</a>
+<ul class="sectlevel3">
+<li><a href="#_single_sign_on_2">2.3.1. Single Sign-on</a></li>
+<li><a href="#_single_log_out_2">2.3.2. Single Log-out</a></li>
+<li><a href="#_end_user_chooses_identity_provider">2.3.3. End-User chooses Identity Provider</a></li>
+<li><a href="#_external_identity_provider_authentication">2.3.4. External Identity Provider Authentication</a></li>
+<li><a href="#_request_user_attributes_through_scim">2.3.5. Request User Attributes through SCIM</a></li>
+<li><a href="#_resource_registration">2.3.6. Resource registration</a></li>
+<li><a href="#_dynamically_register_a_client">2.3.7. Dynamically register a client</a></li>
+</ul>
+</li>
 <li><a href="#_external_interfaces">2.4. External Interfaces</a>
 <ul class="sectlevel3">
 <li><a href="#_authentication_authn_interface">2.4.1. Authentication (AuthN) Interface</a></li>
@@ -68,12 +78,6 @@
 <li><a href="#_required_resources">2.5. Required Resources</a>
 <ul class="sectlevel3">
 <li><a href="#_software">2.5.1. Software</a></li>
-</ul>
-</li>
-<li><a href="#_design_standards_conventions_and_procedures">2.6. Design Standards, Conventions and Procedures</a>
-<ul class="sectlevel3">
-<li><a href="#_uml_design">2.6.1. UML Design</a></li>
-<li><a href="#_naming_conventions">2.6.2. Naming Conventions</a></li>
 </ul>
 </li>
 </ul>
@@ -1097,7 +1101,7 @@ OGC 08-068r2,<br>
 </table>
 </div>
 <div class="paragraph">
-<p>The Login Service, heavily relies on Free and Open Source Software that already implements the interfaces and functionality required. The following image depicts the Static Architecture of this Building Block. //TODO</p>
+<p>The Login Service heavily relies on Free and Open Source Software that already implements the interfaces and functionality required. The following image depicts the Static Architecture of this Building Block. //TODO</p>
 </div>
 <div id="IMAGE" class="ulist">
 <ul>
@@ -1143,30 +1147,66 @@ OGC 08-068r2,<br>
 </tr>
 </table>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>End-User chooses Identity Provider</p>
-</li>
-<li>
-<p>External Identity Provider Authentication</p>
-</li>
-<li>
-<p>Single Sign-on</p>
-</li>
-<li>
-<p>Single Log-out</p>
-</li>
-<li>
-<p>UMA workflow</p>
-</li>
-<li>
-<p>Request User Attributes through SCIM</p>
-</li>
-<li>
-<p>Resource registration</p>
-</li>
-</ul>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/sessions.png" alt="sessions">
+</div>
+</div>
+<div class="paragraph">
+<p>This diagram covers the following use cases:</p>
+</div>
+<div class="sect3">
+<h4 id="_single_sign_on_2">2.3.1. Single Sign-on</h4>
+<div class="paragraph">
+<p>Upon performing a Login action, a new Session is generated that is then used by the user to perform actions on the Exploitation Platform.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_single_log_out_2">2.3.2. Single Log-out</h4>
+<div class="paragraph">
+<p>Upon performing a Logout action, the created Session is destroyed, preventing further action by the End-User on the Exploitation Platform, until a new Login action is taken.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_end_user_chooses_identity_provider">2.3.3. End-User chooses Identity Provider</h4>
+<div class="paragraph">
+<p>When performing a Login action, the End-User can choose if they wish to use an External Identity Provider to delegate authentication (or use the Login Service itself).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_external_identity_provider_authentication">2.3.4. External Identity Provider Authentication</h4>
+<div class="paragraph">
+<p>If an External Identity Provider is chosen to delegate authentication, the Login Service redirects to it in order to proceed with the Login action. This is best explained by the sequence diagram present in [<a href="#_authentication_flow">Authentication Flow</a>]</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/client.png" alt="client">
+</div>
+</div>
+<div class="paragraph">
+<p>This diagram covers the following use cases:<br>
+=== UMA workflow<br>
+By default, some actions are protected by a UMA (User-Managed access) workflow, that is already described in the Master System Design document (ref. [PENDING]). This can be best described by the following diagram:<br>
+TODO: import UMA sequence diagram</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_request_user_attributes_through_scim">2.3.5. Request User Attributes through SCIM</h4>
+<div class="paragraph">
+<p>Requesting a User&#8217;s attributes can be done via SCIM&#8217;s .well-known endpoints, best by using a previously registered client to call them and perform UMA authentication.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_resource_registration">2.3.6. Resource registration</h4>
+<div class="paragraph">
+<p>Resource registration can be done directly via OIDC&#8217;s .well-known endpoints, best by using a previously registered client to call them using basic authentication.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_dynamically_register_a_client">2.3.7. Dynamically register a client</h4>
+<div class="paragraph">
+<p>The Exploitation Platform allows a client to dynamically register with itself, by calling OIDC .well-know endpoints.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1196,19 +1236,19 @@ OGC 08-068r2,<br>
 <div class="sect3">
 <h4 id="_authentication_authn_interface">2.4.1. Authentication (AuthN) Interface</h4>
 <div class="paragraph">
-<p>The Login Service exposes an OpenID Connect interface through a .well-known URI that describes all standard endpoints</p>
+<p>The Login Service exposes an OpenID Connect interface through a .well-known URI that describes all standard endpoints.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_authorization_authz_interface">2.4.2. Authorization (AuthZ) Interface</h4>
 <div class="paragraph">
-<p>The Login Service exposes a User Managed Access (UMA) interface through a .well-known URI that describes all standard endpoints</p>
+<p>The Login Service exposes a User Managed Access (UMA) interface through a .well-known URI that describes all standard endpoints.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_identity_management_interface">2.4.3. Identity Management Interface</h4>
 <div class="paragraph">
-<p>The Login Service exposes a System for Cross Domain Identity (SCIM) Interface through a .well-known URI that describes all standard endpoints</p>
+<p>The Login Service exposes a System for Cross Domain Identity (SCIM) Interface through a .well-known URI that describes all standard endpoints.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1316,38 +1356,6 @@ OGC 08-068r2,<br>
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_design_standards_conventions_and_procedures">2.6. Design Standards, Conventions and Procedures</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="title">Content Description</div>
-<div class="paragraph">
-<p>This section contains:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Explanations on the UML Design notation and necessary naming conventions used throughout the document</p>
-</li>
-</ul>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_uml_design">2.6.1. UML Design</h4>
-
-</div>
-<div class="sect3">
-<h4 id="_naming_conventions">2.6.2. Naming Conventions</h4>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1706,7 +1714,7 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2020-09-08 18:22:06 UTC
+Last updated 2020-09-08 18:25:45 UTC
 </div>
 </div>
 </body>
