@@ -106,6 +106,7 @@ If an External Identity Provider is chosen to delegate authentication, the Login
 
 image::../images/client.png[top=5%, align=center, pdfwidth=6.5in]
 This diagram covers the following use cases:
+
 === UMA workflow
 By default, some actions are protected by a UMA (User-Managed access) workflow, that is already described in the Master System Design document (ref. [PENDING]). This can be best described by the following diagram:
 TODO: import UMA sequence diagram
