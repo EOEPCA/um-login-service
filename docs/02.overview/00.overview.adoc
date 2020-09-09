@@ -67,7 +67,9 @@ This section contains:
 
 ================================
 
-The Login Service heavily relies on Free and Open Source Software that already implements the interfaces and functionality required. The following describes the main components of this building block:
+The Login Service heavily relies on Free and Open Source Software that already implements the interfaces and functionality required. The following diagram describes the main components of this building block:
+
+image::../images/static.PNG[top=5%, align=center, pdfwidth=6.5in]
 
 * The Authentication and Authorization Service enables both OIDC and UMA flows for the whole Platform
 * The Administration Service provides and Administration GUI and a SCIM Implementation allowing direct interaction with the End-User Back-End
