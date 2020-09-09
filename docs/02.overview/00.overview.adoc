@@ -67,7 +67,7 @@ This section contains:
 
 ================================
 
-The Login Service, heavily relies on Free and Open Source Software that already implements the interfaces and functionality required. The following image depicts the Static Architecture of this Building Block. //TODO
+The Login Service heavily relies on Free and Open Source Software that already implements the interfaces and functionality required. The following image depicts the Static Architecture of this Building Block. //TODO
 
 [[IMAGE]]
 
@@ -89,14 +89,36 @@ This section contains:
 
 ================================
 
-//TODO 
- * End-User chooses Identity Provider
- * External Identity Provider Authentication
- * Single Sign-on
- * Single Log-out
- * UMA workflow
- * Request User Attributes through SCIM
- * Resource registration
+image::../images/sessions.png[top=5%, align=center, pdfwidth=6.5in]
+This diagram covers the following use cases:
+
+=== Single Sign-on
+Upon performing a Login action, a new Session is generated that is then used by the user to perform actions on the Exploitation Platform.
+
+=== Single Log-out
+Upon performing a Logout action, the created Session is destroyed, preventing further action by the End-User on the Exploitation Platform, until a new Login action is taken.
+
+=== End-User chooses Identity Provider
+When performing a Login action, the End-User can choose if they wish to use an External Identity Provider to delegate authentication (or use the Login Service itself).
+
+=== External Identity Provider Authentication
+If an External Identity Provider is chosen to delegate authentication, the Login Service redirects to it in order to proceed with the Login action. This is best explained by the sequence diagram present in [<<_authentication_flow>>]
+
+image::../images/client.png[top=5%, align=center, pdfwidth=6.5in]
+This diagram covers the following use cases:
+
+=== UMA workflow
+By default, some actions are protected by a UMA (User-Managed access) workflow, that is already described in the Master System Design document (ref. [PENDING]). This can be best described by the following diagram:
+TODO: import UMA sequence diagram
+
+=== Request User Attributes through SCIM
+Requesting a User's attributes can be done via SCIM's .well-known endpoints, best by using a previously registered client to call them and perform UMA authentication.
+
+=== Resource registration
+Resource registration can be done directly via OIDC's .well-known endpoints, best by using a previously registered client to call them using basic authentication.
+
+=== Dynamically register a client
+The Exploitation Platform allows a client to dynamically register with itself, by calling OIDC .well-know endpoints.
 
 == External Interfaces
 
@@ -111,15 +133,15 @@ This section contains:
 
 === Authentication (AuthN) Interface
 
-The Login Service exposes an OpenID Connect interface through a .well-known URI that describes all standard endpoints
+The Login Service exposes an OpenID Connect interface through a .well-known URI that describes all standard endpoints.
 
 === Authorization (AuthZ) Interface
 
-The Login Service exposes a User Managed Access (UMA) interface through a .well-known URI that describes all standard endpoints
+The Login Service exposes a User Managed Access (UMA) interface through a .well-known URI that describes all standard endpoints.
 
 === Identity Management Interface
 
-The Login Service exposes a System for Cross Domain Identity (SCIM) Interface through a .well-known URI that describes all standard endpoints
+The Login Service exposes a System for Cross Domain Identity (SCIM) Interface through a .well-known URI that describes all standard endpoints.
 
 === Administration Interface
 
@@ -158,17 +180,3 @@ The following Open-Source Software is required to support the deployment and int
 ** Kubernetes secret and config Tooling - https://github.com/GluuFederation/gluu-docker/tree/3.1.6/examples/kubernetes/minikube
 ** Reverse Proxy exposing API interfaces - Nginx/Ingress
 
-
-== Design Standards, Conventions and Procedures
-
-[NOTE]
-.Content Description
-================================
-This section contains:
-
-* Explanations on the UML Design notation and necessary naming conventions used throughout the document
-
-================================
-
-=== UML Design
-=== Naming Conventions
