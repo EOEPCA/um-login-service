@@ -1018,9 +1018,14 @@ OGC 08-068r2,<br>
 <p>As stated in the EOEPCA Master System Design Document (ref. [PENDING]), the Login Service establishes itself as a client (Relying Party) for external Identity Providers (IDPs) allowing users coming from external domains to authenticate into the Exploitation Platform. In addition to this functionality, the Login Service also allows any Platform component to authenticate itself (without the need for an End-User to initiate the flow) therefore facilitating security aspects of the internal workflows of a Platform.</p>
 </div>
 <div class="paragraph">
-<p>The figure below, identifies the main workflows on which the Login Service participates: //TODO</p>
+<p>The figure below, identifies the main workflows on which the Login Service participates:</p>
 </div>
-<div id="IMAGE" class="paragraph">
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/workflow.png" alt="workflow">
+</div>
+</div>
+<div class="paragraph">
 <p>Based on this workflows, the Login Service enables the following functionality aspects</p>
 </div>
 <div class="sect3">
@@ -1191,8 +1196,7 @@ OGC 08-068r2,<br>
 <div class="sect3">
 <h4 id="_uma_workflow">2.3.5. UMA workflow</h4>
 <div class="paragraph">
-<p>By default, some actions are protected by a UMA (User-Managed access) workflow, that is already described in the Master System Design document (ref. [PENDING]). This can be best described by the following diagram:<br>
-TODO: import UMA sequence diagram</p>
+<p>By default, some actions are protected by a UMA (User-Managed access) workflow, that is already described in the Master System Design document (ref. [PENDING]). As part of this process, any security policies that have been previously established as [[<a href="#_authentication_scopes">[_authentication_scopes]</a>]] are enacted.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1728,7 +1732,7 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2020-09-09 09:05:33 UTC
+Last updated 2020-09-09 09:35:32 UTC
 </div>
 </div>
 </body>
