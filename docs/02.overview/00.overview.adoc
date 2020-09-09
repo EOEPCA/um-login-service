@@ -20,7 +20,7 @@ The figure below, identifies the main workflows on which the Login Service parti
 
 image::../images/workflow.png[top=5%, align=center, pdfwidth=6.5in]
 
-Based on this workflows, the Login Service enables the following functionality aspects
+Based on this workflow, the Login Service enables the following functionality aspects:
 
 === End-User Authentication through external IDPs
 
