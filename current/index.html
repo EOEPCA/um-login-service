@@ -41,7 +41,7 @@
 <li><a href="#_end_user_authentication_through_external_idps">2.1.1. End-User Authentication through external IDPs</a>
 <ul class="sectlevel4">
 <li><a href="#_authentication_flow">2.1.1.1. Authentication Flow</a></li>
-<li><a href="#_unique_identification_of_end_users">2.1.1.2. Unique identification of End-Users</a></li>
+<li><a href="#IMAGE">2.1.1.2. Unique identification of End-Users</a></li>
 </ul>
 </li>
 <li><a href="#_single_sign_on">2.1.2. Single Sign-On</a></li>
@@ -55,18 +55,7 @@
 </ul>
 </li>
 <li><a href="#_static_architecture">2.2. Static Architecture</a></li>
-<li><a href="#_use_cases">2.3. Use Cases</a>
-<ul class="sectlevel3">
-<li><a href="#_single_sign_on_2">2.3.1. Single Sign-on</a></li>
-<li><a href="#_single_log_out_2">2.3.2. Single Log-out</a></li>
-<li><a href="#_end_user_chooses_identity_provider">2.3.3. End-User chooses Identity Provider</a></li>
-<li><a href="#_external_identity_provider_authentication">2.3.4. External Identity Provider Authentication</a></li>
-<li><a href="#_uma_workflow">2.3.5. UMA workflow</a></li>
-<li><a href="#_request_user_attributes_through_scim">2.3.6. Request User Attributes through SCIM</a></li>
-<li><a href="#_resource_registration">2.3.7. Resource registration</a></li>
-<li><a href="#_dynamically_register_a_client">2.3.8. Dynamically register a client</a></li>
-</ul>
-</li>
+<li><a href="#_use_cases">2.3. Use Cases</a></li>
 <li><a href="#_external_interfaces">2.4. External Interfaces</a>
 <ul class="sectlevel3">
 <li><a href="#_authentication_authn_interface">2.4.1. Authentication (AuthN) Interface</a></li>
@@ -81,6 +70,12 @@
 <li><a href="#_software">2.5.1. Software</a></li>
 </ul>
 </li>
+<li><a href="#_design_standards_conventions_and_procedures">2.6. Design Standards, Conventions and Procedures</a>
+<ul class="sectlevel3">
+<li><a href="#_uml_design">2.6.1. UML Design</a></li>
+<li><a href="#_naming_conventions">2.6.2. Naming Conventions</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#mainComponents">3. Building Block Design</a>
@@ -89,12 +84,7 @@
 <ul class="sectlevel3">
 <li><a href="#_overview_and_purpose">3.1.1. Overview and Purpose</a></li>
 <li><a href="#_software_reuse_and_dependencies">3.1.2. Software Reuse and Dependencies</a></li>
-<li><a href="#_interfaces">3.1.3. Interfaces</a>
-<ul class="sectlevel4">
-<li><a href="#_oidc_endpoints">3.1.3.1. OIDC Endpoints</a></li>
-<li><a href="#_uma_endpoints">3.1.3.2. UMA Endpoints</a></li>
-</ul>
-</li>
+<li><a href="#_interfaces_todo">3.1.3. Interfaces //TODO</a></li>
 <li><a href="#_data">3.1.4. Data</a>
 <ul class="sectlevel4">
 <li><a href="#_configuration">3.1.4.1. Configuration</a></li>
@@ -108,51 +98,40 @@
 <ul class="sectlevel3">
 <li><a href="#_overview_and_purpose_2">3.2.1. Overview and Purpose</a></li>
 <li><a href="#_software_reuse_and_dependencies_2">3.2.2. Software Reuse and Dependencies</a></li>
-<li><a href="#_interfaces_2">3.2.3. Interfaces</a>
-<ul class="sectlevel4">
-<li><a href="#_scim_endpoints">3.2.3.1. SCIM Endpoints</a></li>
-<li><a href="#_web_interface">3.2.3.2. Web Interface</a></li>
-</ul>
-</li>
+<li><a href="#_interfaces_todo_2">3.2.3. Interfaces // TODO</a></li>
 <li><a href="#_data_2">3.2.4. Data</a>
 <ul class="sectlevel4">
-<li><a href="#_configuration_2">3.2.4.1. Configuration</a></li>
-<li><a href="#_data_flow_2">3.2.4.2. Data flow</a></li>
+<li><a href="#_data_flow_2">3.2.4.1. Data flow</a></li>
 </ul>
 </li>
-<li><a href="#_applicable_resources_2">3.2.5. Applicable Resources</a></li>
+<li><a href="#_applicable_resources_todo">3.2.5. Applicable Resources //TODO</a></li>
 </ul>
 </li>
 <li><a href="#_back_end_service">3.3. Back-End Service</a>
 <ul class="sectlevel3">
 <li><a href="#_overview_and_purpose_3">3.3.1. Overview and Purpose</a></li>
 <li><a href="#_software_reuse_and_dependencies_3">3.3.2. Software Reuse and Dependencies</a></li>
-<li><a href="#_interfaces_3">3.3.3. Interfaces</a></li>
+<li><a href="#_interfaces_todo_3">3.3.3. Interfaces //TODO</a></li>
 <li><a href="#_data_3">3.3.4. Data</a>
 <ul class="sectlevel4">
 <li><a href="#_data_flow_3">3.3.4.1. Data Flow</a></li>
-<li><a href="#_configuration_3">3.3.4.2. Configuration</a></li>
+<li><a href="#_configuration_2">3.3.4.2. Configuration</a></li>
 </ul>
 </li>
-<li><a href="#_applicable_resources_3">3.3.5. Applicable Resources</a></li>
+<li><a href="#_applicable_resources_2">3.3.5. Applicable Resources</a></li>
 </ul>
 </li>
-<li><a href="#_relying_party_service">3.4. Relying-Party Service</a>
+<li><a href="#_relying_party_service_todo_passport_idps">3.4. Relying-Party Service //TODO (passport, IDPs)</a>
 <ul class="sectlevel3">
-<li><a href="#_overview_and_purpose_4">3.4.1. Overview and Purpose</a></li>
-<li><a href="#_software_reuse_and_dependencies_4">3.4.2. Software Reuse and Dependencies</a></li>
-<li><a href="#_interfaces_4">3.4.3. Interfaces</a>
-<ul class="sectlevel4">
-<li><a href="#_oidc_endpoints_2">3.4.3.1. OIDC Endpoints</a></li>
-</ul>
-</li>
+<li><a href="#_overview_and_purpose_todo">3.4.1. Overview and Purpose //TODO</a></li>
+<li><a href="#_software_reuse_and_dependencies_todo">3.4.2. Software Reuse and Dependencies //TODO</a></li>
+<li><a href="#_interfaces_todo_4">3.4.3. Interfaces //TODO</a></li>
 <li><a href="#_data_4">3.4.4. Data</a>
 <ul class="sectlevel4">
-<li><a href="#_data_flow_4">3.4.4.1. Data Flow</a></li>
-<li><a href="#_configuration_4">3.4.4.2. Configuration</a></li>
+<li><a href="#_data_flow_todo">3.4.4.1. Data Flow // TODO</a></li>
+<li><a href="#_configuration_3">3.4.4.2. Configuration</a></li>
 </ul>
 </li>
-<li><a href="#_applicable_resources_4">3.4.5. Applicable Resources</a></li>
 </ul>
 </li>
 </ul>
@@ -243,11 +222,11 @@ The Amendment Record Sheet below records the history and issue status of this do
 <dl>
 <dt class="hdlist1">Section 2 - <a href="#mainOverview">Overview</a></dt>
 <dd>
-<p>Provides an overview of the Login Service component, within the context of the wider Common Architecture design.</p>
+<p>Provides an over of the Login Service component, within the context of the wider Common Architecture design.</p>
 </dd>
-<dt class="hdlist1">Section 3 - <a href="#mainComponents">Building Block Design</a></dt>
+<dt class="hdlist1">Section 3 - <a href="#mainDesign">[mainDesign]</a></dt>
 <dd>
-<p>Provides the building block design of the Login Service component.</p>
+<p>Provides the design of the Login Service component.</p>
 </dd>
 </dl>
 </div>
@@ -1020,13 +999,8 @@ OGC 08-068r2,<br>
 <div class="paragraph">
 <p>The figure below, identifies the main workflows on which the Login Service participates:</p>
 </div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="./images/workflow.png" alt="workflow">
-</div>
-</div>
-<div class="paragraph">
-<p>Based on this workflow, the Login Service enables the following functionality aspects:</p>
+<div id="IMAGE" class="paragraph">
+<p>Based on this workflows, the Login Service enables the following functionality aspects</p>
 </div>
 <div class="sect3">
 <h4 id="_end_user_authentication_through_external_idps">2.1.1. End-User Authentication through external IDPs</h4>
@@ -1038,14 +1012,9 @@ OGC 08-068r2,<br>
 <div class="paragraph">
 <p>The following image indicates the sequence of events necessary for a user to authenticate using an external Identity Provider (IDP).</p>
 </div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="./images/passport.png" alt="passport">
-</div>
-</div>
 </div>
 <div class="sect4">
-<h5 id="_unique_identification_of_end_users">2.1.1.2. Unique identification of End-Users</h5>
+<h5 id="IMAGE">2.1.1.2. Unique identification of End-Users</h5>
 <div class="paragraph">
 <p>By default, the Login Service extracts the email account stored in the external Identity Provider and checks that the user has not logged in previously with any other external IDP under the same email account. Whenever that&#8217;s the case, the authentication flow skips the persistence of End-User attributes to the back-end and directly considers the user authenticated.</p>
 </div>
@@ -1060,7 +1029,7 @@ OGC 08-068r2,<br>
 <div class="sect3">
 <h4 id="_single_log_out">2.1.3. Single Log-Out</h4>
 <div class="paragraph">
-<p>Similar to the SSO functionality, applications can request the End-User session to be terminated across the platform, and register themselves to receive this log-out request (in order to also handle it internally).</p>
+<p>Similar to the SSO functionality, applications can request the End-User session can be terminated across the platform, and register themselves to receive this log-out request (in order to also handle it internally).</p>
 </div>
 </div>
 <div class="sect3">
@@ -1107,14 +1076,9 @@ OGC 08-068r2,<br>
 </table>
 </div>
 <div class="paragraph">
-<p>The Login Service heavily relies on Free and Open Source Software that already implements the interfaces and functionality required. The following diagram describes the main components of this building block:</p>
+<p>The Login Service, heavily relies on Free and Open Source Software that already implements the interfaces and functionality required. The following image depicts the Static Architecture of this Building Block.</p>
 </div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="./images/static.PNG" alt="static">
-</div>
-</div>
-<div class="ulist">
+<div id="IMAGE" class="ulist">
 <ul>
 <li>
 <p>The Authentication and Authorization Service enables both OIDC and UMA flows for the whole Platform</p>
@@ -1131,7 +1095,7 @@ OGC 08-068r2,<br>
 </ul>
 </div>
 <div class="paragraph">
-<p>The Section for the Building Block Design [<a href="#mainComponents">Building Block Design</a>] contains detailed descriptions and references to the Open Source components used in this Building Block.</p>
+<p>The Section for the Building Block Design [REF] contains detailed descriptions and references to the Open Source components used in this Building Block.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1157,70 +1121,6 @@ OGC 08-068r2,<br>
 </td>
 </tr>
 </table>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="./images/sessions.png" alt="sessions">
-</div>
-</div>
-<div class="paragraph">
-<p>This diagram covers the following use cases:</p>
-</div>
-<div class="sect3">
-<h4 id="_single_sign_on_2">2.3.1. Single Sign-on</h4>
-<div class="paragraph">
-<p>Upon performing a Login action, a new Session is generated that is then used by the user to perform actions on the Exploitation Platform.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_single_log_out_2">2.3.2. Single Log-out</h4>
-<div class="paragraph">
-<p>Upon performing a Logout action, the created Session is destroyed, preventing further action by the End-User on the Exploitation Platform, until a new Login action is taken.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_end_user_chooses_identity_provider">2.3.3. End-User chooses Identity Provider</h4>
-<div class="paragraph">
-<p>When performing a Login action, the End-User can choose if they wish to use an External Identity Provider to delegate authentication (or use the Login Service itself).</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_external_identity_provider_authentication">2.3.4. External Identity Provider Authentication</h4>
-<div class="paragraph">
-<p>If an External Identity Provider is chosen to delegate authentication, the Login Service redirects to it in order to proceed with the Login action. This is best explained by the sequence diagram present in [<a href="#_authentication_flow">Authentication Flow</a>]</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="./images/client.png" alt="client">
-</div>
-</div>
-<div class="paragraph">
-<p>This diagram covers the following use cases:</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_uma_workflow">2.3.5. UMA workflow</h4>
-<div class="paragraph">
-<p>By default, some actions are protected by a UMA (User-Managed access) workflow, that is already described in the Master System Design document (ref. [PENDING]). As part of this process, any security policies that have been previously established as [[<a href="#_authentication_scopes">[_authentication_scopes]</a>]] are enacted.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_request_user_attributes_through_scim">2.3.6. Request User Attributes through SCIM</h4>
-<div class="paragraph">
-<p>Requesting a User&#8217;s attributes can be done via SCIM&#8217;s .well-known endpoints, best by using a previously registered client to call them and perform UMA authentication.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_resource_registration">2.3.7. Resource registration</h4>
-<div class="paragraph">
-<p>Resource registration can be done directly via OIDC&#8217;s .well-known endpoints, best by using a previously registered client to call them using basic authentication.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_dynamically_register_a_client">2.3.8. Dynamically register a client</h4>
-<div class="paragraph">
-<p>The Exploitation Platform allows a client to dynamically register with itself, by calling OIDC .well-know endpoints.</p>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -1250,19 +1150,19 @@ OGC 08-068r2,<br>
 <div class="sect3">
 <h4 id="_authentication_authn_interface">2.4.1. Authentication (AuthN) Interface</h4>
 <div class="paragraph">
-<p>The Login Service exposes an OpenID Connect interface through a .well-known URI that describes all standard endpoints.</p>
+<p>The Login Service exposes an OpenID Connect interface through a .well-known URI that describes all standard endpoints</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_authorization_authz_interface">2.4.2. Authorization (AuthZ) Interface</h4>
 <div class="paragraph">
-<p>The Login Service exposes a User Managed Access (UMA) interface through a .well-known URI that describes all standard endpoints.</p>
+<p>The Login Service exposes a User Managed Access (UMA) interface through a .well-known URI that describes all standard endpoints</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_identity_management_interface">2.4.3. Identity Management Interface</h4>
 <div class="paragraph">
-<p>The Login Service exposes a System for Cross Domain Identity (SCIM) Interface through a .well-known URI that describes all standard endpoints.</p>
+<p>The Login Service exposes a System for Cross Domain Identity (SCIM) Interface through a .well-known URI that describes all standard endpoints</p>
 </div>
 </div>
 <div class="sect3">
@@ -1370,6 +1270,38 @@ OGC 08-068r2,<br>
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_design_standards_conventions_and_procedures">2.6. Design Standards, Conventions and Procedures</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Content Description</div>
+<div class="paragraph">
+<p>This section contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Explanations on the UML Design notation and necessary naming conventions used throughout the document</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_uml_design">2.6.1. UML Design</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_naming_conventions">2.6.2. Naming Conventions</h4>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1430,7 +1362,7 @@ OGC 08-068r2,<br>
 <p>The login service provides both authentication and authorization via it&#8217;s oxAuth component. This component also provides the OpenID Connect (OIDC) and UMA flows, exposed through endpoints to external clients.</p>
 </div>
 <div class="paragraph">
-<p>It also provides authentication via web service, allowing for simple login interactions with users.</p>
+<p>it also provides authentication via web service, allowing for simple login interactions with users.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1440,19 +1372,8 @@ OGC 08-068r2,<br>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_interfaces">3.1.3. Interfaces</h4>
-<div class="sect4">
-<h5 id="_oidc_endpoints">3.1.3.1. OIDC Endpoints</h5>
-<div class="paragraph">
-<p>A listing of endpoints to interact with OIDC is exposed on a .well-know URL (default is .well-known/openid-configuration).</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_uma_endpoints">3.1.3.2. UMA Endpoints</h5>
-<div class="paragraph">
-<p>A listing of endpoints to interact with UMA is exposed on a .well-know URL (default is .well-known/uma2-configuration).</p>
-</div>
-</div>
+<h4 id="_interfaces_todo">3.1.3. Interfaces //TODO</h4>
+
 </div>
 <div class="sect3">
 <h4 id="_data">3.1.4. Data</h4>
@@ -1496,12 +1417,15 @@ OGC 08-068r2,<br>
 </div>
 </div>
 <div class="paragraph">
-<p>The login service provides administration functionality for users with elevated priviledges. This allows admins to have an overview of the entire system, as well as configure anything necessary from this interface. Some of the configurations available from it are:</p>
+<p>The login service provides administration functionality for users with elevated priviledges. This allows admins to have an overview of the entire system, as well as configure anything necessary from this interface.</p>
+</div>
+<div class="paragraph">
+<p>Examples of what can be configured here are:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>OAuth Clients</p>
+<p>Oauth Clients</p>
 </li>
 <li>
 <p>UMA Scopes &amp; Resources</p>
@@ -1509,10 +1433,10 @@ OGC 08-068r2,<br>
 <li>
 <p>Edit/Add/Remove Users</p>
 </li>
+<li>
+<p>&#8230;&#8203; and many more</p>
+</li>
 </ul>
-</div>
-<div class="paragraph">
-<p>A complete description of available configurations can be found here: <a href="https://gluu.org/docs/gluu-server/4.1/admin-guide/oxtrust-ui/#oxtrust-admin-gui" class="bare">https://gluu.org/docs/gluu-server/4.1/admin-guide/oxtrust-ui/#oxtrust-admin-gui</a></p>
 </div>
 </div>
 <div class="sect3">
@@ -1529,24 +1453,17 @@ OGC 08-068r2,<br>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_interfaces_2">3.2.3. Interfaces</h4>
-<div class="sect4">
-<h5 id="_scim_endpoints">3.2.3.1. SCIM Endpoints</h5>
-<div class="paragraph">
-<p>A listing of endpoints to interact with SCIM is exposed on a .well-know URL (default is .well-known/scim-configuration).</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_web_interface">3.2.3.2. Web Interface</h5>
-<div class="paragraph">
-<p>A web interface is exposed to allow administrators and local operators to login and manage configuration aspects of the Login Service.</p>
-</div>
-</div>
+<h4 id="_interfaces_todo_2">3.2.3. Interfaces // TODO</h4>
+
 </div>
 <div class="sect3">
 <h4 id="_data_2">3.2.4. Data</h4>
 <div class="sect4">
-<h5 id="_configuration_2">3.2.4.1. Configuration</h5>
+<h5 id="_data_flow_2">3.2.4.1. Data flow</h5>
+<div class="paragraph">
+<p>All information handled by this service is read/written to the LDAP instance deployed at the backend.<br>
+==== Configuration</p>
+</div>
 <div class="paragraph">
 <p>Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.</p>
 </div>
@@ -1554,25 +1471,10 @@ OGC 08-068r2,<br>
 <p>Direct customization without the "persistance" module is not possible at this time.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_data_flow_2">3.2.4.2. Data flow</h5>
-<div class="paragraph">
-<p>All information handled by this service is read/written to the LDAP instance deployed at the backend.</p>
-</div>
-</div>
 </div>
 <div class="sect3">
-<h4 id="_applicable_resources_2">3.2.5. Applicable Resources</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>oxTrust (gluu) - <a href="https://gluu.org/docs/de/reference/oxtrust/" class="bare">https://gluu.org/docs/de/reference/oxtrust/</a></p>
-</li>
-<li>
-<p>oxTrust (gluu @ Github) - <a href="https://github.com/GluuFederation/docker-oxtrust" class="bare">https://github.com/GluuFederation/docker-oxtrust</a></p>
-</li>
-</ul>
-</div>
+<h4 id="_applicable_resources_todo">3.2.5. Applicable Resources //TODO</h4>
+
 </div>
 </div>
 <div class="sect2">
@@ -1594,10 +1496,8 @@ OGC 08-068r2,<br>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_interfaces_3">3.3.3. Interfaces</h4>
-<div class="paragraph">
-<p>Not applicable, all actions are done internally on the LDAP instance.</p>
-</div>
+<h4 id="_interfaces_todo_3">3.3.3. Interfaces //TODO</h4>
+
 </div>
 <div class="sect3">
 <h4 id="_data_3">3.3.4. Data</h4>
@@ -1609,14 +1509,14 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 </div>
 </div>
 <div class="sect4">
-<h5 id="_configuration_3">3.3.4.2. Configuration</h5>
+<h5 id="_configuration_2">3.3.4.2. Configuration</h5>
 <div class="paragraph">
 <p>There is no configuration available for this service at this time</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_applicable_resources_3">3.3.5. Applicable Resources</h4>
+<h4 id="_applicable_resources_2">3.3.5. Applicable Resources</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1630,39 +1530,23 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 </div>
 </div>
 <div class="sect2">
-<h3 id="_relying_party_service">3.4. Relying-Party Service</h3>
+<h3 id="_relying_party_service_todo_passport_idps">3.4. Relying-Party Service //TODO (passport, IDPs)</h3>
 <div class="sect3">
-<h4 id="_overview_and_purpose_4">3.4.1. Overview and Purpose</h4>
-<div class="paragraph">
-<p>Gluu has a bundled middleware project called Passport.js, the purpose of which is to facilitate authentication using an external identity provider. To this end, the OIDC interface can be called by an IDP.</p>
-</div>
+<h4 id="_overview_and_purpose_todo">3.4.1. Overview and Purpose //TODO</h4>
+
 </div>
 <div class="sect3">
-<h4 id="_software_reuse_and_dependencies_4">3.4.2. Software Reuse and Dependencies</h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>oxTrust</strong>: A gluu component, providing the web interface and interaction</p>
-</li>
-<li>
-<p><strong>passport</strong>: Gluu&#8217;s container instance of Passport.js' implementation</p>
-</li>
-</ul>
-</div>
+<h4 id="_software_reuse_and_dependencies_todo">3.4.2. Software Reuse and Dependencies //TODO</h4>
+
 </div>
 <div class="sect3">
-<h4 id="_interfaces_4">3.4.3. Interfaces</h4>
-<div class="sect4">
-<h5 id="_oidc_endpoints_2">3.4.3.1. OIDC Endpoints</h5>
-<div class="paragraph">
-<p>A listing of endpoints to interact with OIDC is exposed on a .well-know URL (default is .well-known/openid-configuration).</p>
-</div>
-</div>
+<h4 id="_interfaces_todo_4">3.4.3. Interfaces //TODO</h4>
+
 </div>
 <div class="sect3">
 <h4 id="_data_4">3.4.4. Data</h4>
 <div class="sect4">
-<h5 id="_data_flow_4">3.4.4.1. Data Flow</h5>
+<h5 id="_data_flow_todo">3.4.4.1. Data Flow // TODO</h5>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/passport.png" alt="passport">
@@ -1670,17 +1554,14 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 </div>
 </div>
 <div class="sect4">
-<h5 id="_configuration_4">3.4.4.2. Configuration</h5>
+<h5 id="_configuration_3">3.4.4.2. Configuration</h5>
 <div class="paragraph">
 <p>Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.</p>
 </div>
 <div class="paragraph">
-<p>Direct customization without the "persistance" module is not possible at this time.</p>
+<p>Direct customization without the "persistance" module is not possible at this time.<br>
+=== Applicable Resources</p>
 </div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_applicable_resources_4">3.4.5. Applicable Resources</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1689,15 +1570,10 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 <li>
 <p>Passport (Github) - <a href="https://github.com/jaredhanson/passport" class="bare">https://github.com/jaredhanson/passport</a></p>
 </li>
-<li>
-<p>oxPassport (gluu) - <a href="https://gluu.org/docs/de/reference/oxpassport/" class="bare">https://gluu.org/docs/de/reference/oxpassport/</a></p>
-</li>
-<li>
-<p>oxPassport (gluu @ Github) - <a href="https://github.com/GluuFederation/docker-oxPassport" class="bare">https://github.com/GluuFederation/docker-oxPassport</a></p>
-</li>
 </ul>
 </div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 </div>
@@ -1737,7 +1613,7 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2020-09-09 11:00:33 UTC
+Last updated 2020-09-09 13:37:46 UTC
 </div>
 </div>
 </body>
