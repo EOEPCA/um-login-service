@@ -50,6 +50,7 @@
 <ul class="sectlevel4">
 <li><a href="#_public_access">2.1.4.1. Public Access</a></li>
 <li><a href="#_authenticated_access">2.1.4.2. Authenticated Access</a></li>
+<li><a href="#_protected_access">2.1.4.3. Protected Access</a></li>
 </ul>
 </li>
 </ul>
@@ -1080,6 +1081,12 @@ OGC 08-068r2,<br>
 <p>This scope is associated with a policy that verifies if the user, making the request, has an ongoing active session.</p>
 </div>
 </div>
+<div class="sect4">
+<h5 id="_protected_access">2.1.4.3. Protected Access</h5>
+<div class="paragraph">
+<p>This scope delegates user verification to the <a href="https://github.com/EOEPCA/um-pdp-engine">Policy Decision Point (PDP)</a> building block, via XACML-compliant communication.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1737,7 +1744,7 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2020-09-09 17:50:05 UTC
+Last updated 2020-09-10 13:28:56 UTC
 </div>
 </div>
 </body>
