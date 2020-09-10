@@ -56,6 +56,10 @@ This specific scope allows for any end user or client application to freely acce
 
 This scope is associated with a policy that verifies if the user, making the request, has an ongoing active session.
 
+==== Protected Access
+
+This scope delegates user verification to the https://github.com/EOEPCA/um-pdp-engine[Policy Decision Point (PDP)] building block, via XACML-compliant communication.
+
 == Static Architecture
 
 [NOTE]
