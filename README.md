@@ -39,9 +39,7 @@
   - [Built With](#built-with)
 - [Getting Started](#getting-started)
   - [Installation](#installation)
-  - [Testing](#testing)
-- [Configuration](#configuration)
-  - [Generate.json](#generatejson)
+  - [Configuration file](#configuration-file)
 - [Documentation](#documentation)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
@@ -58,6 +56,17 @@
 - [Docker](https://docker.com)
 - [Kubernetes](https://kubernetes.io)
 
+## About
+
+This building block serves as a baseline for the Login Service used in EOEPCA's project. It uses default docker images for its main components, except for the LDAP configuration, which points to the latest stable build of the EOEPCA/um-login-persistence building block. It makes use of Gluu's kubernetes solution for a VM installation.
+
+This diagram gives a basic approach to the components of the building block:
+<br />
+![Basic Diagram](/images/basic.png)
+<br />
+
+More detailed information can be found on the building block's documentation: [Login Service Documentation](https://eoepca.github.io/um-login-service/)
+
 <!-- GETTING STARTED -->
 
 ## Getting Started
@@ -66,65 +75,25 @@ To get a local copy up and running follow these simple steps.
 
 ### Installation
 
-1. Get into EOEPCA's development environment
+1. Get into EOEPCA's development environment ([installation details](https://github.com/EOEPCA/um-dev-env))
 
 ```sh
 vagrant ssh
 ```
 
-3. Clone the repo
+2. Clone the repo
 
 ```sh
 git clone https://github.com/EOEPCA/um-login-service.git
 ```
 
-4. Change local directory
+3. Explore local directory
 
 ```sh
 cd um-login-service
 ```
 
-5. Open the configuration files at `src/config` and change them as you need (see [Configuration](#configuration) for more information )
-
-6. Execute the setup for the whole cluster. This process will take about 15-30min, depending on your system and configuration
-
-```sh
-cd travis
-sh ./setupCluster.sh
-```
-
-Note that after the script is done it is possible the cluster is still propagating information and won't be available until some 5-15m after this.
-
-### Testing
-
-Access the following endpoints to check functionality:
-```sh
-curl -XGET https://eoepca-dev.gluu.org/.well-known/openid-configuration -k
-```
-```sh
-curl -XGET https://eoepca-dev.gluu.org/.well-known/scim-configuration -k
-```
-
-If you wish to access the UI via browser, run the following command from inside the VM:
-```sh
-sudo apt install firefox xorg
-```
-
-Selenium is still in progres to be integrated with travis, meanwhile in order to test the login interface you should:
-install selenium
-install google-chrome and chromedriver
-The chromedriver must match the google-chrome version
-chromdriver file must be inside tests path
-Gluu's hostname, username and password are configurables through test_settings.json
-
-Then, using MobaXterm on the host machine and connecting to the VM, open firefox and access the following links:
-https://eoepca-dev.gluu.org/.well-known/openid-configuration
-https://eoepca-dev.gluu.org/.well-known/scim-configuration
-
-## Configuration
-All config should be changed **before** executing setupCluster.
-
-### Generate.json
+### Configuration file
 File located under `src/config/generate.json`.
 
 The parameters that are accepted, and their meaning, are as follows:
