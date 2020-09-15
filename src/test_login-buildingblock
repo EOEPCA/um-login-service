@@ -1,0 +1,24 @@
+import requests
+import json
+
+def dynamicRegisterClient( targetURL, clientName, redirectURIs ):
+    """ Dynamically register a client with Gluu
+    
+    Parameters:
+    targetURL (str): registration_endpoint for Gluu, obtained via https://<Gluu Server>/.well-known/openid-configuration
+    clientName (str): Name of the registering client
+    redirectURIs (*str): List of Redirect URIs
+    
+    Returns:
+    List of values from response JSON in this order: scope, registration_access_token, response_types, client_id, redirect_uris
+    
+    """
+    headers = { 'content-type': "application/json" }
+    params = "{\"client_name\": \"" + clientName + "\", \"redirect_uris\" : ["
+    for uri in redirectURIs:
+        params += "\"" + uri.strip() + "\", "
+    params = params[:-2]
+    params += "]}"
+    res = requests.post(targetURL, data=params, headers=headers, verify=False)
+    matrix = res.json()
+    return (matrix['scope'], matrix['registration_access_token'], matrix['response_types'], matrix['client_id'], matrix['redirect_uris'])
