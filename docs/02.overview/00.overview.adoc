@@ -18,9 +18,9 @@ As stated in the EOEPCA Master System Design Document (ref. [PENDING]), the Logi
 
 The figure below, identifies the main workflows on which the Login Service participates:
 
-[[IMAGE]]
+image::../images/workflow.png[top=5%, align=center, pdfwidth=6.5in]
 
-Based on this workflows, the Login Service enables the following functionality aspects
+Based on this workflow, the Login Service enables the following functionality aspects:
 
 === End-User Authentication through external IDPs
 
@@ -30,7 +30,7 @@ The Login Service establishes itself as a client to all supported external IDPs,
 
 The following image indicates the sequence of events necessary for a user to authenticate using an external Identity Provider (IDP).
 
-[[IMAGE]]
+image::../images/passport.png[top=5%, align=center, pdfwidth=6.5in]
 
 ==== Unique identification of End-Users
 
@@ -42,7 +42,23 @@ Single Sign-On (SSO) comes as one of the main benefits of using OIDC as authenti
 
 === Single Log-Out
 
-Similar to the SSO functionality, applications can request the End-User session can be terminated across the platform, and register themselves to receive this log-out request (in order to also handle it internally).
+Similar to the SSO functionality, applications can request the End-User session to be terminated across the platform, and register themselves to receive this log-out request (in order to also handle it internally).
+
+=== Authorization Scopes
+
+Authorization scopes are definitions used to protect resources, by enabling associated policies that ensure a connecting client has the access permissions required for a given resource.
+
+==== Public Access
+
+This specific scope allows for any end user or client application to freely access a resource, without any restrictions.
+
+==== Authenticated Access
+
+This scope is associated with a policy that verifies if the user, making the request, has an ongoing active session.
+
+==== Protected Access
+
+This scope delegates user verification to the https://github.com/EOEPCA/um-pdp-engine[Policy Decision Point (PDP)] building block, via XACML-compliant communication.
 
 == Static Architecture
 
@@ -55,16 +71,16 @@ This section contains:
 
 ================================
 
-The Login Service, heavily relies on Free and Open Source Software that already implements the interfaces and functionality required. The following image depicts the Static Architecture of this Building Block.
+The Login Service heavily relies on Free and Open Source Software that already implements the interfaces and functionality required. The following diagram describes the main components of this building block:
 
-[[IMAGE]]
+image::../images/static.PNG[top=5%, align=center, pdfwidth=6.5in]
 
 * The Authentication and Authorization Service enables both OIDC and UMA flows for the whole Platform
 * The Administration Service provides and Administration GUI and a SCIM Implementation allowing direct interaction with the End-User Back-End
 * The Back-End Service stores the necessary information for the other components to provide Session Management, Authorization and persists external IDP information generated or relayed during authentication.
 * The Relying Party component allows to register as a RP in any external IDP.
 
-The Section for the Building Block Design [REF] contains detailed descriptions and references to the Open Source components used in this Building Block.
+The Section for the Building Block Design [<<mainComponents>>] contains detailed descriptions and references to the Open Source components used in this Building Block.
 
 == Use Cases
 
@@ -76,6 +92,36 @@ This section contains:
 * Diagrams and definition of the use cases covered by this Building Block
 
 ================================
+
+image::../images/sessions.png[top=5%, align=center, pdfwidth=6.5in]
+This diagram covers the following use cases:
+
+=== Single Sign-on
+Upon performing a Login action, a new Session is generated that is then used by the user to perform actions on the Exploitation Platform.
+
+=== Single Log-out
+Upon performing a Logout action, the created Session is destroyed, preventing further action by the End-User on the Exploitation Platform, until a new Login action is taken.
+
+=== End-User chooses Identity Provider
+When performing a Login action, the End-User can choose if they wish to use an External Identity Provider to delegate authentication (or use the Login Service itself).
+
+=== External Identity Provider Authentication
+If an External Identity Provider is chosen to delegate authentication, the Login Service redirects to it in order to proceed with the Login action. This is best explained by the sequence diagram present in [<<_authentication_flow>>]
+
+image::../images/client.png[top=5%, align=center, pdfwidth=6.5in]
+This diagram covers the following use cases:
+
+=== UMA workflow
+By default, some actions are protected by a UMA (User-Managed access) workflow, that is already described in the Master System Design document (ref. [PENDING]). As part of this process, any security policies that have been previously established as [[<<_authentication_scopes>>]] are enacted.
+
+=== Request User Attributes through SCIM
+Requesting a User's attributes can be done via SCIM's .well-known endpoints, best by using a previously registered client to call them and perform UMA authentication.
+
+=== Resource registration
+Resource registration can be done directly via OIDC's .well-known endpoints, best by using a previously registered client to call them using basic authentication.
+
+=== Dynamically register a client
+The Exploitation Platform allows a client to dynamically register with itself, by calling OIDC .well-know endpoints.
 
 == External Interfaces
 
@@ -90,15 +136,15 @@ This section contains:
 
 === Authentication (AuthN) Interface
 
-The Login Service exposes an OpenID Connect interface through a .well-known URI that describes all standard endpoints
+The Login Service exposes an OpenID Connect interface through a .well-known URI that describes all standard endpoints.
 
 === Authorization (AuthZ) Interface
 
-The Login Service exposes a User Managed Access (UMA) interface through a .well-known URI that describes all standard endpoints
+The Login Service exposes a User Managed Access (UMA) interface through a .well-known URI that describes all standard endpoints.
 
 === Identity Management Interface
 
-The Login Service exposes a System for Cross Domain Identity (SCIM) Interface through a .well-known URI that describes all standard endpoints
+The Login Service exposes a System for Cross Domain Identity (SCIM) Interface through a .well-known URI that describes all standard endpoints.
 
 === Administration Interface
 
@@ -137,17 +183,3 @@ The following Open-Source Software is required to support the deployment and int
 ** Kubernetes secret and config Tooling - https://github.com/GluuFederation/gluu-docker/tree/3.1.6/examples/kubernetes/minikube
 ** Reverse Proxy exposing API interfaces - Nginx/Ingress
 
-
-== Design Standards, Conventions and Procedures
-
-[NOTE]
-.Content Description
-================================
-This section contains:
-
-* Explanations on the UML Design notation and necessary naming conventions used throughout the document
-
-================================
-
-=== UML Design
-=== Naming Conventions
