@@ -4,7 +4,7 @@ ORIG_DIR="$(pwd)"
 cd "$(dirname "$0")"
 BIN_DIR="$(pwd)"
 
-trap "cd '${ORIG_DIR}'; rm -rf repos" EXIT
+trap "cd '${ORIG_DIR}';" EXIT
 
 # Work in the docs/ directory
 cd "${BIN_DIR}/.."
@@ -37,6 +37,7 @@ for doc in SDD ICD; do
 
 done
 
+cd repos
 # Config git profile for commits
 if [ -n "${GH_USER_NAME}" ]; then git config user.name "${GH_USER_NAME}"; fi
 if [ -n "${GH_USER_EMAIL}" ]; then git config user.email "${GH_USER_EMAIL}"; fi
