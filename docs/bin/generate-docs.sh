@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -x
+#!/usr/bin/env bash
 
 ORIG_DIR="$(pwd)"
 cd "$(dirname "$0")"
