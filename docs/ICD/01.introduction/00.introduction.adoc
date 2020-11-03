@@ -1,0 +1,8 @@
+
+= Introduction
+
+== Purpose and Scope
+
+This document presents the {component-name} Interfaces for the Common Architecture.
+
+== Structure of the Document
