@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash -x
 
 ORIG_DIR="$(pwd)"
 cd "$(dirname "$0")"
@@ -20,7 +20,7 @@ for doc in SDD ICD; do
 	  # Running locally we want to remove the docker containers
 	  export DOCKER_RM="--rm"
 	fi
-
+	export DOCKER_RM="--rm"
 	# Prepare output/ directory
 	rm -rf output
 	mkdir -p output
