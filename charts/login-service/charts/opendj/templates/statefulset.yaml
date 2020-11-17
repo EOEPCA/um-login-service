@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ template "login-service.fullname" . }}-init-ss
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.global.serviceName }} # has to match .spec.template.metadata.labels
+  serviceName: {{ .Values.global.serviceName }}
+  replicas: {{ .Values.statefulSetReplicas }} # by default is 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.global.serviceName }} # has to match .spec.selector.matchLabels
+    spec:
+      volumes:
+        - name: vol-userman
+          persistentVolumeClaim:
+            claimName: eoepca-userman-pvc
+
+      containers:
+      - name: {{ template "login-service.fullname" . }}-init-container
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
+        image: {{ .Values.image }}
+        envFrom:
+        - configMapRef:
+            name: {{ .Values.opendj.metadataName }}
+        ports:
+        {{- range $key, $value := .Values.ports }}
+          - containerPort: {{ $value.targetPort }}
+            name: {{ $key }}
+        {{- end }}
+        volumeMounts:
+          - mountPath: /opt/opendj/config
+            sub_path: opendj/config
+            name: vol-userman
+          - mountPath: /opt/opendj/ldif
+            sub_path: opendj/ldif
+            name: vol-userman
+          - mountPath: /opt/opendj/logs
+            sub_path: opendj/logs
+            name: vol-userman
+          - mountPath: /opt/opendj/db
+            sub_path: opendj/db
+            name: vol-userman
+          - mountPath: /flag
+            sub_path: opendj/flag
+            name: vol-userman
+        readinessProbe:
+          tcpSocket: 
+            port: {{ .Values.tcpSocket.port }}
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+        livenessProbe:
+          tcpSocket:
+            port: {{ .Values.tcpSocket.port }}
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+  
