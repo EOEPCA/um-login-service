@@ -5,6 +5,7 @@ global:
   serviceName: opendj
   nginxIp: 192.168.99.100
   oxAuthServiceName: oxauth
+  persistenceServiceName: persistence
   oxTrustSeriveName: oxtrust
   domain: demoexample.gluu.org
   gluuLdapUrl: opendj:1636
@@ -17,7 +18,10 @@ global:
   description: gluu-config-init-volume
   fsType: ext4
   
-
+persistence: 
+  accessModes: ReadWriteMany
+  dbStorageSize: 5Gi
+  type: DirectoryOrCreate
 config:
   enabled: true
   # email address of the administrator usually. Used for certificate creation

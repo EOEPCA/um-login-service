@@ -14,7 +14,7 @@ spec:
         app: {{ .Values.global.serviceName }} # has to match .spec.selector.matchLabels
     spec:
       volumes:
-        - name: vol-userman
+        - name: eoepca-userman-pv-host
           persistentVolumeClaim:
             claimName: eoepca-userman-pvc
 
@@ -33,19 +33,19 @@ spec:
         volumeMounts:
           - mountPath: /opt/opendj/config
             sub_path: opendj/config
-            name: vol-userman
+            name: eoepca-userman-pv-host
           - mountPath: /opt/opendj/ldif
             sub_path: opendj/ldif
-            name: vol-userman
+            name: eoepca-userman-pv-host
           - mountPath: /opt/opendj/logs
             sub_path: opendj/logs
-            name: vol-userman
+            name: eoepca-userman-pv-host
           - mountPath: /opt/opendj/db
             sub_path: opendj/db
-            name: vol-userman
+            name: eoepca-userman-pv-host
           - mountPath: /flag
             sub_path: opendj/flag
-            name: vol-userman
+            name: eoepca-userman-pv-host
         readinessProbe:
           tcpSocket: 
             port: {{ .Values.tcpSocket.port }}

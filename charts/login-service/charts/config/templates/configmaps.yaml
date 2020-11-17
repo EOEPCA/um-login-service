@@ -31,7 +31,7 @@ data:
       "admin_pw": {{ .Values.adminPass | quote }},
       "ldap_pw": {{.Values.ldapPass | quote }},
       "email": {{ .Values.email | quote }},
-      "org_name": {{ .Values.orgName | quote }}
+      "org_name": {{ .Values.orgName | quote }},
       "gluu_config_adapter": {{.Values.gluuConfAdapter | quote }},
       "ldap_type": {{.Values.ldapType | quote }},
       "redis_pw": {{.Values.redisPass | quote }}

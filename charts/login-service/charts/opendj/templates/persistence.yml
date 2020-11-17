@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ .Values.persistence.name}}-init-ss
+  name: {{template "persistence.fullname" . }}-init-ss
 spec:
   serviceName: {{ .Values.persistence.name }}
   replicas: {{ .Values.persistence.statefulSetReplicas }} # by default is 1
