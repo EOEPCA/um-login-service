@@ -24,11 +24,12 @@ spec:
         image: {{ .Values.image }}
         envFrom:
         - configMapRef:
-            name: {{ .Values.opendj.metadataName }}
+            name: {{ include "opendj.fullname" . }}
         ports:
         {{- range $key, $value := .Values.ports }}
           - containerPort: {{ $value.targetPort }}
             name: {{ $key }}
+            protocol: TCP
         {{- end }}
         volumeMounts:
           - mountPath: /opt/opendj/config

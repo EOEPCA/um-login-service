@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.opendj.metadataName }}
+  name: {{ include "opendj.fullname" . }}
 data:
   GLUU_CONFIG_ADAPTER: {{ .Values.opendj.configAdapter | quote }}
   GLUU_SECRET_ADAPTER: {{ .Values.opendj.configAdapter | quote }}

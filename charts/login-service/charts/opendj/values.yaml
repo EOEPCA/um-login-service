@@ -60,11 +60,11 @@ persistence:
 tcpSocket:
   port: 1636
 readinessProbe:
-  initialDelaySeconds: 25
-  periodSeconds: 25
+  initialDelaySeconds: 90
+  periodSeconds: 90
 livenessProbe:
-  initialDelaySeconds: 30
-  periodSeconds: 30
+  initialDelaySeconds: 90
+  periodSeconds: 90
 
 #servicePorts values used in StatefulSet container
 ports:
