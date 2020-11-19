@@ -3,7 +3,7 @@
 global:
   namespace: default
   serviceName: opendj
-  nginxIp: 192.168.99.100
+  nginxIp: 10.0.2.15
   oxAuthServiceName: oxauth
   persistenceServiceName: persistence
   oxTrustSeriveName: oxtrust
@@ -78,7 +78,7 @@ nginx:
   enabled: true
 
 ingress:
-  enabled: false
+  enabled: true
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"

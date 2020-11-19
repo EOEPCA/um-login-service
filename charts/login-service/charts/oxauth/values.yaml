@@ -50,7 +50,7 @@ persistence:
   clientSecret: LP_CLIENT_SECRET
   clientSecretv: "640baffac0948454c48de2505726f53d11adc8a6"
 #hostAliases
-nginxIP: 192.168.99.100
+nginxIP: 10.0.2.15
 
 #ports for the deployment
 ports:
