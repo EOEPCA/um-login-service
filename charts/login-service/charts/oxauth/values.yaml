@@ -50,7 +50,7 @@ persistence:
   clientSecret: LP_CLIENT_SECRET
   clientSecretv: "640baffac0948454c48de2505726f53d11adc8a6"
 #hostAliases
-nginxIP: 10.0.2.15
+nginxIp: 10.0.2.15
 
 #ports for the deployment
 ports:
@@ -71,16 +71,16 @@ volumeMounts:
   logs:
     mountPath: /opt/gluu/jetty/oxauth/logs
     name: eoepca-userman-pv-host
-    sub_path: oxauth/logs
+    subPath: oxauth/logs
   ext:
     mountPath: /opt/gluu/jetty/oxauth/lib/ext
     name: eoepca-userman-pv-host
-    sub_path: oxauth/lib/ext
+    subPath: oxauth/lib/ext
   static:
     mountPath: /opt/gluu/jetty/oxauth/custom/static
     name: eoepca-userman-pv-host
-    sub_path: oxauth/custom/static
+    subPath: oxauth/custom/static
   pages:
     mountPath: /opt/gluu/jetty/oxauth/custom/pages
     name: eoepca-userman-pv-host
-    sub_path: oxauth/custom/pages
+    subPath: oxauth/custom/pages

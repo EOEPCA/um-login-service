@@ -40,20 +40,20 @@ spec:
         {{- range $key, $value := .Values.volumeMounts }}
           - mountPath: {{ $value.mountPath }}
             name: {{ $value.name }}
-            subPath: {{ $key }}
+            subPath: {{ $value.subPath }}
         {{- end }}
         livenessProbe:
           httpGet:
             path: /identity/restv1/scim-configuration
             port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 30
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
         readinessProbe:
           httpGet:
             path: /identity/restv1/scim-configuration
             port: 8080
-          initialDelaySeconds: 25
-          periodSeconds: 25
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
       volumes:
         - name: eoepca-userman-pv-host
           persistentVolumeClaim:

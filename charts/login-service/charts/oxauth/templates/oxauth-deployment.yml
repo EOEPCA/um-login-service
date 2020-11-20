@@ -32,7 +32,7 @@ spec:
         {{- range $key, $value := .Values.volumeMounts }}
           - mountPath: {{ $value.mountPath }}
             name: {{ $value.name }}
-            subPath: {{ $key }}
+            subPath: {{ $value.subPath }}
         {{- end }}
         livenessProbe:
           httpGet:
