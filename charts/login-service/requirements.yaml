@@ -3,12 +3,6 @@ dependencies:
     condition: config.enabled
     version: 1.1.0
 
-  - name: redis
-    condition: redis.enabled
-    version: 1.1.0
-    tags:
-      - redis
-
   - name: opendj
     condition: opendj.enabled
     version: 1.1.0
