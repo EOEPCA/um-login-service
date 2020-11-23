@@ -64,7 +64,7 @@ opendj:
   gluuRedisEnabled: false
 
 oxpassport:
-  enabled: false  
+  enabled: true  
 
 oxauth:
   enabled: true

@@ -24,7 +24,9 @@ spec:
           # limits:
           #   memory: {{ .Values.limits.memory }} 
         ports:
-        - containerPort: {{ .Values.ports.containerPort }}
+        - name: oxauth
+          containerPort: 8080
+          protocol: TCP
         envFrom:
         - configMapRef:
             name: {{ template "oxauth.fullname" . }}-cm

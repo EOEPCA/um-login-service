@@ -58,12 +58,12 @@ ports:
 
 # livenessProbe
 livenessProbe:
-  initialDelaySeconds: 90
+  initialDelaySeconds: 600
   periodSeconds: 90
 
 # readinessProbe
 readinessProbe:
-  initialDelaySeconds: 90
+  initialDelaySeconds: 600
   periodSeconds: 90
 
 #VolumeMounts

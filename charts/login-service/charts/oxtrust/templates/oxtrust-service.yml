@@ -7,8 +7,10 @@ metadata:
     APP_NAME: {{ .Values.global.oxTrustSeriveName }}
 spec:
   ports:
-  - port: {{ .Values.port }}
-    name: {{ .Values.global.oxTrustSeriveName }}
+  - port: 8080
+    name: oxtrust
+    targetPort: 8080
+    protocol: TCP
   selector:
     app: {{ .Values.global.oxTrustSeriveName }}
-    
+    release: {{ .Release.Name }}

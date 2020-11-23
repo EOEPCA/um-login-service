@@ -25,9 +25,9 @@ dependencies:
     condition: oxtrust.enabled
     version: 1.1.0
 
-  # - name: oxpassport
-  #   version: 1.1.0
-  #   condition: oxpassport.enabled
-  #   tags:
-  #     - oxpassport
+  - name: oxpassport
+    version: 1.1.0
+    condition: oxpassport.enabled
+    tags:
+      - oxpassport
 

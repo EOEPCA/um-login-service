@@ -1,37 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "redis.fullname" . }}
+  name: {{ include "oxpassport.fullname" . }}
   labels:
-    app: {{ include "redis.name" . }}
-    chart: {{ include "redis.chart" . }}
+    app: {{ include "oxpassport.name" . }}
+    chart: {{ include "oxpassport.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "redis.name" . }}
+      app: {{ include "oxpassport.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ include "redis.name" . }}
+        app: {{ include "oxpassport.name" . }}
         release: {{ .Release.Name }}
     spec:
+      hostAliases:
+      - ip: {{ .Values.global.nginxIp }}
+        hostnames:
+        - {{ .Values.global.domain }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name:  {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
-              containerPort: 6379
+            - name: oxpassport
+              containerPort: 8090
               protocol: TCP
-          livenessProbe:
-            tcpSocket:
-              port: 6379
-            initialDelaySeconds: 30
-            periodSeconds: 30
+          envFrom:
+            - configMapRef:
+                name: {{ template "oxpassport.fullname" . }}-cm
+          
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
