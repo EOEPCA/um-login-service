@@ -4,7 +4,6 @@ metadata:
   name: {{ .Values.global.oxTrustSeriveName }}
   labels:
     app: {{ .Values.global.oxTrustSeriveName }}
-    APP_NAME: {{ .Values.global.oxTrustSeriveName }}
 spec:
   ports:
   - port: 8080
@@ -13,4 +12,3 @@ spec:
     protocol: TCP
   selector:
     app: {{ .Values.global.oxTrustSeriveName }}
-    release: {{ .Release.Name }}

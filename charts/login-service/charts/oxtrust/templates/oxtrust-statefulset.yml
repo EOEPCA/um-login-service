@@ -3,20 +3,17 @@ kind: StatefulSet
 metadata:
   name: {{ template "oxtrust.fullname" . }}-ss
   labels:
-    app: {{ template "oxtrust.fullname" . }}
-    APP_NAME: oxtrust
+    app: oxtrust
 spec:
   serviceName: oxtrust
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "oxtrust.fullname" . }}
-      APP_NAME: oxtrust
+      app: oxtrust
   template:
     metadata:
       labels: 
-        app: {{ template "oxtrust.fullname" . }}
-        APP_NAME: oxtrust
+        app: oxtrust
     spec:
       containers:
       - name: {{ include "oxtrust.name" . }}
