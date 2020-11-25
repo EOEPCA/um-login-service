@@ -17,12 +17,17 @@ spec:
         - name: eoepca-userman-pv-host
           persistentVolumeClaim:
             claimName: eoepca-userman-pvc
-        
+        - name: config-attributes
+          configMap:
+            name: custom-attributes-config
       containers:
       - name: {{ template "login-service.fullname" . }}-init-container
         imagePullPolicy: {{ .Values.imagePullPolicy }}
         image: {{ .Values.image }}
-        #command: ["cat", {{ .Files.Get "scripts/77-customAttributes.ldif" | quote }},">>", "/opt/opendj/template/config/schema/77-customAttributes.ldif"]
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "cp /data/77-customAttributes.ldif /opt/opendj/template/config/schema/77-customAttributes.ldif"]
         envFrom:
         - configMapRef:
             name: {{ include "opendj.fullname" . }}
@@ -33,20 +38,22 @@ spec:
             protocol: TCP
         {{- end }}
         volumeMounts:
+          - name: config-attributes
+            mountPath: /data/
           - mountPath: /opt/opendj/config
-            sub_path: opendj/config
+            subPath: opendj/config
             name: eoepca-userman-pv-host
           - mountPath: /opt/opendj/ldif
-            sub_path: opendj/ldif
+            subPath: opendj/ldif
             name: eoepca-userman-pv-host
           - mountPath: /opt/opendj/logs
-            sub_path: opendj/logs
+            subPath: opendj/logs
             name: eoepca-userman-pv-host
           - mountPath: /opt/opendj/db
-            sub_path: opendj/db
+            subPath: opendj/db
             name: eoepca-userman-pv-host
           - mountPath: /flag
-            sub_path: opendj/flag
+            subPath: opendj/flag
             name: eoepca-userman-pv-host
         readinessProbe:
           tcpSocket: 
