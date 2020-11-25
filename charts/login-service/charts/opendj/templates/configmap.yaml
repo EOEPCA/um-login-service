@@ -20,3 +20,17 @@ data:
   {{- end }}
   # must the same as the opendj service name
   GLUU_CERT_ALT_NAME: {{ .Values.global.serviceName }} #{{ template "login-service.fullname" . }}-service
+
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: custom-attributes-config  
+data:
+  {{ if .Files.Get "scripts/77-customAttributes.ldif" }}
+  77-customAttributes.ldif: {{ .Files.Get "scripts/77-customAttributes.ldif" | quote  }}
+  {{ else }}
+  {{ fail "you need to supply your license file! add 'fs-license.conf' to your chart 'config' directory." }}
+  {{ end }}
