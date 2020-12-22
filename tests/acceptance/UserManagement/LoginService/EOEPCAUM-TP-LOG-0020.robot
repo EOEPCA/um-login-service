@@ -20,15 +20,16 @@ ${PASSWORD}=  defaultPWD
 Login Service Configuration Validation
   UMA Get Data from Config File
   Set Chrome
+  Capture Page Screenshot
   LoginService Fill Credentials
   LoginService Enter Profile Page
   LoginService Call Log out Button
 
-User Profile Management
-  UMA Get Data from Config File
-  Set Chrome
-  LoginService Fill Credentials
-  LoginService Go to Users
+# User Profile Management
+#   UMA Get Data from Config File
+#   Set Chrome
+#   LoginService Fill Credentials
+#   LoginService Go to Users
 
 *** Keywords ***
 Set Chrome
@@ -100,6 +101,7 @@ LoginService Go to Users
   LoginService Edit Update Profile
 
 LoginService Fill Credentials
+  Set Browser Implicit Wait  3
   Input Text  id=loginForm:username  admin
   Input Password  id=loginForm:password  admin_Abcd1234#
   Click Button  id=loginForm:loginButton
