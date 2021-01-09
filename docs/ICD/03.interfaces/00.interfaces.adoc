@@ -6294,4 +6294,20 @@ JSON Web Key Set (JWKS) - A JSON object that represents a set of JWKs. The JSON 
 
 |===
 
+[#CustomUserAttributes]
+=== _CustomUserAttributes_ 
 
+Defines custom user attributes that are used to expand the default gluuPerson objectclass, by using the gluuCustomPerson objectclass
+
+[.fields-CustomUserAttributes]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| isOperator 
+| - 
+| Boolean 
+| Flag that signals if a registered user is an operator.
+|  
+
+|===
