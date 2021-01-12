@@ -1,0 +1,46 @@
+[[traceabilityMatrix]]
+= User Story Traceability
+
+.User Stories
+|===
+|Code |Description 
+|EOEPCA-188
+|Implementation of Helm Charts
+
+|EOEPCA-66	
+|Setup of CI/CD Configuration for "Login Service"
+
+|EOEPCA-22	
+|End-User Request for consent on attribute release
+
+|EOEPCA-19	
+|Uniquely Identification of End-Users
+
+|EOEPCA-18	
+|End-User Logout
+
+|EOEPCA-17	
+|End-User Authentication using external IDPs (Github)
+
+|EOEPCA-16	
+|Local Access to Administration Portal
+
+|EOEPCA-10	
+|Setup and tailoring of OIDC and UMA provider
+
+|EOEPCA-9	
+|Initial setup of CI/CD and Development Tooling
+
+|EOEPCA-176	
+|Policy Checks over external End-Users
+
+|EOEPCA-174	
+|Automation of Security Concerns
+
+|EOEPCA-13	
+|Reusable SCIM Client Implementation
+
+|EOEPCA-11	
+|Reusable OIDC Client Implementation
+
+|===
