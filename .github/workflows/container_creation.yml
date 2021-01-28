@@ -35,7 +35,6 @@ jobs:
       # Uncomment below if wanted Dockerhub Publication
       - name: Container Creation and Publishing
         run: ./gh_actions/setupCluster.sh
-      - name: Smoke and Acceptance Test
       # - name: Release Container
       #   if: github.ref == 'refs/heads/master' && github.event != 'pull_request'
       #   run: ./gh_actions/release.sh um-license-manager
