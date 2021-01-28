@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.10">
+<meta name="generator" content="Asciidoctor 2.0.12">
 <meta name="description" content="Login Service Design Document for the Common Architecture">
 <meta name="keywords" content="common architecture design">
 <meta name="author" content="TVUK System Team">
@@ -158,7 +158,7 @@
 </li>
 </ul>
 </li>
-<li><a href="#traceabilityMatrix">4. Use Case Traceability</a></li>
+<li><a href="#traceabilityMatrix">4. User Story Traceability</a></li>
 </ul>
 </div>
 </div>
@@ -1711,30 +1711,73 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 </div>
 </div>
 <div class="sect1">
-<h2 id="traceabilityMatrix">4. Use Case Traceability</h2>
+<h2 id="traceabilityMatrix">4. User Story Traceability</h2>
 <div class="sectionbody">
-<div class="admonitionblock note">
-<table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. User Stories</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
 <tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="title">Content Description</div>
-<div class="paragraph">
-<p>This section contains:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>A traceability matrix against the use case analysis document of the project, indicating which components address each use case</p>
-</li>
-</ul>
-</div>
-</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-188</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implementation of Helm Charts</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-66</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Setup of CI/CD Configuration for "Login Service"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-22</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">End-User Request for consent on attribute release</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-19</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Uniquely Identification of End-Users</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-18</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">End-User Logout</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-17</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">End-User Authentication using external IDPs (Github)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Local Access to Administration Portal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Setup and tailoring of OIDC and UMA provider</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initial setup of CI/CD and Development Tooling</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-176</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Policy Checks over external End-Users</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-174</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automation of Security Concerns</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-13</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reusable SCIM Client Implementation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-11</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reusable OIDC Client Implementation</p></td>
+</tr>
+</tbody>
 </table>
-</div>
 <hr>
 <div class="paragraph large">
 <p>&lt;&lt; End of Document &gt;&gt;</p>
@@ -1745,7 +1788,7 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2020-11-03 15:41:42 UTC
+Last updated 2021-01-28 19:53:42 UTC
 </div>
 </div>
 </body>
