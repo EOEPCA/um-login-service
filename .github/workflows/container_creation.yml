@@ -34,9 +34,8 @@ jobs:
       #     pytest ./tests
       # Uncomment below if wanted Dockerhub Publication
       - name: Container Creation and Publishing
-        run: ./gh_actions/containerCreation.sh um-login-service
+        run: ./gh_actions/setupCluster.sh
       - name: Smoke and Acceptance Test
-        run: ./gh_actions/acceptanceTest.sh um-login-service 8080 7000
       # - name: Release Container
       #   if: github.ref == 'refs/heads/master' && github.event != 'pull_request'
       #   run: ./gh_actions/release.sh um-license-manager
