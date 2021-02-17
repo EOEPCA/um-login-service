@@ -61,6 +61,16 @@ This scope is associated with a policy that verifies if the user, making the req
 This scope delegates user verification to the https://github.com/EOEPCA/um-pdp-engine[Policy Decision Point (PDP)] building block, via XACML-compliant communication.
 The protected access will verify the JWT's credentials if is a external issuer to the platform and will be indicated via XACML to the PDP.
 
+==== Protected Read
+
+This scope also delegates user verification to the https://github.com/EOEPCA/um-pdp-engine[Policy Decision Point (PDP)] building block, via XACML-compliant communication.
+The protected read will verify the HTTP verb (HEAD and GET) used to the request to the PEP endpoint and then will be indicated via XACML to the PDP with a value of 'read' in the action-id.
+
+==== Protected Write
+
+This scope has the same functionality like the previous scope and it is used in https://github.com/EOEPCA/um-pdp-engine[Policy Decision Point (PDP)] building block, via XACML-compliant communication.
+In this case the protected write will verify the HTTP verb (PUT, POST and DELETE) used to the request to the PEP endpoint and then will be indicated via XACML to the PDP with a value of 'write' in the action-id.
+
 ==== Is Operator
 
 This scope is used in conjuction with the isOperator custom user attribute, to allow the Policy Enforcement Point (PEP) to query the OIDC endpoint and establish if a user is an authorized operator for resources.
