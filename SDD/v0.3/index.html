@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.12">
+<meta name="description" content="Login Service Design Document for the Common Architecture">
+<meta name="keywords" content="common architecture design">
+<meta name="author" content="TVUK System Team">
+<title>Login Service Design Document: EOEPCA.SDD.xxx</title>
+<link rel="stylesheet" href="stylesheets/eoepca.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>Login Service Design Document: EOEPCA.SDD.xxx</h1>
+<div class="details">
+<span id="author" class="author">TVUK System Team</span><br>
+<span id="email" class="email">&lt;<a href="mailto:Eoepca.SystemTeam@telespazio.com">Eoepca.SystemTeam@telespazio.com</a>&gt;</span><br>
+<span id="revnumber">version 0.1,</span>
+<span id="revdate">dd/mm/yyyy</span>
+<br><span id="revremark"></span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Login Service Design Document</div>
+<ul class="sectlevel1">
+<li><a href="#_introduction">1. Introduction</a>
+<ul class="sectlevel2">
+<li><a href="#_purpose_and_scope">1.1. Purpose and Scope</a></li>
+<li><a href="#_structure_of_the_document">1.2. Structure of the Document</a></li>
+<li><a href="#_reference_documents">1.3. Reference Documents</a></li>
+<li><a href="#_terminology">1.4. Terminology</a></li>
+<li><a href="#_glossary">1.5. Glossary</a></li>
+</ul>
+</li>
+<li><a href="#mainOverview">2. Overview</a>
+<ul class="sectlevel2">
+<li><a href="#_building_block_overview">2.1. Building Block Overview</a>
+<ul class="sectlevel3">
+<li><a href="#_end_user_authentication_through_external_idps">2.1.1. End-User Authentication through external IDPs</a>
+<ul class="sectlevel4">
+<li><a href="#_authentication_flow">2.1.1.1. Authentication Flow</a></li>
+<li><a href="#_unique_identification_of_end_users">2.1.1.2. Unique identification of End-Users</a></li>
+</ul>
+</li>
+<li><a href="#_single_sign_on">2.1.2. Single Sign-On</a></li>
+<li><a href="#_single_log_out">2.1.3. Single Log-Out</a></li>
+<li><a href="#_authorization_scopes">2.1.4. Authorization Scopes</a>
+<ul class="sectlevel4">
+<li><a href="#_public_access">2.1.4.1. Public Access</a></li>
+<li><a href="#_authenticated_access">2.1.4.2. Authenticated Access</a></li>
+<li><a href="#_protected_access">2.1.4.3. Protected Access</a></li>
+<li><a href="#_is_operator">2.1.4.4. Is Operator</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_static_architecture">2.2. Static Architecture</a></li>
+<li><a href="#_use_cases">2.3. Use Cases</a>
+<ul class="sectlevel3">
+<li><a href="#_single_sign_on_2">2.3.1. Single Sign-on</a></li>
+<li><a href="#_single_log_out_2">2.3.2. Single Log-out</a></li>
+<li><a href="#_end_user_chooses_identity_provider">2.3.3. End-User chooses Identity Provider</a></li>
+<li><a href="#_external_identity_provider_authentication">2.3.4. External Identity Provider Authentication</a></li>
+<li><a href="#_uma_workflow">2.3.5. UMA workflow</a></li>
+<li><a href="#_request_user_attributes_through_scim">2.3.6. Request User Attributes through SCIM</a></li>
+<li><a href="#_resource_registration">2.3.7. Resource registration</a></li>
+<li><a href="#_dynamically_register_a_client">2.3.8. Dynamically register a client</a></li>
+</ul>
+</li>
+<li><a href="#_external_interfaces">2.4. External Interfaces</a>
+<ul class="sectlevel3">
+<li><a href="#_authentication_authn_interface">2.4.1. Authentication (AuthN) Interface</a></li>
+<li><a href="#_authorization_authz_interface">2.4.2. Authorization (AuthZ) Interface</a></li>
+<li><a href="#_identity_management_interface">2.4.3. Identity Management Interface</a></li>
+<li><a href="#_administration_interface">2.4.4. Administration Interface</a></li>
+<li><a href="#_external_idp_discovery_interface">2.4.5. External IDP Discovery Interface</a></li>
+</ul>
+</li>
+<li><a href="#_required_resources">2.5. Required Resources</a>
+<ul class="sectlevel3">
+<li><a href="#_software">2.5.1. Software</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#mainComponents">3. Building Block Design</a>
+<ul class="sectlevel2">
+<li><a href="#_authentication_and_authorization_service">3.1. Authentication and Authorization Service</a>
+<ul class="sectlevel3">
+<li><a href="#_overview_and_purpose">3.1.1. Overview and Purpose</a></li>
+<li><a href="#_software_reuse_and_dependencies">3.1.2. Software Reuse and Dependencies</a></li>
+<li><a href="#_interfaces">3.1.3. Interfaces</a>
+<ul class="sectlevel4">
+<li><a href="#_oidc_endpoints">3.1.3.1. OIDC Endpoints</a></li>
+<li><a href="#_uma_endpoints">3.1.3.2. UMA Endpoints</a></li>
+</ul>
+</li>
+<li><a href="#_data">3.1.4. Data</a>
+<ul class="sectlevel4">
+<li><a href="#_configuration">3.1.4.1. Configuration</a></li>
+<li><a href="#_data_flow">3.1.4.2. Data flow</a></li>
+</ul>
+</li>
+<li><a href="#_applicable_resources">3.1.5. Applicable Resources</a></li>
+</ul>
+</li>
+<li><a href="#_administration_service">3.2. Administration Service</a>
+<ul class="sectlevel3">
+<li><a href="#_overview_and_purpose_2">3.2.1. Overview and Purpose</a></li>
+<li><a href="#_software_reuse_and_dependencies_2">3.2.2. Software Reuse and Dependencies</a></li>
+<li><a href="#_interfaces_2">3.2.3. Interfaces</a>
+<ul class="sectlevel4">
+<li><a href="#_scim_endpoints">3.2.3.1. SCIM Endpoints</a></li>
+<li><a href="#_web_interface">3.2.3.2. Web Interface</a></li>
+</ul>
+</li>
+<li><a href="#_data_2">3.2.4. Data</a>
+<ul class="sectlevel4">
+<li><a href="#_configuration_2">3.2.4.1. Configuration</a></li>
+<li><a href="#_data_flow_2">3.2.4.2. Data flow</a></li>
+</ul>
+</li>
+<li><a href="#_applicable_resources_2">3.2.5. Applicable Resources</a></li>
+</ul>
+</li>
+<li><a href="#_back_end_service">3.3. Back-End Service</a>
+<ul class="sectlevel3">
+<li><a href="#_overview_and_purpose_3">3.3.1. Overview and Purpose</a></li>
+<li><a href="#_software_reuse_and_dependencies_3">3.3.2. Software Reuse and Dependencies</a></li>
+<li><a href="#_interfaces_3">3.3.3. Interfaces</a></li>
+<li><a href="#_data_3">3.3.4. Data</a>
+<ul class="sectlevel4">
+<li><a href="#_data_flow_3">3.3.4.1. Data Flow</a></li>
+<li><a href="#_configuration_3">3.3.4.2. Configuration</a></li>
+</ul>
+</li>
+<li><a href="#_applicable_resources_3">3.3.5. Applicable Resources</a></li>
+</ul>
+</li>
+<li><a href="#_relying_party_service">3.4. Relying-Party Service</a>
+<ul class="sectlevel3">
+<li><a href="#_overview_and_purpose_4">3.4.1. Overview and Purpose</a></li>
+<li><a href="#_software_reuse_and_dependencies_4">3.4.2. Software Reuse and Dependencies</a></li>
+<li><a href="#_interfaces_4">3.4.3. Interfaces</a>
+<ul class="sectlevel4">
+<li><a href="#_oidc_endpoints_2">3.4.3.1. OIDC Endpoints</a></li>
+</ul>
+</li>
+<li><a href="#_data_4">3.4.4. Data</a>
+<ul class="sectlevel4">
+<li><a href="#_data_flow_4">3.4.4.1. Data Flow</a></li>
+<li><a href="#_configuration_4">3.4.4.2. Configuration</a></li>
+</ul>
+</li>
+<li><a href="#_applicable_resources_4">3.4.5. Applicable Resources</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#traceabilityMatrix">4. User Story Traceability</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>EO Exploitation Platform Common Architecture<br>
+<em>Login Service Design Document</em><br>
+EOEPCA.SDD.xxx</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>COMMENTS and ISSUES</strong><br>
+If you would like to raise comments or issues on this document, please do so by raising an Issue at the following URL <a href="https://github.com/EOEPCA/um-login-service/issues" class="bare">https://github.com/EOEPCA/um-login-service/issues</a>.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>PDF</strong><br>
+This document is available in PDF format <a href="EOEPCA-um-login-service.pdf" target="_blank" rel="noopener">here</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>EUROPEAN SPACE AGENCY CONTRACT REPORT</strong><br>
+The work described in this report was done under ESA contract. Responsibility for the contents resides in the author or organisation that prepared it.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>TELESPAZIO VEGA UK Ltd</strong><br>
+350 Capability Green, Luton, Bedfordshire, LU1 3LU, United Kingdom.<br>
+Tel: +44 (0)1582 399000<br>
+<a href="http://telespazio-vega.com/">www.telespazio-vega.com</a></p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">AMENDMENT HISTORY</dt>
+<dd>
+<p>This document shall be amended by releasing a new edition of the document in its entirety.<br>
+The Amendment Record Sheet below records the history and issue status of this document.</p>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Amendment Record Sheet</caption>
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 25%;">
+<col style="width: 62.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">ISSUE</th>
+<th class="tableblock halign-center valign-top">DATE</th>
+<th class="tableblock halign-left valign-top">REASON</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="tableblock halign-center valign-top"><p class="tableblock">0.1</p></th>
+<td class="tableblock halign-center valign-top"><p class="tableblock">dd/mm/yyyy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initial in-progress draft</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div>
+<hr>
+<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction">1. Introduction</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_purpose_and_scope">1.1. Purpose and Scope</h3>
+<div class="paragraph">
+<p>This document presents the Login Service Design for the Common Architecture.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_structure_of_the_document">1.2. Structure of the Document</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Section 2 - <a href="#mainOverview">Overview</a></dt>
+<dd>
+<p>Provides an overview of the Login Service component, within the context of the wider Common Architecture design.</p>
+</dd>
+<dt class="hdlist1">Section 3 - <a href="#mainComponents">Building Block Design</a></dt>
+<dd>
+<p>Provides the building block design of the Login Service component.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_reference_documents">1.3. Reference Documents</h3>
+<div class="paragraph">
+<p>The following is a list of Reference Documents with a direct bearing on the content of this document.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 18.1818%;">
+<col style="width: 63.6363%;">
+<col style="width: 18.1819%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Reference</th>
+<th class="tableblock halign-left valign-top">Document Details</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="EOEPCA-UC"></a>[EOEPCA-UC]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>EOEPCA - Use Case Analysis<br>
+EOEPCA.TN.005<br>
+<a href="https://eoepca.github.io/use-case-analysis" class="bare">https://eoepca.github.io/use-case-analysis</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Issue 1.0,<br>
+02/08/2019</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="EP-FM"></a>[EP-FM]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Exploitation Platform - Functional Model,<br>
+ESA-EOPSDP-TN-17-050</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Issue 1.0,<br>
+30/11/2017</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="TEP-OA"></a>[TEP-OA]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Thematic Exploitation Platform Open Architecture,<br>
+EMSS-EOPS-TN-17-002</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Issue 1,<br>
+12/12/2017</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="WPS-T"></a>[WPS-T]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OGC Testbed-14: WPS-T Engineering Report,<br>
+OGC 18-036r1,<br>
+<a href="http://docs.opengeospatial.org/per/18-036r1.html" class="bare">http://docs.opengeospatial.org/per/18-036r1.html</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>18-036r1,<br>
+07/02/2019</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="WPS-REST-JSON"></a>[WPS-REST-JSON]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OGC WPS 2.0 REST/JSON Binding Extension, Draft,<br>
+OGC 18-062,<br>
+<a href="https://raw.githubusercontent.com/opengeospatial/wps-rest-binding/develop/docs/18-062.pdf" class="bare">https://raw.githubusercontent.com/opengeospatial/wps-rest-binding/develop/docs/18-062.pdf</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1.0-draft</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="CWL"></a>[CWL]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Common Workflow Language Specifications,<br>
+<a href="https://www.commonwl.org/v1.0/" class="bare">https://www.commonwl.org/v1.0/</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>v1.0.2</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="TB13-AP"></a>[TB13-AP]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OGC Testbed-13, EP Application Package Engineering Report,<br>
+OGC 17-023,<br>
+<a href="http://docs.opengeospatial.org/per/17-023.html" class="bare">http://docs.opengeospatial.org/per/17-023.html</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>17-023,<br>
+30/01/2018</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="TB13-ADES"></a>[TB13-ADES]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OGC Testbed-13, Application Deployment and Execution Service Engineering Report,<br>
+OGC 17-024,<br>
+<a href="http://docs.opengeospatial.org/per/17-024.html" class="bare">http://docs.opengeospatial.org/per/17-024.html</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>17-024,<br>
+11/01/2018</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="TB14-AP"></a>[TB14-AP]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OGC Testbed-14, Application Package Engineering Report,<br>
+OGC 18-049r1,<br>
+<a href="http://docs.opengeospatial.org/per/18-049r1.html" class="bare">http://docs.opengeospatial.org/per/18-049r1.html</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>18-049r1,<br>
+07/02/2019</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="TB14-ADES"></a>[TB14-ADES]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OGC Testbed-14, ADES &amp; EMS Results and Best Practices Engineering Report,<br>
+OGC 18-050r1, <a href="http://docs.opengeospatial.org/per/18-050r1.html" class="bare">http://docs.opengeospatial.org/per/18-050r1.html</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>18-050r1,<br>
+08/02/2019</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="OS-GEO-TIME"></a>[OS-GEO-TIME]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OpenSearch GEO: OpenSearch Geo and Time Extensions,<br>
+OGC 10-032r8,<br>
+<a href="http://www.opengeospatial.org/standards/opensearchgeo" class="bare">http://www.opengeospatial.org/standards/opensearchgeo</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>10-032r8,<br>
+14/04/2014</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="OS-EO"></a>[OS-EO]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OpenSearch EO: OGC OpenSearch Extension for Earth Observation,<br>
+OGC 13-026r9,<br>
+<a href="http://docs.opengeospatial.org/is/13-026r8/13-026r8.html" class="bare">http://docs.opengeospatial.org/is/13-026r8/13-026r8.html</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>13-026r9,<br>
+16/12/2016</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="GEOJSON-LD"></a>[GEOJSON-LD]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OGC EO Dataset Metadata GeoJSON(-LD) Encoding Standard,<br>
+OGC 17-003r1/17-084</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>17-003r1/17-084</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="GEOJSON-LD-RESP"></a>[GEOJSON-LD-RESP]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OGC OpenSearch-EO GeoJSON(-LD) Response Encoding Standard,<br>
+OGC 17-047</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>17-047</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="PCI-DSS"></a>[PCI-DSS]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The Payment Card Industry Data Security Standard,<br>
+<a href="https://www.pcisecuritystandards.org/document_library?category=pcidss&amp;document=pci_dss" class="bare">https://www.pcisecuritystandards.org/document_library?category=pcidss&amp;document=pci_dss</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>v3.2.1</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="CEOS-OS-BP"></a>[CEOS-OS-BP]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>CEOS OpenSearch Best Practise,<br>
+<a href="http://ceos.org/ourwork/workinggroups/wgiss/access/opensearch/" class="bare">http://ceos.org/ourwork/workinggroups/wgiss/access/opensearch/</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>v1.2,<br>
+13/06/2017</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="OIDC"></a>[OIDC]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OpenID Connect Core 1.0,<br>
+<a href="https://openid.net/specs/openid-connect-core-1_0.html" class="bare">https://openid.net/specs/openid-connect-core-1_0.html</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>v1.0,<br>
+08/11/2014</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="OGC-CSW"></a>[OGC-CSW]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OGC Catalogue Services 3.0 Specification - HTTP Protocol Binding (Catalogue Services for the Web),<br>
+OGC 12-176r7,<br>
+<a href="http://docs.opengeospatial.org/is/12-176r7/12-176r7.html" class="bare">http://docs.opengeospatial.org/is/12-176r7/12-176r7.html</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>v3.0,<br>
+10/06/2016</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="OGC-WMS"></a>[OGC-WMS]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OGC Web Map Server Implementation Specification,<br>
+OGC 06-042,<br>
+<a href="http://portal.opengeospatial.org/files/?artifact_id=14416" class="bare">http://portal.opengeospatial.org/files/?artifact_id=14416</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>v1.3.0,<br>
+05/03/2006</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="OGC-WMTS"></a>[OGC-WMTS]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OGC Web Map Tile Service Implementation Standard,<br>
+OGC 07-057r7,<br>
+<a href="http://portal.opengeospatial.org/files/?artifact_id=35326" class="bare">http://portal.opengeospatial.org/files/?artifact_id=35326</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>v1.0.0,<br>
+06/04/2010</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="OGC-WFS"></a>[OGC-WFS]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OGC Web Feature Service 2.0 Interface Standard – With Corrigendum,<br>
+OGC 09-025r2,<br>
+<a href="http://docs.opengeospatial.org/is/09-025r2/09-025r2.html" class="bare">http://docs.opengeospatial.org/is/09-025r2/09-025r2.html</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>v2.0.2,<br>
+10/07/2014</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="OGC-WCS"></a>[OGC-WCS]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OGC Web Coverage Service (WCS) 2.1 Interface Standard - Core,<br>
+OGC 17-089r1,<br>
+<a href="http://docs.opengeospatial.org/is/17-089r1/17-089r1.html" class="bare">http://docs.opengeospatial.org/is/17-089r1/17-089r1.html</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>v2.1,<br>
+16/08/2018</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="OGC-WCPS"></a>[OGC-WCPS]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Web Coverage Processing Service (WCPS) Language Interface Standard,<br>
+OGC 08-068r2,<br>
+<a href="http://portal.opengeospatial.org/files/?artifact_id=32319" class="bare">http://portal.opengeospatial.org/files/?artifact_id=32319</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>v1.0.0,<br>
+25/03/2009</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="AWS-S3"></a>[AWS-S3]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Amazon Simple Storage Service REST API,<br>
+<a href="https://docs.aws.amazon.com/AmazonS3/latest/API" class="bare">https://docs.aws.amazon.com/AmazonS3/latest/API</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>API Version 2006-03-01</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_terminology">1.4. Terminology</h3>
+<div class="paragraph">
+<p>The following terms are used in the Master System Design.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Term</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User with administrative capability on the EP</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Algorithm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A self-contained set of operations to be performed, typically to achieve a desired data manipulation. The algorithm must be implemented (codified) for deployment and execution on the platform.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Analysis Result</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Products</em> produced as output of an <em>Interactive Application</em> analysis session.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Analytics</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A set of activities aimed to discover, interpret and communicate meaningful patters within the data. Analytics considered here are performed manually (or in a semi-automatic way) on-line with the aid of <em>Interactive Applications</em>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application Artefact</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The 'software' component that provides the execution unit of the <em>Application Package</em>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application Deployment and Execution Service (ADES)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WPS-T (REST/JSON) service that incorporates the Docker execution engine, and is responsible for the execution of the processing service (as a WPS request) within the ‘target’ Exploitation Platform.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application Descriptor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A file that provides the metadata part of the <em>Application Package</em>. Provides all the metadata required to accommodate the processor within the WPS service and make it available for execution.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application Package</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A platform independent and self-contained representation of a software item, providing executable, metadata and dependencies such that it can be deployed to and executed within an Exploitation Platform. Comprises the <em>Application Descriptor</em> and the <em>Application Artefact</em>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bulk Processing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Execution of a <em>Processing Service</em> on large amounts of data specified by AOI and TOI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The codification of an algorithm performed with a given programming language - compiled to Software or directly executed (interpretted) within the platform.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Compute Platform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Platform on which execution occurs (this may differ from the Host or Home platform where federated processing is happening)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consumer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User accessing existing services/products within the EP. Consumers may be scientific/research or commercial, and may or may not be experts of the domain</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data Access Library</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An abstraction of the interface to the data layer of the resource tier. The library provides bindings for common languages (including python, Javascript) and presents a common object model to the code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Development</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The act of building new products/services/applications to be exposed within the platform and made available for users to conduct exploitation activities. Development may be performed inside or outside of the platform. If performed outside, an integration activity will be required to accommodate the developed service so that it is exposed within the platform.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Discovery</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User finds products/services of interest to them based upon search criteria.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Execution</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The act to start a <em>Processing Service</em> or an <em>Interactive Application</em>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Execution Management Service (EMS)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The EMS is responsible for the orchestration of workflows, including the possibility of steps running on other (remote) platforms, and the on-demand deployment of processors to local/remote ADES as required.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expert</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User developing and integrating added-value to the EP (Scientific Researcher or Service Developer)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exploitation Tier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Exploitation Tier represents the end-users who exploit the services of the platform to perform analysis, or using high-level applications built-in on top of the platform’s services</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">External Application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An application or script that is developed and executed outside of the Exploitation Platform, but is able to use the data/services of the EP via a programmatic interface (API).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Guest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An unregistered User or an unauthenticated Consumer with limited access to the EP&#8217;s services</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Home Platform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Platform on which a User is based or from which an action was initiated by a User</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Host Platform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Platform through which a Resource has been published</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Identity Provider (IdP)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The source for validating user identity in a federated identity system, (user authentication as a service).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interactive Application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A stand-alone application provided within the exploitation platform for on-line hosted processing. Provides an interactive interface through which the user is able to conduct their analysis of the data, producing <em>Analysis Results</em> as output. Interactive Applications include at least the following types: console application, web application (rich browser interface), remote desktop to a hosted VM.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interactive Console Application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A simple <em>Interactive Application</em> for analysis in which a console interface to a platform-hosted terminal is provided to the user. The console interface can be provided through the user&#8217;s browser session or through a remote SSH connection.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interactive Remote Desktop</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An Interactive Application for analysis provided as a remote desktop session to an OS-session (or directly to a 'native' application) on the exploitation platform. The user will have access to a number of applications within the hosted OS. The remote desktop session is provided through the user’s web browser.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interactive Web Application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An Interactive Application for analysis provided as a rich user interface through the user&#8217;s web browser.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key-Value Pair</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A key-value pair (KVP) is an abstract data type that includes a group of key identifiers and a set of associated values. Key-value pairs are frequently used in lookup tables, hash tables and configuration files.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kubernetes (K8s)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Container orchestration system for automating application deployment, scaling and management.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Login Service</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An encapsulation of Authenticated Login provision within the Exploitation Platform context. The Login Service is an OpenID Connect Provider that is used purely for authentication. It acts as a Relying Party in flows with external IdPs to obtain access to the user&#8217;s identity.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EO Network of Resources</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The coordinated collection of European EO resources (platforms, data sources, etc.).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object Store</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A computer data storage architecture that manages data as objects. Each object typically includes the data itself, a variable amount of metadata, and a globally unique identifier.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">On-demand Processing Service</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <em>Processing Service</em> whose execution is initiated directly by the user on an ad-hoc basis.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Platform (EP)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An on-line collection of products, services and tools for exploitation of EO data</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Platform Tier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Platform Tier represents the Exploitation Platform and the services it offers to end-users</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Processing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A set of pre-defined activities that interact to achieve a result. For the exploitation platform, comprises on-line processing to derive data products from input data, conducted by a hosted processing service execution.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Processing Result</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>Products</em> produced as output of a <em>Processing Service</em> execution.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Processing Service</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A non-interactive data processing that has a well-defined set of input data types, input parameterisation, producing <em>Processing Results</em> with a well-defined output data type.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Products</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EO data (commercial and non-commercial) and Value-added products and made available through the EP. <em>It is assumed that the Hosting Environment for the EP makes available an existing supply of EO Data</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resource</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A entity, such as a Product, Processing Service or Interactive Application, which is of interest to a user, is indexed in a catalogue and can be returned as a single meaningful search result</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resource Tier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Resource Tier represents the hosting infrastructure and provides the EO data, storage and compute upon which the exploitation platform is deployed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reusable Research Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An encapsulation of some research/analysis that describes all aspects required to reproduce the analysis, including data used, processing performed etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scientific Researcher</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expert user with the objective to perform scientific research. Having minimal IT knowledge with no desire to acquire it, they want the effort for the translation of their algorithm into a service/product to be minimised by the platform.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Service Developer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expert user with the objective to provide a performing, stable and reliable service/product. Having deeper IT knowledge or a willingness to acquire it, they require deeper access to the platform IT functionalities for optimisation of their algorithm.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Software</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The compilation of code into a binary program to be executed within the platform on-line computing environment.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Systematic Processing Service</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <em>Processing Service</em> whose execution is initiated automatically (on behalf of a user), either according to a schedule (routine) or triggered by an event (e.g. arrival of new data).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Terms &amp; Conditions (T&amp;Cs)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The obligations that the user agrees to abide by in regard of usage of products/services of the platform. T&amp;Cs are set by the provider of each product/service.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transactional Web Processing Service (WPS-T)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transactional extension to WPS that allows adhoc deployment / undeployment of user-provided processors.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An individual using the EP, of any type (Admin/Consumer/Expert/Guest)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value-added products</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Products generated from processing services of the EP (or external processing) and made available through the EP. This includes products uploaded to the EP by users and published for collaborative consumption</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Visualisation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To obtain a visual representation of any data/products held within the platform - presented to the user within their web browser session.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web Coverage Service (WCS)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OGC standard that provides an open specification for sharing raster datasets on the web.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web Coverage Processing Service (WCPS)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OGC standard that defines a protocol-independent language for the extraction, processing, and analysis of multi-dimentional coverages representing sensor, image, or statistics data.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web Feature Service (WFS)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OGC standard that makes geographic feature data (vector geospatial datasets) available on the web.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web Map Service (WMS)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OGC standard that provides a simple HTTP interface for requesting geo-registered map images from one or more distributed geospatial databases.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web Map Tile Service (WMTS)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OGC standard that provides a simple HTTP interface for requesting map tiles of spatially referenced data using the images with predefined content, extent, and resolution.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web Processing Services (WPS)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OGC standard that defines how a client can request the execution of a process, and how the output from the process is handled.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Workspace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A user-scoped 'container' in the EP, in which each user maintains their own links to resources (products and services) that have been collected by a user during their usage of the EP. The workspace acts as the hub for a user&#8217;s exploitation activities within the EP</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_glossary">1.5. Glossary</h3>
+<div class="paragraph">
+<p>The following acronyms and abbreviations have been used in this report.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 85.7143%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Term</th>
+<th class="tableblock halign-left valign-top">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AAI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Authentication &amp; Authorization Infrastructure</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ABAC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute Based Access Control</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADES</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application Deployment and Execution Service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ALFA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Abbreviated Language For Authorization</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AOI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Area of Interest</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application Programming Interface</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CMS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content Management System</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CWL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Common Workflow Language</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data Access Library</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EMS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Execution Management Service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Earth Observation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exploitation Platform</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FUSE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filesystem in Userspace</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GeoXACML</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Geo-specific extension to the XACML Policy Language</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IAM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Identity and Access Management</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IdP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Identity Provider</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JavaScript Object Notation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">K8s</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kubernetes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KVP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key-value Pair</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M2M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Machine-to-machine</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OGC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open Geospatial Consortium</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PDE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Processor Development Environment</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PDP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Policy Decision Point</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PEP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Policy Enforcement Point</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PIP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Policy Information Point</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RBAC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Role Based Access Control</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Representational State Transfer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SSH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Secure Shell</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TOI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time of Interest</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UMA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User-Managed Access</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">VNC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Virtual Network Computing</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WCS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web Coverage Service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WCPS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web Coverage Processing Service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WFS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web Feature Service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WMS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web Map Service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WMTS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web Map Tile Service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WPS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web Processing Service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WPS-T</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transactional Web Processing Service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XACML</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eXtensible Access Control Markup Language</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mainOverview">2. Overview</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_building_block_overview">2.1. Building Block Overview</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Content Description</div>
+<div class="paragraph">
+<p>This section contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>High-Level Description of the Building Block</p>
+</li>
+<li>
+<p>Context within EOEPCA</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The Login Service building block provides an OIDC and UMA compliant solution enabling authentication and authorization mechanisms within an Exploitation Platform. Other building blocks, such as the Policy Decision Point, Policy Enforcement Point and User Profile rely on this Building Block to provide several standard interfaces.</p>
+</div>
+<div class="paragraph">
+<p>As stated in the EOEPCA Master System Design Document (ref. [PENDING]), the Login Service establishes itself as a client (Relying Party) for external Identity Providers (IDPs) allowing users coming from external domains to authenticate into the Exploitation Platform. In addition to this functionality, the Login Service also allows any Platform component to authenticate itself (without the need for an End-User to initiate the flow) therefore facilitating security aspects of the internal workflows of a Platform.</p>
+</div>
+<div class="paragraph">
+<p>The figure below, identifies the main workflows on which the Login Service participates:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/workflow.png" alt="workflow">
+</div>
+</div>
+<div class="paragraph">
+<p>Based on this workflow, the Login Service enables the following functionality aspects:</p>
+</div>
+<div class="sect3">
+<h4 id="_end_user_authentication_through_external_idps">2.1.1. End-User Authentication through external IDPs</h4>
+<div class="paragraph">
+<p>The Login Service establishes itself as a client to all supported external IDPs, with the necessary trust relationships in place to support the authentication flow. End-Users participating in this flow will propagate - with their necessary consent - a subset of the information stored in the external IDP into the Login Service back-end in order to facilitate unique identification of users and the Billing and Accounting functionalities of the overall Platform.</p>
+</div>
+<div class="sect4">
+<h5 id="_authentication_flow">2.1.1.1. Authentication Flow</h5>
+<div class="paragraph">
+<p>The following image indicates the sequence of events necessary for a user to authenticate using an external Identity Provider (IDP).</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/passport.png" alt="passport">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_unique_identification_of_end_users">2.1.1.2. Unique identification of End-Users</h5>
+<div class="paragraph">
+<p>By default, the Login Service extracts the email account stored in the external Identity Provider and checks that the user has not logged in previously with any other external IDP under the same email account. Whenever that&#8217;s the case, the authentication flow skips the persistence of End-User attributes to the back-end and directly considers the user authenticated.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_single_sign_on">2.1.2. Single Sign-On</h4>
+<div class="paragraph">
+<p>Single Sign-On (SSO) comes as one of the main benefits of using OIDC as authentication standard, allowing Service Providers (Client Applications) that utilize the Login Service to skip the step that requires input of credentials by the end-user if the Login Service detects that a session for the user is ongoing within the platform.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_single_log_out">2.1.3. Single Log-Out</h4>
+<div class="paragraph">
+<p>Similar to the SSO functionality, applications can request the End-User session to be terminated across the platform, and register themselves to receive this log-out request (in order to also handle it internally).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_authorization_scopes">2.1.4. Authorization Scopes</h4>
+<div class="paragraph">
+<p>Authorization scopes are definitions used to protect resources, by enabling associated policies that ensure a connecting client has the access permissions required for a given resource.</p>
+</div>
+<div class="sect4">
+<h5 id="_public_access">2.1.4.1. Public Access</h5>
+<div class="paragraph">
+<p>This specific scope allows for any end user or client application to freely access a resource, without any restrictions.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_authenticated_access">2.1.4.2. Authenticated Access</h5>
+<div class="paragraph">
+<p>This scope is associated with a policy that verifies if the user, making the request, has an ongoing active session.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_protected_access">2.1.4.3. Protected Access</h5>
+<div class="paragraph">
+<p>This scope delegates user verification to the <a href="https://github.com/EOEPCA/um-pdp-engine">Policy Decision Point (PDP)</a> building block, via XACML-compliant communication.<br>
+The protected access will verify the JWT&#8217;s credentials if is a external issuer to the platform and will be indicated via XACML to the PDP.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_is_operator">2.1.4.4. Is Operator</h5>
+<div class="paragraph">
+<p>This scope is used in conjuction with the isOperator custom user attribute, to allow the Policy Enforcement Point (PEP) to query the OIDC endpoint and establish if a user is an authorized operator for resources.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_architecture">2.2. Static Architecture</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Content Description</div>
+<div class="paragraph">
+<p>This section contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Diagram and description of the major logical components within the Building Block</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The Login Service heavily relies on Free and Open Source Software that already implements the interfaces and functionality required. The following diagram describes the main components of this building block:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/static.PNG" alt="static">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The Authentication and Authorization Service enables both OIDC and UMA flows for the whole Platform</p>
+</li>
+<li>
+<p>The Administration Service provides and Administration GUI and a SCIM Implementation allowing direct interaction with the End-User Back-End</p>
+</li>
+<li>
+<p>The Back-End Service stores the necessary information for the other components to provide Session Management, Authorization and persists external IDP information generated or relayed during authentication.</p>
+</li>
+<li>
+<p>The Relying Party component allows to register as a RP in any external IDP.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Section for the Building Block Design [<a href="#mainComponents">Building Block Design</a>] contains detailed descriptions and references to the Open Source components used in this Building Block.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_use_cases">2.3. Use Cases</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Content Description</div>
+<div class="paragraph">
+<p>This section contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Diagrams and definition of the use cases covered by this Building Block</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/sessions.png" alt="sessions">
+</div>
+</div>
+<div class="paragraph">
+<p>This diagram covers the following use cases:</p>
+</div>
+<div class="sect3">
+<h4 id="_single_sign_on_2">2.3.1. Single Sign-on</h4>
+<div class="paragraph">
+<p>Upon performing a Login action, a new Session is generated that is then used by the user to perform actions on the Exploitation Platform.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_single_log_out_2">2.3.2. Single Log-out</h4>
+<div class="paragraph">
+<p>Upon performing a Logout action, the created Session is destroyed, preventing further action by the End-User on the Exploitation Platform, until a new Login action is taken.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_end_user_chooses_identity_provider">2.3.3. End-User chooses Identity Provider</h4>
+<div class="paragraph">
+<p>When performing a Login action, the End-User can choose if they wish to use an External Identity Provider to delegate authentication (or use the Login Service itself).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_external_identity_provider_authentication">2.3.4. External Identity Provider Authentication</h4>
+<div class="paragraph">
+<p>If an External Identity Provider is chosen to delegate authentication, the Login Service redirects to it in order to proceed with the Login action. This is best explained by the sequence diagram present in [<a href="#_authentication_flow">Authentication Flow</a>]</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/client.png" alt="client">
+</div>
+</div>
+<div class="paragraph">
+<p>This diagram covers the following use cases:</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_uma_workflow">2.3.5. UMA workflow</h4>
+<div class="paragraph">
+<p>By default, some actions are protected by a UMA (User-Managed access) workflow, that is already described in the Master System Design document (ref. [PENDING]). As part of this process, any security policies that have been previously established as [[<a href="#_authentication_scopes">[_authentication_scopes]</a>]] are enacted.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_request_user_attributes_through_scim">2.3.6. Request User Attributes through SCIM</h4>
+<div class="paragraph">
+<p>Requesting a User&#8217;s attributes can be done via SCIM&#8217;s .well-known endpoints, best by using a previously registered client to call them and perform UMA authentication.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_resource_registration">2.3.7. Resource registration</h4>
+<div class="paragraph">
+<p>Resource registration can be done directly via OIDC&#8217;s .well-known endpoints, best by using a previously registered client to call them using basic authentication.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_dynamically_register_a_client">2.3.8. Dynamically register a client</h4>
+<div class="paragraph">
+<p>The Exploitation Platform allows a client to dynamically register with itself, by calling OIDC .well-know endpoints.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_external_interfaces">2.4. External Interfaces</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Content Description</div>
+<div class="paragraph">
+<p>This section contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Listing of technical external interfaces (with other Building Blocks)</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_authentication_authn_interface">2.4.1. Authentication (AuthN) Interface</h4>
+<div class="paragraph">
+<p>The Login Service exposes an OpenID Connect interface through a .well-known URI that describes all standard endpoints.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_authorization_authz_interface">2.4.2. Authorization (AuthZ) Interface</h4>
+<div class="paragraph">
+<p>The Login Service exposes a User Managed Access (UMA) interface through a .well-known URI that describes all standard endpoints.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_identity_management_interface">2.4.3. Identity Management Interface</h4>
+<div class="paragraph">
+<p>The Login Service exposes a System for Cross Domain Identity (SCIM) Interface through a .well-known URI that describes all standard endpoints.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_administration_interface">2.4.4. Administration Interface</h4>
+<div class="paragraph">
+<p>A web service is made available for administrators and operators to manage the configuration aspects of the Login Service without the need to authenticate using external IDPs.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_external_idp_discovery_interface">2.4.5. External IDP Discovery Interface</h4>
+<div class="paragraph">
+<p>A landing web page interface for Authentication Requests is made available, allowing users to select their preferred external IDP and initiate authentication flow.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_required_resources">2.5. Required Resources</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Content Description</div>
+<div class="paragraph">
+<p>This section contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>List of HW and SW required resources for the correct functioning of the building Block</p>
+</li>
+<li>
+<p>References to open repositories (when applicable)</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_software">2.5.1. Software</h4>
+<div class="paragraph">
+<p>The following Open-Source Software is required to support the deployment and integration of the Login Service:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Authentication and Authorization Service</p>
+<div class="ulist">
+<ul>
+<li>
+<p>oxAuth - Gluu Inc. - <a href="https://github.com/GluuFederation/oxAuth" class="bare">https://github.com/GluuFederation/oxAuth</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Administration Service</p>
+<div class="ulist">
+<ul>
+<li>
+<p>oxTrust - Gluu Inc. - <a href="https://github.com/GluuFederation/oxTrust" class="bare">https://github.com/GluuFederation/oxTrust</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Back-end Service</p>
+<div class="ulist">
+<ul>
+<li>
+<p>OpenDJ/LDAP Distribution - <a href="https://github.com/GluuFederation/docker-opendj" class="bare">https://github.com/GluuFederation/docker-opendj</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>OIDC Compliant, extensible Relying Party</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Passport.js - <a href="https://github.com/jaredhanson/passport" class="bare">https://github.com/jaredhanson/passport</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Deployment, Configuration and Integration Tooling</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Persistence system load/backup/restore components - <a href="https://github.com/EOEPCA/um-login-persistence" class="bare">https://github.com/EOEPCA/um-login-persistence</a></p>
+</li>
+<li>
+<p>Kubernetes secret and config Tooling - <a href="https://github.com/GluuFederation/gluu-docker/tree/3.1.6/examples/kubernetes/minikube" class="bare">https://github.com/GluuFederation/gluu-docker/tree/3.1.6/examples/kubernetes/minikube</a></p>
+</li>
+<li>
+<p>Reverse Proxy exposing API interfaces - Nginx/Ingress</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mainComponents">3. Building Block Design</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Content Description</div>
+<div class="paragraph">
+<p>This section contains:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A concise breakdown of the Building Block in several independent services (when applicable). For each component, the following subsections are added:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Overview and purpose: indicating the functionality covered by the component</p>
+</li>
+<li>
+<p>SW Reuse and Dependencies: indicating reuse of third party open source solutions (if any) and any pre-required Dependencies</p>
+</li>
+<li>
+<p>Interfaces: both internal to the building block and those exposed externally</p>
+</li>
+<li>
+<p>Data: Data usage of the building block, data flow and any GDPR concerns should be addressed here</p>
+</li>
+<li>
+<p>Applicable Resources: links and references to (Reference Docs), and repositories.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When a breakdown is necessary, a general overview of the building block can be given. On the contrary, no breakdown indicates a single component development with the same expected sections.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_authentication_and_authorization_service">3.1. Authentication and Authorization Service</h3>
+<div class="sect3">
+<h4 id="_overview_and_purpose">3.1.1. Overview and Purpose</h4>
+<div class="paragraph">
+<p>The login service provides both authentication and authorization via it&#8217;s oxAuth component. This component also provides the OpenID Connect (OIDC) and UMA flows, exposed through endpoints to external clients.</p>
+</div>
+<div class="paragraph">
+<p>It also provides authentication via web service, allowing for simple login interactions with users.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_software_reuse_and_dependencies">3.1.2. Software Reuse and Dependencies</h4>
+<div class="paragraph">
+<p>This service depends solely on oxAuth software, from gluu (see applicable resources and the overview for this building block)</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_interfaces">3.1.3. Interfaces</h4>
+<div class="sect4">
+<h5 id="_oidc_endpoints">3.1.3.1. OIDC Endpoints</h5>
+<div class="paragraph">
+<p>A listing of endpoints to interact with OIDC is exposed on a .well-know URL (default is .well-known/openid-configuration).</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_uma_endpoints">3.1.3.2. UMA Endpoints</h5>
+<div class="paragraph">
+<p>A listing of endpoints to interact with UMA is exposed on a .well-know URL (default is .well-known/uma2-configuration).</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_data">3.1.4. Data</h4>
+<div class="sect4">
+<h5 id="_configuration">3.1.4.1. Configuration</h5>
+<div class="paragraph">
+<p>Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.</p>
+</div>
+<div class="paragraph">
+<p>Direct customization without the "persistance" module is not possible at this time.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_data_flow">3.1.4.2. Data flow</h5>
+<div class="paragraph">
+<p>All information handled by this service is read/written to the LDAP instance deployed at the backend.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_applicable_resources">3.1.5. Applicable Resources</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>oxAuth (gluu) - <a href="https://gluu.org/docs/de/reference/oxauth/" class="bare">https://gluu.org/docs/de/reference/oxauth/</a></p>
+</li>
+<li>
+<p>oxAuth (gluu @ Github) - <a href="https://github.com/GluuFederation/docker-oxauth" class="bare">https://github.com/GluuFederation/docker-oxauth</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_administration_service">3.2. Administration Service</h3>
+<div class="sect3">
+<h4 id="_overview_and_purpose_2">3.2.1. Overview and Purpose</h4>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/gluu-dashboard.png" alt="gluu dashboard">
+</div>
+</div>
+<div class="paragraph">
+<p>The login service provides administration functionality for users with elevated priviledges. This allows admins to have an overview of the entire system, as well as configure anything necessary from this interface. Some of the configurations available from it are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>OAuth Clients</p>
+</li>
+<li>
+<p>UMA Scopes &amp; Resources</p>
+</li>
+<li>
+<p>Edit/Add/Remove Users</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A complete description of available configurations can be found here: <a href="https://gluu.org/docs/gluu-server/4.1/admin-guide/oxtrust-ui/#oxtrust-admin-gui" class="bare">https://gluu.org/docs/gluu-server/4.1/admin-guide/oxtrust-ui/#oxtrust-admin-gui</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_software_reuse_and_dependencies_2">3.2.2. Software Reuse and Dependencies</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>oxTrust</strong>: A gluu component, providing the web interface and interaction</p>
+</li>
+<li>
+<p><strong>opendj</strong>: The instance of LDAP providing the backend store for information</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_interfaces_2">3.2.3. Interfaces</h4>
+<div class="sect4">
+<h5 id="_scim_endpoints">3.2.3.1. SCIM Endpoints</h5>
+<div class="paragraph">
+<p>A listing of endpoints to interact with SCIM is exposed on a .well-know URL (default is .well-known/scim-configuration).</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_web_interface">3.2.3.2. Web Interface</h5>
+<div class="paragraph">
+<p>A web interface is exposed to allow administrators and local operators to login and manage configuration aspects of the Login Service.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_data_2">3.2.4. Data</h4>
+<div class="sect4">
+<h5 id="_configuration_2">3.2.4.1. Configuration</h5>
+<div class="paragraph">
+<p>Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.</p>
+</div>
+<div class="paragraph">
+<p>Direct customization without the "persistance" module is not possible at this time.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_data_flow_2">3.2.4.2. Data flow</h5>
+<div class="paragraph">
+<p>All information handled by this service is read/written to the LDAP instance deployed at the backend.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_applicable_resources_2">3.2.5. Applicable Resources</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>oxTrust (gluu) - <a href="https://gluu.org/docs/de/reference/oxtrust/" class="bare">https://gluu.org/docs/de/reference/oxtrust/</a></p>
+</li>
+<li>
+<p>oxTrust (gluu @ Github) - <a href="https://github.com/GluuFederation/docker-oxtrust" class="bare">https://github.com/GluuFederation/docker-oxtrust</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_back_end_service">3.3. Back-End Service</h3>
+<div class="sect3">
+<h4 id="_overview_and_purpose_3">3.3.1. Overview and Purpose</h4>
+<div class="paragraph">
+<p>The backend service is composed of the opendj component, which serves an LDAP service, storing all of the data and configuration of the platform.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_software_reuse_and_dependencies_3">3.3.2. Software Reuse and Dependencies</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>opendj</strong>: The instance of LDAP providing the backend store for information</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_interfaces_3">3.3.3. Interfaces</h4>
+<div class="paragraph">
+<p>Not applicable, all actions are done internally on the LDAP instance.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_data_3">3.3.4. Data</h4>
+<div class="sect4">
+<h5 id="_data_flow_3">3.3.4.1. Data Flow</h5>
+<div class="paragraph">
+<p>The service itself doesn&#8217;t process data, but stores it in an LDAP database.<br>
+Thus, all flows follow the LDAP protocol for connection and exchange of data.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_configuration_3">3.3.4.2. Configuration</h5>
+<div class="paragraph">
+<p>There is no configuration available for this service at this time</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_applicable_resources_3">3.3.5. Applicable Resources</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Persistance, LDAP - Gluu - <a href="https://gluu.org/docs/gluu-server/reference/persistence/#ldap" class="bare">https://gluu.org/docs/gluu-server/reference/persistence/#ldap</a></p>
+</li>
+<li>
+<p>OpenDJ, docker - <a href="https://github.com/GluuFederation/docker-opendj" class="bare">https://github.com/GluuFederation/docker-opendj</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_relying_party_service">3.4. Relying-Party Service</h3>
+<div class="sect3">
+<h4 id="_overview_and_purpose_4">3.4.1. Overview and Purpose</h4>
+<div class="paragraph">
+<p>Gluu has a bundled middleware project called Passport.js, the purpose of which is to facilitate authentication using an external identity provider. To this end, the OIDC interface can be called by an IDP.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_software_reuse_and_dependencies_4">3.4.2. Software Reuse and Dependencies</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>oxTrust</strong>: A gluu component, providing the web interface and interaction</p>
+</li>
+<li>
+<p><strong>passport</strong>: Gluu&#8217;s container instance of Passport.js' implementation</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_interfaces_4">3.4.3. Interfaces</h4>
+<div class="sect4">
+<h5 id="_oidc_endpoints_2">3.4.3.1. OIDC Endpoints</h5>
+<div class="paragraph">
+<p>A listing of endpoints to interact with OIDC is exposed on a .well-know URL (default is .well-known/openid-configuration).</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_data_4">3.4.4. Data</h4>
+<div class="sect4">
+<h5 id="_data_flow_4">3.4.4.1. Data Flow</h5>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/passport.png" alt="passport">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_configuration_4">3.4.4.2. Configuration</h5>
+<div class="paragraph">
+<p>Configuration is obtained via the persistance module, which loads scripts, custom html, and data to LDAP and/or their respective places.</p>
+</div>
+<div class="paragraph">
+<p>Direct customization without the "persistance" module is not possible at this time.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_applicable_resources_4">3.4.5. Applicable Resources</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Passport.js - <a href="http://www.passportjs.org/" class="bare">http://www.passportjs.org/</a></p>
+</li>
+<li>
+<p>Passport (Github) - <a href="https://github.com/jaredhanson/passport" class="bare">https://github.com/jaredhanson/passport</a></p>
+</li>
+<li>
+<p>oxPassport (gluu) - <a href="https://gluu.org/docs/de/reference/oxpassport/" class="bare">https://gluu.org/docs/de/reference/oxpassport/</a></p>
+</li>
+<li>
+<p>oxPassport (gluu @ Github) - <a href="https://github.com/GluuFederation/docker-oxPassport" class="bare">https://github.com/GluuFederation/docker-oxPassport</a></p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="traceabilityMatrix">4. User Story Traceability</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. User Stories</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-188</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implementation of Helm Charts</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-66</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Setup of CI/CD Configuration for "Login Service"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-22</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">End-User Request for consent on attribute release</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-19</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Uniquely Identification of End-Users</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-18</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">End-User Logout</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-17</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">End-User Authentication using external IDPs (Github)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Local Access to Administration Portal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Setup and tailoring of OIDC and UMA provider</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initial setup of CI/CD and Development Tooling</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-176</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Policy Checks over external End-Users</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-174</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automation of Security Concerns</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-13</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reusable SCIM Client Implementation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-11</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reusable OIDC Client Implementation</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div class="paragraph large">
+<p>&lt;&lt; End of Document &gt;&gt;</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.1<br>
+Last updated 2021-02-26 11:28:16 UTC
+</div>
+</div>
+</body>
+</html>
