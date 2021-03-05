@@ -3,56 +3,56 @@
 
 .User Stories
 |===
-|Code |Description |Use Case |VVP Coverage
+|User Story Code |Description |Building Block Use Case |Master Use Case
 |EOEPCA-188
 |Implementation of Helm Charts
 | -
-| -
+| CI/CD task
 
 |EOEPCA-66	
 |Setup of CI/CD Configuration for "Login Service"
 | -
-| -
+| CI/CD task
 
 |EOEPCA-22	
 |End-User Request for consent on attribute release
 | -
-| -
+| EOEPCA-UC-0103/EOEPCA-UC-1707
 
 |EOEPCA-19	
 |Uniquely Identification of End-Users
-| LS_UC_001
-| -
+| LS-UC-001
+| EOEPCA-UC-0101
 
 |EOEPCA-18	
 |End-User Logout
-| LS_UC_002
+| LS-UC-002
 | -
 
 |EOEPCA-17	
 |End-User Authentication using external IDPs (Github)
-| LS_UC_001
-| -
+| LS-UC-001
+| EOEPCA-UC-0102
 
 |EOEPCA-16	
 |Local Access to Administration Portal
-| LS_UC_001/LS_UC_002/LS_UC_003/LS_UC_004
-| -
+| LS-UC-001/LS-UC-002/LS-UC-003/LS-UC-004
+| EOEPCA-UC-0109/EOEPCA-UC-0111
 
 |EOEPCA-10	
 |Setup and tailoring of OIDC and UMA provider
-| LS_UC_004/LS_UC_005/LS_UC_006/LS_UC_007
-| -
+| LS-UC-004/LS-UC-005/LS-UC-006/LS-UC-007
+| EOEPCA-UC-0507/EOEPCA-UC-1003/EOEPCA-UC-1004/EOEPCA-UC-1005
 
 |EOEPCA-9	
 |Initial setup of CI/CD and Development Tooling
 | -
-| -
+| CI/CD task
 
 |EOEPCA-176	
 |Policy Checks over external End-Users
 | -
-| -
+| EOEPCA-UC-0107
 
 |EOEPCA-174	
 |Automation of Security Concerns
@@ -61,12 +61,12 @@
 
 |EOEPCA-13	
 |Reusable SCIM Client Implementation
-| LS_UC_006/LS_UC_007
-| -
+| LS-UC-006/LS-UC-007
+| EOEPCA-UC-0507/EOEPCA-UC-1003/EOEPCA-UC-1004/EOEPCA-UC-1005
 
 |EOEPCA-11	
 |Reusable OIDC Client Implementation
-| LS_UC_006/LS_UC_007
-| -
+| LS-UC-006/LS-UC-007
+| EOEPCA-UC-0507/EOEPCA-UC-1003/EOEPCA-UC-1004/EOEPCA-UC-1005
 
 |===
