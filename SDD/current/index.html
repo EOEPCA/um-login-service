@@ -51,22 +51,27 @@
 <li><a href="#_public_access">2.1.4.1. Public Access</a></li>
 <li><a href="#_authenticated_access">2.1.4.2. Authenticated Access</a></li>
 <li><a href="#_protected_access">2.1.4.3. Protected Access</a></li>
-<li><a href="#_is_operator">2.1.4.4. Is Operator</a></li>
+<li><a href="#_protected_read">2.1.4.4. Protected Read</a></li>
+<li><a href="#_protected_write">2.1.4.5. Protected Write</a></li>
+<li><a href="#_is_operator">2.1.4.6. Is Operator</a></li>
 </ul>
 </li>
+<li><a href="#_custom_uma_rpt_policies">2.1.5. Custom UMA RPT policies</a></li>
 </ul>
 </li>
 <li><a href="#_static_architecture">2.2. Static Architecture</a></li>
 <li><a href="#_use_cases">2.3. Use Cases</a>
 <ul class="sectlevel3">
-<li><a href="#_single_sign_on_2">2.3.1. Single Sign-on</a></li>
-<li><a href="#_single_log_out_2">2.3.2. Single Log-out</a></li>
-<li><a href="#_end_user_chooses_identity_provider">2.3.3. End-User chooses Identity Provider</a></li>
-<li><a href="#_external_identity_provider_authentication">2.3.4. External Identity Provider Authentication</a></li>
-<li><a href="#_uma_workflow">2.3.5. UMA workflow</a></li>
-<li><a href="#_request_user_attributes_through_scim">2.3.6. Request User Attributes through SCIM</a></li>
-<li><a href="#_resource_registration">2.3.7. Resource registration</a></li>
-<li><a href="#_dynamically_register_a_client">2.3.8. Dynamically register a client</a></li>
+<li><a href="#_ls_uc_001_single_sign_on">2.3.1. LS-UC-001: Single Sign-on</a></li>
+<li><a href="#_ls_uc_002_single_log_out">2.3.2. LS-UC-002: Single Log-out</a></li>
+<li><a href="#_ls_uc_003_end_user_chooses_identity_provider">2.3.3. LS-UC-003: End-User chooses Identity Provider</a></li>
+<li><a href="#_ls_uc_004_external_identity_provider_authentication">2.3.4. LS-UC-004: External Identity Provider Authentication</a></li>
+<li><a href="#_ls_uc_004_uma_workflow">2.3.5. LS-UC-004: UMA workflow</a></li>
+<li><a href="#_ls_uc_005_request_user_attributes_through_scim">2.3.6. LS-UC-005: Request User Attributes through SCIM</a></li>
+<li><a href="#_ls_uc_006_resource_registration">2.3.7. LS-UC-006: Resource registration</a></li>
+<li><a href="#_ls_uc_007_dynamically_register_a_client">2.3.8. LS-UC-007: Dynamically register a client</a></li>
+<li><a href="#_ls_uc_008_jwt_expiration_validation">2.3.9. LS-UC-008: JWT expiration validation</a></li>
+<li><a href="#_ls_uc_009_external_jwt_identification">2.3.10. LS-UC-009: External JWT identification</a></li>
 </ul>
 </li>
 <li><a href="#_external_interfaces">2.4. External Interfaces</a>
@@ -1090,10 +1095,30 @@ The protected access will verify the JWT&#8217;s credentials if is a external is
 </div>
 </div>
 <div class="sect4">
-<h5 id="_is_operator">2.1.4.4. Is Operator</h5>
+<h5 id="_protected_read">2.1.4.4. Protected Read</h5>
+<div class="paragraph">
+<p>This scope also delegates user verification to the <a href="https://github.com/EOEPCA/um-pdp-engine">Policy Decision Point (PDP)</a> building block, via XACML-compliant communication.<br>
+The protected read will verify the HTTP verb (HEAD and GET) used to the request to the PEP endpoint and then will be indicated via XACML to the PDP with a value of 'read' in the action-id.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_protected_write">2.1.4.5. Protected Write</h5>
+<div class="paragraph">
+<p>This scope has the same functionality like the previous scope and it is used in <a href="https://github.com/EOEPCA/um-pdp-engine">Policy Decision Point (PDP)</a> building block, via XACML-compliant communication.<br>
+In this case the protected write will verify the HTTP verb (PUT, POST and DELETE) used to the request to the PEP endpoint and then will be indicated via XACML to the PDP with a value of 'write' in the action-id.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_is_operator">2.1.4.6. Is Operator</h5>
 <div class="paragraph">
 <p>This scope is used in conjuction with the isOperator custom user attribute, to allow the Policy Enforcement Point (PEP) to query the OIDC endpoint and establish if a user is an authorized operator for resources.</p>
 </div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_custom_uma_rpt_policies">2.1.5. Custom UMA RPT policies</h4>
+<div class="paragraph">
+<p>Defining custom UMA RPT Policies allows for fine-tuning of scope-dependent actions that were defined above, such as introspection and a first step validation of JWT tokens and other attributes.</p>
 </div>
 </div>
 </div>
@@ -1182,25 +1207,25 @@ The protected access will verify the JWT&#8217;s credentials if is a external is
 <p>This diagram covers the following use cases:</p>
 </div>
 <div class="sect3">
-<h4 id="_single_sign_on_2">2.3.1. Single Sign-on</h4>
+<h4 id="_ls_uc_001_single_sign_on">2.3.1. LS-UC-001: Single Sign-on</h4>
 <div class="paragraph">
 <p>Upon performing a Login action, a new Session is generated that is then used by the user to perform actions on the Exploitation Platform.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_single_log_out_2">2.3.2. Single Log-out</h4>
+<h4 id="_ls_uc_002_single_log_out">2.3.2. LS-UC-002: Single Log-out</h4>
 <div class="paragraph">
 <p>Upon performing a Logout action, the created Session is destroyed, preventing further action by the End-User on the Exploitation Platform, until a new Login action is taken.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_end_user_chooses_identity_provider">2.3.3. End-User chooses Identity Provider</h4>
+<h4 id="_ls_uc_003_end_user_chooses_identity_provider">2.3.3. LS-UC-003: End-User chooses Identity Provider</h4>
 <div class="paragraph">
 <p>When performing a Login action, the End-User can choose if they wish to use an External Identity Provider to delegate authentication (or use the Login Service itself).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_external_identity_provider_authentication">2.3.4. External Identity Provider Authentication</h4>
+<h4 id="_ls_uc_004_external_identity_provider_authentication">2.3.4. LS-UC-004: External Identity Provider Authentication</h4>
 <div class="paragraph">
 <p>If an External Identity Provider is chosen to delegate authentication, the Login Service redirects to it in order to proceed with the Login action. This is best explained by the sequence diagram present in [<a href="#_authentication_flow">Authentication Flow</a>]</p>
 </div>
@@ -1214,27 +1239,47 @@ The protected access will verify the JWT&#8217;s credentials if is a external is
 </div>
 </div>
 <div class="sect3">
-<h4 id="_uma_workflow">2.3.5. UMA workflow</h4>
+<h4 id="_ls_uc_004_uma_workflow">2.3.5. LS-UC-004: UMA workflow</h4>
 <div class="paragraph">
 <p>By default, some actions are protected by a UMA (User-Managed access) workflow, that is already described in the Master System Design document (ref. [PENDING]). As part of this process, any security policies that have been previously established as [[<a href="#_authentication_scopes">[_authentication_scopes]</a>]] are enacted.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_request_user_attributes_through_scim">2.3.6. Request User Attributes through SCIM</h4>
+<h4 id="_ls_uc_005_request_user_attributes_through_scim">2.3.6. LS-UC-005: Request User Attributes through SCIM</h4>
 <div class="paragraph">
 <p>Requesting a User&#8217;s attributes can be done via SCIM&#8217;s .well-known endpoints, best by using a previously registered client to call them and perform UMA authentication.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_resource_registration">2.3.7. Resource registration</h4>
+<h4 id="_ls_uc_006_resource_registration">2.3.7. LS-UC-006: Resource registration</h4>
 <div class="paragraph">
 <p>Resource registration can be done directly via OIDC&#8217;s .well-known endpoints, best by using a previously registered client to call them using basic authentication.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_dynamically_register_a_client">2.3.8. Dynamically register a client</h4>
+<h4 id="_ls_uc_007_dynamically_register_a_client">2.3.8. LS-UC-007: Dynamically register a client</h4>
 <div class="paragraph">
 <p>The Exploitation Platform allows a client to dynamically register with itself, by calling OIDC .well-know endpoints.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/JWTValidate.png" alt="JWTValidate">
+</div>
+</div>
+<div class="paragraph">
+<p>This diagram covers the following use cases:</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ls_uc_008_jwt_expiration_validation">2.3.9. LS-UC-008: JWT expiration validation</h4>
+<div class="paragraph">
+<p>When accessing a resource, the Login Service is capable, on a first step, of validating the expiration date on a JWT to avoid passing expired authentication attempts to the Policy Decision Point.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ls_uc_009_external_jwt_identification">2.3.10. LS-UC-009: External JWT identification</h4>
+<div class="paragraph">
+<p>The Login Service is capable of identifying whether a passed JWT is internal or external do the Exploitation Platform. In case of external JWTs, the Login Service is also capable of passing any external attributes contained in the request, including the issuer, to the Policy Decision Point.</p>
 </div>
 </div>
 </div>
@@ -1723,65 +1768,95 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 2. User Stories</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User Story Code</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Building Block Use Case</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Master Use Case</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-188</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Implementation of Helm Charts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CI/CD task</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-66</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Setup of CI/CD Configuration for "Login Service"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CI/CD task</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-22</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">End-User Request for consent on attribute release</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-UC-0103/EOEPCA-UC-1707</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-19</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Uniquely Identification of End-Users</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LS-UC-001</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-UC-0101</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-18</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">End-User Logout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LS-UC-002</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-17</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">End-User Authentication using external IDPs (Github)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LS-UC-001</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-UC-0102</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-16</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Local Access to Administration Portal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LS-UC-001/LS-UC-002/LS-UC-003/LS-UC-004</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-UC-0109/EOEPCA-UC-0111</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-10</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Setup and tailoring of OIDC and UMA provider</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LS-UC-004/LS-UC-005/LS-UC-006/LS-UC-007</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-UC-0507/EOEPCA-UC-1003/EOEPCA-UC-1004/EOEPCA-UC-1005</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-9</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Initial setup of CI/CD and Development Tooling</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CI/CD task</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-176</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Policy Checks over external End-Users</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-UC-0107</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-174</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Automation of Security Concerns</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-13</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Reusable SCIM Client Implementation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LS-UC-006/LS-UC-007</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-UC-0507/EOEPCA-UC-1003/EOEPCA-UC-1004/EOEPCA-UC-1005</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-11</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Reusable OIDC Client Implementation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LS-UC-006/LS-UC-007</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EOEPCA-UC-0507/EOEPCA-UC-1003/EOEPCA-UC-1004/EOEPCA-UC-1005</p></td>
 </tr>
 </tbody>
 </table>
@@ -1795,7 +1870,7 @@ Thus, all flows follow the LDAP protocol for connection and exchange of data.</p
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2021-01-29 10:29:08 UTC
+Last updated 2021-03-09 11:29:13 UTC
 </div>
 </div>
 </body>
