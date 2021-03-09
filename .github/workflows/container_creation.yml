@@ -30,7 +30,7 @@ jobs:
       - name: Testing
         run: |
           sudo apt-get install jq python3-venv
-          pip install -r ./src/requirements.txt
+      #   pip install -r ./src/requirements.txt
       #     pytest ./tests
       # Uncomment below if wanted Dockerhub Publication
       # - name: Container Creation and Publishing
