@@ -27,14 +27,14 @@ jobs:
         with:
           python-version: 3.6.9
       # Runs a set of commands using the runners shell
-      # - name: Testing
-      #   run: |
-      #     sudo apt-get install jq python3-venv
-      #     pip install -r ./src/requirements.txt
+      - name: Testing
+        run: |
+          sudo apt-get install jq python3-venv
+          pip install -r ./src/requirements.txt
       #     pytest ./tests
       # Uncomment below if wanted Dockerhub Publication
-      - name: Container Creation and Publishing
-        run: ./gh_actions/setupCluster.sh
+      # - name: Container Creation and Publishing
+      #   run: ./gh_actions/setupCluster.sh
       # - name: Release Container
       #   if: github.ref == 'refs/heads/master' && github.event != 'pull_request'
       #   run: ./gh_actions/release.sh um-license-manager
