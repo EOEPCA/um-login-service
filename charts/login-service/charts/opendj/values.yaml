@@ -38,7 +38,7 @@ persistence:
   statefulSetReplicas: 1
   imagePullPolicy: Always
   restartPolicy: Never
-  image: eoepca/um-login-persistence:task189_1
+  image: eoepca/um-login-persistence:v0.3
   configAdapter: GLUU_CONFIG_ADAPTER
   adapter: "kubernetes"
   secretAdapter: GLUU_SECRET_ADAPTER
@@ -128,6 +128,10 @@ volumeReplMounts:
 
 #VolumeClaimTemplates
 storage: 1Gi
+
+# VolumeClaim values
+volumeClaim:
+  name: um-login-service-opendj-pvc
 
 #opendj-config-pv
 opendj-config:

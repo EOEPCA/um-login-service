@@ -31,7 +31,7 @@ persistence:
   statefulSetReplicas: 1
   imagePullPolicy: Always
   restartPolicy: Never
-  image: eoepca/um-login-persistence:latest 
+  image: eoepca/um-login-persistence:v0.3
   configAdapter: GLUU_CONFIG_ADAPTER
   adapter: "kubernetes"
   secretAdapter: GLUU_SECRET_ADAPTER
@@ -66,21 +66,21 @@ readinessProbe:
   initialDelaySeconds: 600
   periodSeconds: 90
 
+# VolumeClaim values
+volumeClaim:
+  name: um-login-service-oxauth-pvc
+
 #VolumeMounts
 volumeMounts:
   logs:
     mountPath: /opt/gluu/jetty/oxauth/logs
-    name: eoepca-userman-pv-host
     subPath: oxauth/logs
   ext:
     mountPath: /opt/gluu/jetty/oxauth/lib/ext
-    name: eoepca-userman-pv-host
     subPath: oxauth/lib/ext
   static:
     mountPath: /opt/gluu/jetty/oxauth/custom/static
-    name: eoepca-userman-pv-host
     subPath: oxauth/custom/static
   pages:
     mountPath: /opt/gluu/jetty/oxauth/custom/pages
-    name: eoepca-userman-pv-host
     subPath: oxauth/custom/pages
