@@ -36,13 +36,13 @@ nginxIp: 10.0.2.15
 gluuOxauthBackend: oxauth:8080
 
 livenessProbe:
-  initialDelaySeconds: 200
-  periodSeconds: 200
+  initialDelaySeconds: 90
+  periodSeconds: 60
 
 # readinessProbe
 readinessProbe:
-  initialDelaySeconds: 200
-  periodSeconds: 200
+  initialDelaySeconds: 90
+  periodSeconds: 60
 
 #service values
 #port for which to open in oxtrust ss

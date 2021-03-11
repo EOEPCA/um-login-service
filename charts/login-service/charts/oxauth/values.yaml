@@ -58,13 +58,13 @@ ports:
 
 # livenessProbe
 livenessProbe:
-  initialDelaySeconds: 600
-  periodSeconds: 90
+  initialDelaySeconds: 90
+  periodSeconds: 30
 
 # readinessProbe
 readinessProbe:
-  initialDelaySeconds: 600
-  periodSeconds: 90
+  initialDelaySeconds: 90
+  periodSeconds: 30
 
 # VolumeClaim values
 volumeClaim:

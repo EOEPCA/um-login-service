@@ -60,12 +60,16 @@ persistence:
 tcpSocket:
   port: 1636
 readinessProbe:
-  initialDelaySeconds: 90
-  periodSeconds: 90
+  initialDelaySeconds: 30
+  periodSeconds: 30
 livenessProbe:
-  initialDelaySeconds: 90
-  periodSeconds: 90
+  initialDelaySeconds: 30
+  periodSeconds: 30
 
+limits:
+  memory: 128Mi
+requests:
+  memory: 600Mi
 #servicePorts values used in StatefulSet container
 ports:
   ldaps:
