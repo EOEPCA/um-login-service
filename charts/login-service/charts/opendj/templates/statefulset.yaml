@@ -27,6 +27,9 @@ spec:
         resources:
           requests:
             memory: {{ .Values.requests.memory }}
+            cpu: {{ .Values.requests.cpu }}
+          limits:
+            memory: {{ .Values.limits.memory }}
         lifecycle:
           postStart:
             exec:

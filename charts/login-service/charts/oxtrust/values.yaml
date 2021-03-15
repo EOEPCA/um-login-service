@@ -26,9 +26,10 @@ volumeClaim:
 
 #resources: 
 limits:
-  memory: 128Mi
+  memory: 600Mi
 requests:
-  memory: 300Mi
+  cpu: 200m
+  memory: 500Mi
 
 #containerPOrt ot connect the container with
 containerPort: 8080

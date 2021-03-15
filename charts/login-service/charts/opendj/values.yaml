@@ -67,9 +67,10 @@ livenessProbe:
   periodSeconds: 30
 
 limits:
-  memory: 128Mi
-requests:
   memory: 600Mi
+requests:
+  cpu: 700m
+  memory: 500Mi
 #servicePorts values used in StatefulSet container
 ports:
   ldaps:
