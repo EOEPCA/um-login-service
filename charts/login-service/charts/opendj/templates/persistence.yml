@@ -13,12 +13,6 @@ spec:
       - name: {{ .Values.persistence.name }}-init-container
         imagePullPolicy: {{ .Values.persistence.imagePullPolicy }}
         image: {{ .Values.persistence.image }}
-        resources:
-          requests:
-            memory: {{ .Values.requests.memory }}
-            cpu: {{ .Values.requests.cpu }}
-          limits:
-            memory: {{ .Values.limits.memory }}
         env:
         - name: {{ .Values.persistence.configAdapter }}
           value: {{ .Values.persistence.adapter }}
@@ -38,4 +32,4 @@ spec:
           value: {{ .Values.persistence.clientIDv }}
         - name: {{ .Values.persistence.clientSecret }}
           value: {{ .Values.persistence.clientSecretv }}
-        
+      

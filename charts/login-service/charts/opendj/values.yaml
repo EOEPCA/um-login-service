@@ -60,11 +60,11 @@ persistence:
 tcpSocket:
   port: 1636
 readinessProbe:
-  initialDelaySeconds: 30
-  periodSeconds: 30
+  initialDelaySeconds: 150
+  periodSeconds: 90
 livenessProbe:
-  initialDelaySeconds: 30
-  periodSeconds: 30
+  initialDelaySeconds: 150
+  periodSeconds: 90
 
 limits:
   memory: 600Mi

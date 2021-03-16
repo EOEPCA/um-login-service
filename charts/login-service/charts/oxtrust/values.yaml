@@ -37,12 +37,12 @@ nginxIp: 10.0.2.15
 gluuOxauthBackend: oxauth:8080
 
 livenessProbe:
-  initialDelaySeconds: 90
+  initialDelaySeconds: 100
   periodSeconds: 60
 
 # readinessProbe
 readinessProbe:
-  initialDelaySeconds: 90
+  initialDelaySeconds: 100
   periodSeconds: 60
 
 #service values

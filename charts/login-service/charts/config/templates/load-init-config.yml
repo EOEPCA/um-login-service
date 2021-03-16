@@ -12,7 +12,7 @@ spec:
       volumes:
         - name: vol-userman
           persistentVolumeClaim:
-            claimName: {{ .Values.volumeClaim.name }}
+            claimName: {{ include "config.fullname" . }}
         - name: {{ include "config.fullname" . }}-mount-gen-file
           configMap:
             name: {{ include "config.fullname" . }}-gen-json-file
@@ -26,8 +26,8 @@ spec:
           requests:
             memory: {{ .Values.requests.memory }}
             cpu: {{ .Values.requests.cpu }}
-          limits:
-            memory: {{ .Values.limits.memory }}
+          # limits:
+          #   memory: {{ .Values.limits.memory }}
         volumeMounts:
           - mountPath: /opt/config-init/db/
             subPath: config-init/db
