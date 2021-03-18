@@ -32,4 +32,4 @@ spec:
           value: {{ .Values.persistence.clientIDv }}
         - name: {{ .Values.persistence.clientSecret }}
           value: {{ .Values.persistence.clientSecretv }}
-        
+      
