@@ -38,7 +38,7 @@ Set Chrome
   Open Browser  ${URL}  browser=chrome  desired_capabilities=${options}
 
 UMA Get Data from Config File
-  ${data}=  OperatingSystem.Get File  ./config.json
+  ${data}=  OperatingSystem.Get File  ${CURDIR}/config.json
   ${json}=  Evaluate  json.loads('''${data}''')  json
   ${URL}=  Get From Dictionary  ${json}  hostname
   ${USER}=  Get From Dictionary  ${json}  username
