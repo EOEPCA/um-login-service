@@ -26,14 +26,19 @@ jobs:
         with:
           python-version: 3.6.9
       - name: Install ubuntu dependencies
-        run: sudo apt-get install jq python3-venv
+        run: sudo apt-get install jq python3-venv virtualenv
       - name: Change to main folder
         run: cd ..
       - name: Create python env
         run: python3 -m venv env
       - name: Activate environment
-        run: |
-          source env/bin/activate
+        run: source env/bin/activate
+      - name: Install requirements
+        run: pip3 install -r requirements.py
+      - name: Installing Chrome and Drivers
+        run: sudo ./gh_actions/install-chromedriver.sh
+      - name: Run tests
+        run: robot ./tests
       # - name: Run main
       #   run: python src/main.py
       # - name: Run tests
