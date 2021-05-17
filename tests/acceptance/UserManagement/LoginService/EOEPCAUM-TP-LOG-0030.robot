@@ -54,8 +54,8 @@ UMA Get Data from Config File
 LoginService Edit Update Profile
 
   ${title}=  Get Title
-  LoginService Add Person  ${USER_NAME}A  ${FIRST_NAME}A  ${DISPLAY_NAME}A  ${LAST_NAME}A  A${EMAIL}  ${PASSWORD}
-  LoginService Delete Person  ${USER_NAME}A
+  #LoginService Add Person  ${USER_NAME}A  ${FIRST_NAME}A  ${DISPLAY_NAME}A  ${LAST_NAME}A  A${EMAIL}  ${PASSWORD}
+  #LoginService Delete Person  ${USER_NAME}A
 
 LoginService Delete Person
   [Arguments]  ${user_name}
