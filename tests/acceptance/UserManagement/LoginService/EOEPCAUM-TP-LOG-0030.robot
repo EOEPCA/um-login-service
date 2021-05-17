@@ -124,7 +124,7 @@ UMA Call Shell ID Token
   ${example}=  List Files In Directory  ${CURDIR}
   Log to Console  ${example}
   ${example}=  List Files In Directory  ${CURDIR}/../
-  Log to Console  ${example}
+  Log to Console  ${CURDIR}
   ${example}=  List Files In Directory  ${CURDIR}/../../
   Log to Console  ${example}
   ${n}=  OperatingSystem.Get File  ${CURDIR}${/}1.txt
