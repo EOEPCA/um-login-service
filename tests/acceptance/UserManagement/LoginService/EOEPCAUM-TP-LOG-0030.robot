@@ -113,6 +113,7 @@ LoginService Call Log out Button
 UMA Get ID Token Valid
   [Arguments]  ${base_url}  ${well_known}  ${user}  ${pwd}  ${client_id}  ${client_secret}
   ${endpoint}=  UMA Get Token Endpoint  ${well_known}
+  Log to Console  El endpoint es ${endpoint}
   ${resp}=  UMA Call Shell ID Token  ${endpoint}  ${client_id}  ${client_secret}
   ${id_token}=  UMA Get ID Token From Response  ${resp}
   Set Global Variable  ${ID_TOKEN}  ${id_token}
@@ -120,12 +121,10 @@ UMA Get ID Token Valid
 
 UMA Call Shell ID Token
   [Arguments]  ${endpoint}  ${client_id}  ${client_secret}
-  ${a}=  Run Process  sh  ${CURDIR}${/}id.sh  -t  ${endpoint}  -i  ${client_id}  -p  ${client_secret}
+  ${a}=  Run Process  sh  ${CURDIR}${/}id.sh  ${endpoint}  ${client_id}  ${client_secret}
   ${example}=  List Files In Directory  ${CURDIR}
   Log to Console  ${example}
-  ${example}=  List Files In Directory  ${CURDIR}/../
-  Log to Console  ${CURDIR}
-  ${example}=  List Files In Directory  ${CURDIR}/../../
+  ${example}=  List Files In Directory  ${CURDIR}/../../../
   Log to Console  ${example}
   ${n}=  OperatingSystem.Get File  ${CURDIR}${/}1.txt
   Log to Console  ${n}
