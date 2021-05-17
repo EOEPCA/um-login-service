@@ -122,6 +122,7 @@ UMA Call Shell ID Token
   [Arguments]  ${endpoint}  ${client_id}  ${client_secret}
   ${a}=  Run Process  sh  ${CURDIR}${/}id.sh  -t  ${endpoint}  -i  ${client_id}  -p  ${client_secret}
   ${n}=  OperatingSystem.Get File  ${CURDIR}${/}1.txt
+  Log to Console  ${n}
   #OperatingSystem.Remove File  ${CURDIR}${/}1.txt
   [Return]  ${n}
 
