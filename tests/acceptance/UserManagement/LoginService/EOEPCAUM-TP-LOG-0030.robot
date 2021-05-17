@@ -117,8 +117,12 @@ UMA Get ID Token Valid
   ${resp}=  UMA Call Shell ID Token  ${endpoint}  ${client_id}  ${client_secret}
   ${scope}=  Create List  openid  user_name
   ${data}=  Create dictionary  scope=${scope}  grant_type=password  username=admin  password=admin_Abcd1234#  client_id=${client_id}  client_secret=${client_secret}
+  ${headers}=  Create Dictionary  cache-control=no-cache
   Log to Console  ${data}
-  ${rosp}=  POST On Session  ${endpoint}  json=${data}
+  Create Session  ep  ${base_url}  verify=False
+  ${test_uri}=  Set Variable  /oxauth/restv1/token
+  ${rosp}=  POST On Session  ep  ${test_uri}  headers=${headers}  json=${data}
+  Log to Console  Esto no deberia de estar printeando
   Log to Console  ${rosp}
   ${id_token}=  UMA Get ID Token From Response  ${resp}
   Set Global Variable  ${ID_TOKEN}  ${id_token}
@@ -129,7 +133,7 @@ UMA Call Shell ID Token
   ${a}=  Run Process  sh  ${CURDIR}${/}id.sh  -t  ${endpoint}  -i  ${client_id}  -p  ${client_secret}
   ${example}=  List Files In Directory  ${CURDIR}
   Log to Console  ${example}
-  ${example}=  List Files In Directory  ${CURDIR}/../../../
+  ${example}=  List Files In Directory  ${CURDIR}/../../../../
   Log to Console  ${example}
   ${n}=  OperatingSystem.Get File  ${CURDIR}${/}1.txt
   Log to Console  ${n}
