@@ -10,7 +10,6 @@ CLIENT_SECRET=""
 SCOPES=""
 SPACE="%20"
 CLAIM_TOKEN=""
-echo "JESUS HA SIDO CREADO" > $PWD/alvl.txt
 echo "wth"
 while getopts ":t:i:p:" opt; do
   case ${opt} in
