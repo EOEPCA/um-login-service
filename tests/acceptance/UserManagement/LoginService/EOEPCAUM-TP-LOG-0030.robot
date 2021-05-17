@@ -115,6 +115,11 @@ UMA Get ID Token Valid
   ${endpoint}=  UMA Get Token Endpoint  ${well_known}
   Log to Console  El endpoint es ${endpoint}
   ${resp}=  UMA Call Shell ID Token  ${endpoint}  ${client_id}  ${client_secret}
+  ${scope}=  Create List  openid  user_name
+  ${data}=  Create dictionary  scope=${scope}  grant_type=password  username=admin  password=admin_Abcd1234#  client_id=${client_id}  client_secret=${client_secret}
+  Log to Console  ${data}
+  ${rosp}=  POST On Session  ${endpoint}  json=${data}
+  Log to Console  ${rosp}
   ${id_token}=  UMA Get ID Token From Response  ${resp}
   Set Global Variable  ${ID_TOKEN}  ${id_token}
   [Return]  ${id_token}
