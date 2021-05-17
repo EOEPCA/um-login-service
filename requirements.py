@@ -11,3 +11,4 @@ robotframework-seleniumlibrary==3.3.1
 selenium==3.141.0
 webdrivermanager
 robotframework
+robotframework-requests
