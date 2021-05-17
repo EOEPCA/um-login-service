@@ -10,7 +10,9 @@ CLIENT_SECRET=""
 SCOPES=""
 SPACE="%20"
 CLAIM_TOKEN=""
-echo "wth"
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+
+echo "$parent_path"
 while getopts ":t:i:p:" opt; do
   case ${opt} in
     t ) TOKEN_ENDPOINT=$OPTARG
@@ -30,4 +32,4 @@ done
 echo $TOKEN_ENDPOINT
 echo $CLIENT_ID
 echo $CLIENT_SECRET
-curl -k -v -XPOST $TOKEN_ENDPOINT -H "cache-control: no-cache" -d "scope=openid%20user_name&grant_type=password&username=admin&password=admin_Abcd1234%23&client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET" > $PWD/1.txt
+curl -k -v -XPOST $TOKEN_ENDPOINT -H "cache-control: no-cache" -d "scope=openid%20user_name&grant_type=password&username=admin&password=admin_Abcd1234%23&client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET" > $parent_path/1.txt

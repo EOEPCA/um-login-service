@@ -126,7 +126,7 @@ UMA Call Shell ID Token
   Log to Console  ${example}
   ${example}=  List Files In Directory  ${CURDIR}/../../../../
   Log to Console  ${example}
-  ${n}=  OperatingSystem.Get File  ${CURDIR}/../../../../1.txt
+  ${n}=  OperatingSystem.Get File  ${CURDIR}/1.txt
   Log to Console  ${n}
   #OperatingSystem.Remove File  ${CURDIR}${/}1.txt
   [Return]  ${n}
