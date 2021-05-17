@@ -115,15 +115,6 @@ UMA Get ID Token Valid
   ${endpoint}=  UMA Get Token Endpoint  ${well_known}
   Log to Console  El endpoint es ${endpoint}
   ${resp}=  UMA Call Shell ID Token  ${endpoint}  ${client_id}  ${client_secret}
-  ${scope}=  Create List  openid  user_name
-  ${data}=  Create dictionary  scope=${scope}  grant_type=password  username=admin  password=admin_Abcd1234#  client_id=${client_id}  client_secret=${client_secret}
-  ${headers}=  Create Dictionary  cache-control=no-cache
-  Log to Console  ${data}
-  Create Session  ep  ${base_url}  verify=False
-  ${test_uri}=  Set Variable  /oxauth/restv1/token
-  ${rosp}=  POST On Session  ep  ${test_uri}  headers=${headers}  json=${data}
-  Log to Console  Esto no deberia de estar printeando
-  Log to Console  ${rosp}
   ${id_token}=  UMA Get ID Token From Response  ${resp}
   Set Global Variable  ${ID_TOKEN}  ${id_token}
   [Return]  ${id_token}
