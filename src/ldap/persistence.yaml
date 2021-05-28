@@ -28,5 +28,9 @@ spec:
               value: "59f1fed27153f631bc08"
             - name: LP_CLIENT_SECRET
               value: "640baffac0948454c48de2505726f53d11adc8a6"
+            - name: COIH_CLIENT_ID
+              value: ""
+            - name: COIH_CLIENT_SECRET
+              value: ""
       restartPolicy: Never
   backoffLimit: 1
