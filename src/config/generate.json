@@ -9,5 +9,6 @@
     "org_name": "Deimos Space S.L.U.",
     "gluu_config_adapter": "kubernetes",
     "ldap_type": "opendj",
-    "redis_pw": "aaaa"
+    "redis_pw": "aaaa",
+    "pdp_ep": "/pdp"
 }
