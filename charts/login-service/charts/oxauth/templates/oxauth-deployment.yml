@@ -21,6 +21,7 @@ spec:
         resources:
           requests:
             memory: {{ .Values.requests.memory }}
+            cpu: {{ .Values.requests.cpu }}
           # limits:
           #   memory: {{ .Values.limits.memory }} 
         ports:
@@ -33,7 +34,7 @@ spec:
         volumeMounts:
         {{- range $key, $value := .Values.volumeMounts }}
           - mountPath: {{ $value.mountPath }}
-            name: {{ $value.name }}
+            name: vol-userman
             subPath: {{ $value.subPath }}
         {{- end }}
         livenessProbe:
@@ -53,6 +54,6 @@ spec:
         hostnames:
         - {{ .Values.global.domain }}
       volumes:
-        - name: eoepca-userman-pv-host
+        - name: vol-userman
           persistentVolumeClaim:
-            claimName: eoepca-oxauth-pvc
+            claimName: {{ .Values.volumeClaim.name }}
