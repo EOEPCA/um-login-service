@@ -1,4 +1,5 @@
 # Declare variables to be passed into your templates.
+enabled: true
 
 replicaCount: 1
 dynamicStorage: true
@@ -30,9 +31,6 @@ persistence:
   type: DirectoryOrCreate
   dbStorageSize: 5Gi
   statefulSetReplicas: 1
-  imagePullPolicy: Always
-  restartPolicy: Never
-  image: eoepca/um-login-persistence:v1.0-RC
   configAdapter: GLUU_CONFIG_ADAPTER
   adapter: "kubernetes"
   secretAdapter: GLUU_SECRET_ADAPTER
