@@ -46,6 +46,8 @@ config:
   volumeClaim:
     name: um-login-service-config-pvc
 
+  image: gluufederation/config-init:4.1.1_02
+
 opendj:
   enabled: true
   # options REDIS/NATIVE_PERSISTENCE
@@ -60,8 +62,8 @@ opendj:
     imagePullPolicy: Always
     image: eoepca/um-login-persistence:v0.9.0
     #COIH Client ID and Secret for passport login
-    coihClientIDv: "lolo"
-    coihClientSecretv: "lala"
+    coihClientIDv: ""
+    coihClientSecretv: ""
   # VolumeClaim values
   volumeClaim:
     name: um-login-service-opendj-pvc

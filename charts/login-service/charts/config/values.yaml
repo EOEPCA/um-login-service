@@ -26,6 +26,8 @@ fullNameOverride: ""
 volumeClaim:
   name: um-login-service-config-pvc
 
+image: gluufederation/config-init:4.1.1_02
+
 limits:
   memory: 600Mi
 requests:
