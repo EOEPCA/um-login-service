@@ -1,3 +1,4 @@
+enabled: true
 # opendj Environament Variables
 # common ConfigMap values
 gluuLdapInit: true
