@@ -24,15 +24,13 @@ persistence:
   type: DirectoryOrCreate
 
 config:
+  # Required environment variables for generating Gluu server initial config
   enabled: true
-  # email address of the administrator usually. Used for certificate creation
-  # adminPass is administrator password for oxTrust and LDAP
+  # ldapType only OpenDJ is supported
+  ldapType: opendj
   # domain name where the Gluu Server resides
   domain: demoexample.gluu.org
   # organisation location details
-
-  # ldapType only OpenDJ is supported
-  ldapType: opendj
   countryCode: ES
   state: Madrid
   city: Tres Cantos
@@ -43,21 +41,12 @@ config:
   gluuConfAdapter: kubernetes
   ldapType: opendj
   redisPass: aaaa
-  # <<<---------------------- SKIPPED THIS IN THE DOCUMENTATION -------->>>
-  # StorageClass values
-  # values used to define the StorageClass template
-  encrypted: true
-  reclaimPolicy: Retain
-  pool: default
-  description: gluu-config-init-volume
-  fsType: ext4
-  provisioner: k8s.io/minikube-hostpath
-  awsZones: us-west-2a
-  gcePdStorageType: pd-standard
-  azureStorageAccountType: Standard_LRS
-  azureStorageKind: Shared
+  pdpEp: /pdp
+  # VolumeClaim values
   volumeClaim:
     name: um-login-service-config-pvc
+
+  image: gluufederation/config-init:4.1.1_02
 
 opendj:
   enabled: true
@@ -65,26 +54,76 @@ opendj:
   gluuCacheType: NATIVE_PERSISTENCE
   # options true/false : must be enabled if cache type is REDIS
   gluuRedisEnabled: false
+  #opendj docker image and policy
+  imagePullPolicy: Always
+  image: gluufederation/wrends:4.1.1_01
+  persistence:
+    #persistence docker image and policy
+    imagePullPolicy: Always
+    image: eoepca/um-login-persistence:v0.9.0
+    #COIH Client ID and Secret for passport login
+    coihClientIDv: ""
+    coihClientSecretv: ""
+  # VolumeClaim values
   volumeClaim:
     name: um-login-service-opendj-pvc
+  readinessProbe:
+    initialDelaySeconds: 150
+    periodSeconds: 90
+  livenessProbe:
+    initialDelaySeconds: 150
+    periodSeconds: 90
 
 oxpassport:
-  enabled: true  
+  enabled: true
+  image:
+    repository: eoepca/um-login-passport
+    # repository: gluufederation/oxpassport
+    tag: v0.1.1
+    # tag: 4.0.1_03
+    pullPolicy: Always
 
 oxauth:
   enabled: true
   dynamicStorage: true
+  image:
+    # repository gluufederation/oxauth:4.1.1_03
+    repository: oxauth
+    tag: 4.1.1_03
+    pullPolicy: Always
   volumeClaim:
     name: um-login-service-oxauth-pvc
+  livenessProbe:
+    initialDelaySeconds: 100
+    periodSeconds: 60
+  readinessProbe:
+    initialDelaySeconds: 100
+    periodSeconds: 60
 
 oxtrust:
   enabled: true
+  #RAM fraction, defaults a 100%
+  gluuMaxRamFraction: 1
   dynamicStorage: true
+  image:
+    # repository gluufederation/oxtrust:4.1.1_02
+    repository: oxtrust
+    tag: 4.1.1_02
+    pullPolicy: Always
   volumeClaim:
     name: um-login-service-oxtrust-pvc
+  livenessProbe:
+    initialDelaySeconds: 100
+    periodSeconds: 60
+  readinessProbe:
+    initialDelaySeconds: 100
+    periodSeconds: 60
 
 nginx:
-  enabled: true
+  image:
+    repository: kungus/gluu-tls-initializer
+    tag: stable
+    pullPolicy: IfNotPresent
   ingress:
     enabled: true
     annotations: {}
@@ -98,24 +137,4 @@ nginx:
       hosts:
         - demoexample.gluu.org
   resources: {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-    # limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 128Mi
-  autoscaling:
-    enabled: false
-    minReplicas: 1
-    maxReplicas: 100
-    targetCPUUtilizationPercentage: 80
-    # targetMemoryUtilizationPercentage: 80
-  nodeSelector: {}
-  tolerations: []
-  affinity: {}
-  tags:
-    redis: false
+
