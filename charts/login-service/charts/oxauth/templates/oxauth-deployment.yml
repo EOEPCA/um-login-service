@@ -1,4 +1,4 @@
-  apiVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "oxauth.fullname" . }}
@@ -24,10 +24,15 @@ spec:
             cpu: {{ .Values.requests.cpu }}
           # limits:
           #   memory: {{ .Values.limits.memory }} 
+        # {{ if .Files.Get "custom/customizations.tar.gz" }}
         lifecycle:
           postStart:
             exec:
-              command: ["/bin/sh", "-c", "mkdir -p /opt/gluu/jetty/oxauth/custom/pages/ && cp /data/*.xhtml /opt/gluu/jetty/oxauth/custom/pages && mkdir -p /opt/gluu/jetty/oxauth/custom/static/css/ && cp /data/*.css /opt/gluu/jetty/oxauth/custom/static/css/ && mkdir -p /opt/gluu/jetty/oxauth/custom/static/img/ && cp /data/*.png /opt/gluu/jetty/oxauth/custom/static/img/ && mkdir -p /opt/gluu/jetty/oxauth/custom/static/js/ && cp /data/*.js /opt/gluu/jetty/oxauth/custom/static/js/"]
+              command: ["/bin/sh", "-c", "if [ -f /data/customizations_oxauth.tar.gz ]; then tar xvf /data/customizations_oxauth.tar.gz -C /opt/gluu/jetty/oxauth/; fi"]
+
+              #command: ["/bin/sh", "-c", "if [ -f /data/customizations.tar.gz ]; then cd /data/ && tar -xvf customizations.tar.gz -C /opt/gluu/jetty/oxauth/custom/; fi"]
+              #command: ["/bin/sh", "-c", "mkdir -p /opt/gluu/jetty/oxauth/custom/pages/ && cp /data/*.xhtml /opt/gluu/jetty/oxauth/custom/pages && mkdir -p /opt/gluu/jetty/oxauth/custom/static/css/ && cp /data/*.css /opt/gluu/jetty/oxauth/custom/static/css/ && mkdir -p /opt/gluu/jetty/oxauth/custom/static/img/ && cp /data/*.png /opt/gluu/jetty/oxauth/custom/static/img/ && mkdir -p /opt/gluu/jetty/oxauth/custom/static/js/ && cp /data/*.js /opt/gluu/jetty/oxauth/custom/static/js/"]
+        # {{ end }}
         ports:
         - name: oxauth
           containerPort: 8080
