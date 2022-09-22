@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:a4j="http://richfaces.org/a4j" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:b="http://bootsfaces.net/ui" xmlns:ox="http://xmlns.jcp.org/jsf/composite/ox" xmlns:rich="http://richfaces.org/rich" xmlns:richext="http://xmlns.jcp.org/jsf/composite/richext" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="/WEB-INF/incl/layout/fullWidthEmpty.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:a4j="http://richfaces.org/a4j" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ox="http://xmlns.jcp.org/jsf/composite/ox" xmlns:rich="http://richfaces.org/rich" xmlns:richext="http://xmlns.jcp.org/jsf/composite/richext" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="/WEB-INF/incl/layout/fullWidthEmpty.xhtml">
+    <f:metadata>
+        <f:viewAction action="#{logoutAction.postLogout}" onPostback="false" />
+    </f:metadata>
     <ui:define name="head">
         <link href="#{oxTrustConfigurationService.cssLocation}/../theme/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="#{oxTrustConfigurationService.cssLocation}/../theme/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
@@ -14,9 +17,10 @@
             * {
                 font-family: open sans;
             }        
-            .error {
+            .message {
                 color: white;
                 font-size: 1.7em;
+                margin-bottom: 50px;
             }
             .brand-logo {
                 position: absolute;
@@ -24,26 +28,14 @@
                 left: 10px;
                 width: 100px;
             }
-            .lockscreen-name {
-                color: white;
-                text-align: center;
-                font-size: 1.4em;
-                margin-bottom: 2px;
-            }
-            .lockscreen-wrapper {
-              text-align: center;
-            }
-            .lockscreen-logo {
-                margin: 100px 0 20px 0;
-            }
             .btn {
                 width: 320px;
                 background: #F47D08 !important;
                 border: 2px solid #F47D08 !important;
                 border-radius: 0 !important;
-                color: white !important;
+                color: white;
                 font-size: 11px !important;
-                font-family: Raleway;
+                font-family:Raleway;
                 height: 50px;
                 line-height: 35px;
                 font-size:11px !important;
@@ -51,41 +43,36 @@
                 font-weight: bold !important;
                 letter-spacing: 1px !important;
             }
+            .lockscreen-wrapper {
+              text-align: center;
+            }
+            .lockscreen-logo {
+              margin: 100px 0 50px 0;
+            }
             .btn:hover, a.btn:active {
                 color: #081742 !important;
                 background-color: #F47D08 !important;
             }
-            .alert-info, .alert-danger {
-                background-color: #081742;
-                border-color: transparent;
-                border: 0;
-                color: white;
-            }
-            a.btn:visited, a.btn:active {
-                color: none !important;
-            }        
             .btn.active, .btn:active {
               box-shadow: none !important;
             } 
+            a.btn:visited, a.btn:active {
+                color: none !important;
+            }    
             a:visited {
               color: white !important;
-            }      
-          </style>
+            } 
+      </style>
     </ui:define>
     <ui:define name="body">
         <img src="../identity/ext/resources/img/brand-logo.png" alt="Logo" class="brand-logo" />
         <div class="lockscreen-wrapper">
-            <div class="lockscreen-logo error">
-                <b>Error</b>
+            <div class="lockscreen-logo">
+                <b class="message">Logout successful!</b>
             </div>
             <!-- User name -->
-            <div class="lockscreen-name">
-                An unexpected error happened...
-                <br />
-                <b:messages redisplay="true" recursive="true" globalOnly="true" severity="info,warn,error,fatal" />
-                <br />
-            </div>
-            <a class="btn" href="#{request.contextPath}/home.htm">Go to Application page</a>
+            <!--div class="lockscreen-name" style="text-align: center;font-size: 1.2em !important;margin-top: 10px; margin-bottom: 10px;">Thank you for using <b>GLUU</b>.</div-->
+            <a href="login.htm" class="btn">Sign in Again</a>
         </div>
     </ui:define>
 </ui:composition>

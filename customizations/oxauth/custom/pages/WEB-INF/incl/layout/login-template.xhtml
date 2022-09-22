@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <f:view transient="true" locale="#{language.localeCode}">
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <title>Identity4EO</title>
+            <link rel="icon" href="#{request.contextPath}/servlet/favicon" type='image/x-icon' />
+            <link type="text/css" rel="stylesheet" href="#{oxAuthConfigurationService.getCssLocation()}/style.css" />
+            <link type="text/css" rel="stylesheet" href="#{oxAuthConfigurationService.getCssLocation()}/bootstrap.min.css" />
+            <link rel="stylesheet" href="#{oxAuthConfigurationService.getCssLocation()}/fontawesome.min.css" />
+            <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" />
+
+            <script src="#{oxAuthConfigurationService.getJsLocation()}/jquery-3.4.1.min.js" />
+            <script src="#{oxAuthConfigurationService.getJsLocation()}/bootstrap.min.js" />
+            <script src="#{oxAuthConfigurationService.getJsLocation()}/platform.js" />
+            <style>
+                @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+                @import url('https://fonts.googleapis.com/css?family=Raleway');
+                * {
+                    font-family: open sans;
+                }
+                body {
+	                margin-bottom: 3% !important;
+                    background-color: #081742;
+                }
+                .footer {
+	                position: fixed;
+                    bottom: 0;
+                    width: 100%;
+                    color: white;
+                    height: 55px;
+                    background-color: #00BE79;
+                    justify-content: center;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                @media screen and (min-height: 720px) {
+                    .footer {
+                        position: absolute;
+                        height: 5px !important;
+                    }
+                }
+                .brand-logo {
+                    position: absolute;
+                    top: 10px;
+                    left: 10px;
+                    width: 100px;
+                }
+                .btn {
+                    width: 320px;
+                    background: #F47D08 !important;
+                    border: 2px solid #F47D08 !important;
+                    border-radius: 0 !important;
+                    color: white;
+                    font-size: 11px !important;
+                    font-family:Raleway;
+                    height: 50px;
+                    line-height: 35px;
+                    font-size:11px !important;
+                    text-transform: uppercase !important;
+                    font-weight: bold !important;
+                    letter-spacing: 1px !important;
+                }
+                .btn:hover, a.btn:active {
+                    color: #081742 !important;
+                    background-color: #F47D08 !important;
+                }
+                a.btn:visited, a.btn:active {
+                    color: none !important;
+                }    
+                a:visited {
+                color: white !important;
+                } 
+        </style>
+        </h:head>
+        <h:body>
+            <div class="body">
+                <ui:insert name="body" />
+            </div>
+        </h:body>
+    </f:view>
+</html>

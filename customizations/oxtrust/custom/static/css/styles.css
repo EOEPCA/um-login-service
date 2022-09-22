@@ -845,3 +845,16 @@ div.wpcf7 p {
 .bg-secondary input[type="text"], .bg-secondary input[type="password"], .bg-secondary input[type="email"], .bg-secondary input[type="tel"], .bg-secondary input[type="date"], .bg-secondary input[type="number"] {
     background: #fff;
 }
+
+.btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #F47D08 !important;
+}
+
+.rf-msg-err, .rf-msgs-err, .rf-msgs-inf {
+	padding-left: 0 !important;
+} 
+
+input[type="submit"]:focus, button[type="submit"]:focus {
+    border: 2px solid black !important;
+}

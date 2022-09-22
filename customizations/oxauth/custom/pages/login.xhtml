@@ -45,7 +45,7 @@
 			  var currentHost = window.location.host;
 			  
 			  if (refHost == currentHost) {
-				regURL = "https://"+window.location.host+"/identity/register.htm";
+				regURL = "https://"+window.location.host+"/identity/register";
 				if (ref.indexOf(regURL) !== -1) {
 					var dest = getCallbackCookie();
 					if (dest !== "None") {
@@ -70,13 +70,13 @@
 			<link rel='stylesheet' id='ebor-theme-styles-css'  href='ext/resources/css/ebor-theme-styles.css' type='text/css' media='all' />
 			<link rel='stylesheet' id='ebor-fonts-css'  href='ext/resources/css/fonts.css' type='text/css' media='all' />
 
-			<link rel='stylesheet' id='ebor-style-inline-css'  href='ext/resources/css/eoepca-inline.css' type='text/css' media='all' />
+			<link rel='stylesheet' id='ebor-style-inline-css'  href='ext/resources/css/id4eo-inline.css' type='text/css' media='all' />
 			<link rel='stylesheet' id='ebor-style-css'  href='ext/resources/css/styles.css' type='text/css' media='all' />
 		  <link rel='stylesheet' id='custom' href='ext/resources/css/login.css' type='text/css' media='all' />
 		</h:head>
         <title><h:outputText value="Identity4EO Login"/></title>
 	   <h:body>
-       <a class="brand-logo"><img src="ext/resources/img/esa.png" alt="Logo"/></a>
+       <a class="brand-logo"><img src="ext/resources/img/brand-logo.png" alt="Logo"/></a>
 		   <div class="perm-fixed-nav">
 				<div class="main-container">
 					<div id="content" class="col-md-4 login-form">
@@ -111,7 +111,7 @@
 												<div class="gradient contact-button green span2 offset3">
 													<div id="submit_block" class="login_input">
 														<h:commandButton id="loginButton" 
-																		 value="Login"
+																		 value="Sign in"
                                      styleClass="btn"
 																		 action="#{authenticator.authenticate}"/>
 													</div>
@@ -126,9 +126,23 @@
 											</li>
 											<li class="row-fluid">
 												<div id="identity" class="span9"> 
-												Need a EOEPCA account? <a class="need-account,register" href="../../identity/register.htm" target="_blank">Register!</a>
+												Need a Identity4EO account? <a class="need-account,register" href="../../identity/register.htm" target="_blank">Register!</a>
 												</div>
 											</li>
+											<s:div style="font-size:60%; margin-top: 20px">
+												<p>
+													<h:outputText value="Make sure to read and accept our"/>
+													<a target="_blank" href="/oxauth/ext/resources/policy/id4eo_privacy.html">
+														<h:outputText
+																value="Privacy Policy"/>
+													</a>
+													<h:outputText value=" and "/>
+													<a target="_blank" href="/oxauth/ext/resources/terms/TOS.html">
+														<h:outputText
+																value="Terms of Service"/>
+													</a>
+												</p>
+											</s:div>
 										</ul>
 									</div>
 								</h:panelGroup>

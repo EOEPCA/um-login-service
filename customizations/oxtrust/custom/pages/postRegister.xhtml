@@ -42,17 +42,18 @@
             .lockscreen-wrapper {
               text-align: center;
             }
-            .lockscreen-logo {
-              margin-top: 10%;
-              margin-bottom: 10px !important;
+            .lockscreen-logo { 
+              margin: 100px 0 50px 0;
             }
             .btn:hover, a.btn:active {
                 color: #081742 !important;
                 background-color: #F47D08 !important;
-                border: 2px solid white !important;
             }
             a.btn:visited, a.btn:active {
                 color: none !important;
+            } 
+            .btn.active, .btn:active {
+              box-shadow: none !important;
             } 
             a:visited {
               color: white !important;
@@ -64,8 +65,8 @@
         <section class="content">
             <div class="lockscreen-wrapper">
                 <div class="lockscreen-logo">
-                    <h:outputText styleClass="message" escape="false" value="#{registerPersonAction.postRegistrationInformation}" />
-                </div>    
+<h:outputText styleClass="message" escape="false" rendered="#{registerPersonAction.postRegistrationInformation eq 'You successfully registered. Enjoy!' or 'Registration failed. Please try again, or contact the system administrator.'}" value="#{registerPersonAction.postRegistrationInformation}" />
+                    <h:outputText styleClass="message" escape="false" rendered="#{registerPersonAction.postRegistrationInformation eq 'You successfully registered. Please contact site administration to enable your account.'}" value="A confirmation e-mail has been sent to your address." />                </div>    
                 <a href="login.htm" class="btn">Sign in</a>
                 <!--window.close no longer works on chrome/firefox-->
                 <!--<a onclick="window.close();" class="btn">Sign in</a>-->
