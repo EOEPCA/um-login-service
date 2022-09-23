@@ -7,7 +7,7 @@
     </f:metadata>
 
     <ui:define name="head">
-        <meta name="description" content="Identity4EO" />
+        <meta name="description" content="EOEPCA" />
         <script type="text/javascript" src="../identity/ext/resources/js/jquery-1.12.4.min.js"></script>
         <script type='text/javascript' src='../identity/ext/resources/js/bootstrap.min.js'></script>
         <script type='text/javascript' src='../identity/ext/resources/js/scripts.js'></script>
@@ -18,7 +18,7 @@
         <link rel='stylesheet' id='ebor-lato-font-css' href='https://fonts.googleapis.com/css?family=Lato%3A300%2C400&#038;ver=4.8' type='text/css' media='all' />
         <link rel='stylesheet' id='ebor-bootstrap-css' href='../identity/ext/resources/css/bootstrap.css' type='text/css' media='all' />
         <link rel='stylesheet' id='ebor-fonts-css' href='../identity/ext/resources/css/fonts.css' type='text/css' media='all' />
-        <link rel='stylesheet' id='ebor-style-inline-css' href='../identity/ext/resources/css/id4eo-inline.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='ebor-style-inline-css' href='../identity/ext/resources/css/eoepca-inline.css' type='text/css' media='all' />
         <link rel='stylesheet' id='ebor-style-css' href='../identity/ext/resources/css/styles.css' type='text/css' media='all' />
         <link rel='stylesheet' id='ebor-style-css' href='../identity/ext/resources/css/register.css' type='text/css' media='all' />
         <ui:fragment rendered="#{not registerPersonAction.captchaDisabled}">
@@ -26,7 +26,7 @@
         </ui:fragment>
     </ui:define>
     <title>
-        <h:outputText value="Identity4EO Register" />
+        <h:outputText value="EOEPCA Register" />
     </title>
     <ui:define name="body">
         <script type="text/javascript">
@@ -76,10 +76,6 @@
                                                                 <h:message id="custAttrValidationMessage" for="custAttrInput" styleClass="rf-msg-det rf-msg-err" />
                                                                 <h:outputText value="" />
                                                             </h:inputText>
-                                                            <h:selectOneMenu value="#{_custAttr.value}" rendered="#{not _custAttr.readonly and (_custAttr.metadata.dataType ne 'DATE') and (_custAttr.metadata.displayName eq 'Gender, male or female') }">
-                                                                <f:selectItem itemValue="female" itemLabel="female" />
-                                                                <f:selectItem itemValue="male" itemLabel="male" />
-                                                            </h:selectOneMenu>
                                                             <h:selectOneMenu  value="#{_custAttr.value}" label="User Type" tabindex="#{_custAttrIdx + 1}" rendered="#{not _custAttr.readonly and (_custAttr.metadata.name eq 'userType')}" required="true" requiredMessage="User Type is required.">
                                                                 <f:selectItem itemLabel="General" itemValue="general" />
                                                                 <f:selectItem itemLabel="Research" itemValue="research" />
@@ -87,8 +83,6 @@
                                                             </h:selectOneMenu>
                                                             <h:message for="custAttrInput" />
                                                             <h:outputText id="custIdText" rendered="#{_custAttr.readonly}" size="40" value="#{_custAttr.value}"></h:outputText>
-                                                            <!-- Date Attribute -->
-                                                            <rich:calendar datePattern="EEE MMM dd HH:mm:ss Z yyyy" readonly="#{_custAttr.readonly}" rendered="#{not _custAttr.readonly and (_custAttr.metadata.dataType eq 'DATE')}" value="#{_custAttr.value}" />
                                                         </ox:decorate>
                                                         <rich:tooltip rendered="#{((not empty _custAttr) and (not empty _custAttr.metadata) and ( not empty _custAttr.metadata.gluuTooltip))}" value="#{_custAttr.metadata.gluuTooltip}" />
                                                     </a4j:outputPanel>

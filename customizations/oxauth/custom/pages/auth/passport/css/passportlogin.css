@@ -5,7 +5,9 @@
 }
 
 body {
-  background-color: lightgrey;
+  background-image: url(ext/resources/img/background.png);
+  background-size: cover;
+  background-color: black;
 }
 
 .brand-logo {
@@ -17,14 +19,14 @@ body {
 
 input[type="submit"],
 button[type="submit"] {
-    border: 2px solid #035a8b;
+    border: none;
     background: #035a8b;
 }
 
 input[type="submit"]:hover {
   color: lightgrey;
   background-color: #035a8b;
-  border: 2px solid lightgrey;
+  border: 1px solid lightgrey;
 }
 
 .btn {
@@ -119,3 +121,11 @@ input[type="number"]:focus {
   flex-direction: row;
   align-items: flex-start;
 }
+
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+outline:none;
+}
+
+.btn.active, .btn:active {
+              box-shadow: none !important;
+            }

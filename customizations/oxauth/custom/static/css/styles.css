@@ -803,7 +803,7 @@ div.wpcf7-validation-errors,
 	padding: 10px;
 	background-color: #fcf8e3;
 	color: #c09853;
-	border: 2px solid #faebcc;
+	border: 2px solid #faebcc;
 }
 div.wpcf7-mail-sent-ok {
 	margin: 0;
@@ -848,7 +848,7 @@ div.wpcf7 p {
 
 .btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary {
     color: #fff;
-    background-color: #F47D08 !important;
+    background-color: #035a8b !important;
 }
 
 .rf-msg-err, .rf-msgs-err, .rf-msgs-inf {
@@ -856,5 +856,5 @@ div.wpcf7 p {
 } 
 
 input[type="submit"]:focus, button[type="submit"]:focus {
-    border: 2px solid black !important;
+    outline: 2px solid black !important;
 }
