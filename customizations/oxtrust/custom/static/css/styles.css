@@ -856,5 +856,15 @@ div.wpcf7 p {
 } 
 
 input[type="submit"]:focus, button[type="submit"]:focus {
-    border: 2px solid black !important;
+	outline: 1px solid black !important;
+}
+
+.btn:focus {
+	color: lightgrey;
+}
+
+body {
+	background-image: url(/identity/ext/resources/img/background.jpg);
+	background-size: cover;
+	background-color: black;
 }
