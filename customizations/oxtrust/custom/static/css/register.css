@@ -5,7 +5,8 @@
 }
 
 body {
-  background-image: url(/identity/ext/resources/img/background.jpg);
+background-image: url(/identity/ext/resources/img/background.jpg);
+background-repeat: no-repeat;
   background-size: cover;
   background-color: black;
 }
@@ -79,7 +80,7 @@ input[type="checkbox"] {
 
 @media (max-width: 991px) {
   #content {
-    margin-top: 70px; 
+    margin-top: 125px; 
     margin-bottom: 0;
   }
 }

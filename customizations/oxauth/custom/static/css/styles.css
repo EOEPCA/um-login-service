@@ -214,6 +214,7 @@ ul.social-icons {
 }
 html, body {
 	overflow-x: hidden;
+	overflow-y: auto !important;
 }
 .admin-bar nav.fixed, 
 .admin-bar nav.absolute {

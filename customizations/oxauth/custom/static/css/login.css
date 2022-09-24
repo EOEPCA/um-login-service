@@ -5,7 +5,8 @@
 }
 
 body {
-  background-image: url(/oxauth/ext/resources/img/background.jpg);
+ background-repeat: no-repeat;
+background-image: url(/oxauth/ext/resources/img/background.jpg);
   background-size: cover;
   background-color: black;
 }

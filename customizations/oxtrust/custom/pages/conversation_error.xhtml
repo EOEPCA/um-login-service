@@ -72,7 +72,13 @@
             }        
             a:visited {
               color: white !important;
-            }               
+            }   
+            a {
+                color: white;
+                text-decoration: underline;
+                margin-top: 20px !important;
+                font-size: 1.2em;
+            }            
           </style>
     </ui:define>
     <ui:define name="body">
@@ -88,7 +94,7 @@
                 <b:messages redisplay="true" recursive="true" globalOnly="true" severity="info,warn,error,fatal" />
                 <br /> 
             </div>
-            <a class="btn" href="#{request.contextPath}/home.htm">Go to Application Page</a>
+            <a href="/">Go to application page</a>
         </div>
     </ui:define>
 </ui:composition>

@@ -68,7 +68,7 @@ input[type="number"]:focus {
 
 @media (max-width: 991px) {
   .login-form {
-    margin-top: 70px; 
+    margin-top: 125px; 
   }
 }
 
