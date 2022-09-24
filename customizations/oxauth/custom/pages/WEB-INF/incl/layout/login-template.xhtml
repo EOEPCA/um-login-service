@@ -10,6 +10,7 @@
             <link type="text/css" rel="stylesheet" href="#{oxAuthConfigurationService.getCssLocation()}/bootstrap.min.css" />
             <link rel="stylesheet" href="#{oxAuthConfigurationService.getCssLocation()}/fontawesome.min.css" />
             <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" />
+			<link rel='stylesheet' id='ebor-style-css'  href='ext/resources/css/styles.css' type='text/css' media='all' />
 
             <script src="#{oxAuthConfigurationService.getJsLocation()}/jquery-3.4.1.min.js" />
             <script src="#{oxAuthConfigurationService.getJsLocation()}/bootstrap.min.js" />
@@ -19,61 +20,43 @@
                 @import url('https://fonts.googleapis.com/css?family=Raleway');
                 * {
                     font-family: open sans;
-                }
-                body {
-                    background-image: url(/oxauth/ext/resources/img/background.jpg);
-                    background-size: cover;
-                    background-color: black;
-                }
-                .footer {
-	                position: fixed;
-                    bottom: 0;
-                    width: 100%;
-                    color: white;
-                    height: 55px;
-                    background-color: #00BE79;
-                    justify-content: center;
-                    margin-left: auto;
-                    margin-right: auto;
-                }
-
-                @media screen and (min-height: 720px) {
-                    .footer {
-                        position: absolute;
-                        height: 5px !important;
-                    }
-                }
+                }        
                 .brand-logo {
                     position: absolute;
                     top: 10px;
                     left: 10px;
                     width: 100px;
                 }
-                .btn {
-                    width: 320px;
-                    background: #035a8b !important;
-                    border: 2px solid #035a8b !important;
-                    border-radius: 0 !important;
+                .wrapper {
+                  text-align: center;
+                }
+                .error-title {
+                    margin: 100px 0 20px 0;
                     color: white;
-                    font-size: 11px !important;
-                    font-family:Raleway;
-                    height: 50px;
-                    line-height: 35px;
-                    font-size:11px !important;
-                    text-transform: uppercase !important;
-                    font-weight: bold !important;
-                    letter-spacing: 1px !important;
+                    font-size: 1.8em;
+                    font-weight: bold;
                 }
-                .btn:hover, a.btn:active {
-                    color: lightgrey !important;
-                    background-color: #035a8b !important;
+                .error-message {
+                    color: white;
+                    text-align: center;
+                    font-size: 1.4em;
+                    margin-bottom: -5px;
                 }
-                a.btn:visited, a.btn:active {
-                    color: none !important;
-                }    
+                .alert-info, .alert-danger {
+                    background-color: lightgrey;
+                    border-color: transparent;
+                    border: 0;
+                    color: white;
+                }
                 a:visited {
-                color: white !important;
+                  color: white !important;
                 } 
+                a {
+                    color: white;
+                    text-decoration: underline;
+                    margin-top: 20px !important;
+                    font-size: 1.2em;
+                }
         </style>
         </h:head>
         <h:body>
