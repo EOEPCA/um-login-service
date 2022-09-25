@@ -43,7 +43,7 @@
               text-align: center;
             }
             .lockscreen-logo { 
-              margin: 100px 0 50px 0;
+              margin: 100px 0 25px 0;
             }
             .btn:hover, a.btn:active {
                 color: lightgrey !important;
@@ -58,12 +58,6 @@
             a:visited {
               color: white !important;
             }
-            a {
-                color: white;
-                text-decoration: underline;
-                margin-top: 20px !important;
-                font-size: 1.2em;
-            }
       </style>
     </ui:define>
     <ui:define name="body">
@@ -73,7 +67,7 @@
                 <div class="lockscreen-logo">
 <h:outputText styleClass="message" escape="false" rendered="#{registerPersonAction.postRegistrationInformation eq 'You successfully registered. Enjoy!' or 'Registration failed. Please try again, or contact the system administrator.'}" value="#{registerPersonAction.postRegistrationInformation}" />
                     <h:outputText styleClass="message" escape="false" rendered="#{registerPersonAction.postRegistrationInformation eq 'You successfully registered. Please contact site administration to enable your account.'}" value="A confirmation e-mail has been sent to your address." />                </div>    
-                <a href="login.htm">Sign in</a>
+                <a href="login.htm" class="btn">Sign in</a>
             </div>
         </section>
     </ui:define>

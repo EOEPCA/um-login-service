@@ -19,10 +19,11 @@
             * {
                 font-family: open sans;
             }
-            @media (max-width: 991px)
+            @media (max-width: 991px) {
                 #content {
-                margin-top: 125px;
+                margin-top: 200px !important;
             }
+        }
             .message {
                 color: white;
                 font-size: 1.7em;
@@ -32,7 +33,7 @@
                 position: absolute;
                 top: 10px;
                 left: 10px;
-                width: 150px;
+                width: 100px;
             }
             .btn {
                 width: 320px;
@@ -59,6 +60,10 @@
             a:visited {
               color: white !important;
             }
+            .row {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
       </style>
     </ui:define>
 
@@ -71,20 +76,20 @@
                                         <div class="col-md-2 col-sm-2 col-xs-2"></div>
                                         <div class="col-md-8 col-sm-8 col-xs-8">
                                                 <h1
-                                                        style="color: #035a8b; font-weight: 400; font-size: 3em; magin-top: 2%; margin-bottom: 5%"
+                                                        style="color: white; font-weight: 400; font-size: 2em; margin-bottom: 20px"
                                                         class="text-center">Registration completed</h1>
                                         </div>
                                         <div class="col-md-2 col-sm-2 col-xs-2"></div>
                                 </div>
                                 <div class="row"
                                         style="margin-left: 20%; margin-right: 20%">
-                                        <div style="color: white; font-size: 1.5em; margin-bottom: 5%" class="text-center">
+                                        <div style="color: white; font-size: 1.5em; margin-bottom: 20px" class="text-center">
                                                 <h:outputText escape="false"
-                                                        value="#{msg['registration.confirm']}" />
+                                                        value="Registration process completed." />
                                         </div>
                                         <div style="margin-top: 1%; color: white; font-size: 2em;"
                                                 class="text-center">
-                                                <a class="btn" href="">Sign in</a>
+                                                <a class="btn" href="/">Sign in</a>
                                         </div>
                                 </div>
                         </h:panelGroup>
@@ -94,20 +99,20 @@
                                         <div class="col-md-2 col-sm-2 col-xs-2"></div>
                                         <div class="col-md-8 col-sm-8 col-xs-8">
                                                 <h1
-                                                        style="color: #035a8b; font-weight: 400; font-size: 3em; margin-top: 2%; margin-bottom: 5%"
+                                                        style="color: white; font-weight: 400; font-size: 2em; margin-bottom: 20px"
                                                         class="text-center">Invalid code</h1>
                                         </div>
                                         <div class="col-md-2 col-sm-2 col-xs-2"></div>
                                 </div>
                                 <div class="row"
                                         style="margin-left: 20%; margin-right: 20%;">
-                                        <div style="color: white; font-size: 1.5em; margin-bottom: 5%" class="text-center">
+                                        <div style="color: white; font-size: 1.5em; margin-bottom: 20px" class="text-center">
                                                 <h:outputText escape="false"
                                                         value="Registration code is not valid or expired. Please contact site administator." />
                                         </div>
                                         <div style="margin-top: 1%; color: white; font-size: 2em;"
                                                 class="text-center">
-                                                <a class="btn" href="../..">Back to application
+                                                <a class="btn" href="/">Back to application
                                                         page</a>
                                         </div>
                                 </div>

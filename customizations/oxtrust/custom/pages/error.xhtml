@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:a4j="http://richfaces.org/a4j" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:b="http://bootsfaces.net/ui" xmlns:ox="http://xmlns.jcp.org/jsf/composite/ox" xmlns:rich="http://richfaces.org/rich" xmlns:richext="http://xmlns.jcp.org/jsf/composite/richext" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="/WEB-INF/incl/layout/fullWidthEmpty.xhtml">
     <ui:define name="head">
-        <style type="text/css">
+        <link href="#{oxTrustConfigurationService.cssLocation}/../theme/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="#{oxTrustConfigurationService.cssLocation}/../theme/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+        <link href="#{oxTrustConfigurationService.cssLocation}/../theme/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+        <link href="#{oxTrustConfigurationService.cssLocation}/../theme/plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />
+        <link href="#{oxTrustConfigurationService.cssLocation}/../theme/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
+        <link href="#{oxTrustConfigurationService.cssLocation}/../theme/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+        <style>
             @import url('https://fonts.googleapis.com/css?family=Open+Sans');
             @import url('https://fonts.googleapis.com/css?family=Raleway');
             * {
@@ -17,9 +23,9 @@
               text-align: center;
             }
             .error-title {
-                margin: 100px 0 20px 0;
+                margin: 125px 0 20px 0;
                 color: white;
-                font-size: 1.8em;
+                font-size: 1.7em;
                 font-weight: bold;
             }
             .error-message {
@@ -41,23 +47,28 @@
                 color: white;
                 text-decoration: underline;
                 margin-top: 20px !important;
-                font-size: 1.2em;
+                font-size: 16px !important;
             }
-          </style>
+            a:hover {
+                color: #0090FF !important;
+              }
+        </style>
     </ui:define>
     <ui:define name="body">
-        <img src="ext/resources/img/brand-logo.png" alt="Logo" class="brand-logo" />
-        <div class="wrapper">
+        <img src="../identity/ext/resources/img/brand-logo.png" alt="Logo" class="brand-logo" />
+        <div class="lockscreen-wrapper">
             <div class="error-title">
                 Error
             </div>
-            <div class="error-message">
+            <div>
                 <p>
-                    <h4 style="margin-bottom: 20px;">An unexpected error happened...</h5>
+                    <h5 class="error-message" style="margin-bottom: 20px;">An unexpected error happened...</h5>
                   </p>
+                  <div class="body">
                 <b:messages redisplay="true" recursive="true" globalOnly="true" severity="info,warn,error,fatal" />
+                  </div>
             </div>
-            <a href="/">Go to application page</a>
+            <a href="/" style="color: white;text-decoration: underline;margin-top: 20px !important;">Go to application page</a>
         </div>
     </ui:define>
 </ui:composition>
