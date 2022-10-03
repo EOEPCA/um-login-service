@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: #081742;
+  background-color: lightgrey;
 }
 
 .brand-logo {
@@ -22,9 +22,9 @@ button[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  color: #081742;
+  color: lightgrey;
   background-color: #5986a5;
-  border: 2px solid #081742;
+  border: 2px solid lightgrey;
 }
 
 .btn {
@@ -55,7 +55,7 @@ input[type="email"]:focus,
 input[type="tel"]:focus, 
 input[type="date"]:focus, 
 input[type="number"]:focus {
-  outline: 1px solid #081742;
+  outline: 1px solid lightgrey;
 }
 
 .login-form {
@@ -68,7 +68,7 @@ input[type="number"]:focus {
 
 @media (max-width: 991px) {
   .login-form {
-    margin-top: 70px; 
+    margin-top: 125px; 
   }
 }
 
