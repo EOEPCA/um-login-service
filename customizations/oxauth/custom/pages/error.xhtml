@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ox="http://xmlns.jcp.org/jsf/composite/ox"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:richext="http://xmlns.jcp.org/jsf/composite/richext"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/incl/layout/fullWidthEmpty.xhtml">
+
+	<ui:define name="head">
+		<style>
+            @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+            @import url('https://fonts.googleapis.com/css?family=Raleway');
+            * {
+                font-family: open sans;
+            }        
+            .brand-logo {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                width: 100px;
+            }
+            .wrapper {
+              text-align: center;
+            }
+            .error-title {
+                margin: 125px 0 20px 0;
+                color: white;
+                font-size: 1.7em;
+                font-weight: bold;
+            }
+            .error-message {
+                color: white;
+                text-align: center;
+                font-size: 1.4em;
+                margin-bottom: -5px;
+            }
+            .alert-info, .alert-danger {
+                background-color: lightgrey;
+                border-color: transparent;
+                border: 0;
+                color: white;
+            }
+            a:visited {
+              color: white !important;
+            } 
+            a {
+                color: white;
+                text-decoration: underline;
+                margin-top: 20px !important;
+                font-size: 16px !important;
+            }
+            a:hover {
+                color: #0090FF !important;
+              }
+        </style>
+	</ui:define>
+	<ui:define name="body">
+        <img src="../identity/ext/resources/img/brand-logo.png" alt="Logo" class="brand-logo" />
+        <div class="lockscreen-wrapper">
+            <div class="error-title">
+                Error
+            </div>
+            <div>
+                <p>
+                    <h5 class="error-message" style="margin-bottom: 20px;">An unexpected error happened...</h5>
+                  </p>
+                  <div class="body">
+                <b:messages redisplay="true" recursive="true" globalOnly="true" severity="info,warn,error,fatal" />
+                  </div>
+            </div>
+            <a href="/" style="color: white;text-decoration: underline;margin-top: 20px !important;">Go to application page</a>
+        </div>
+	</ui:define>
+</ui:composition>
