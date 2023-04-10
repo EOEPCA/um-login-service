@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume # Create PV 
+metadata:
+  name: {{ include "postgres.name" . }}-volume
+  labels:
+    {{- include "postgres.labels" . | nindent 4 }}
+    type: {{ .Values.persistence.type }}
+spec:
+  storageClassName: {{ .Values.persistence.storageClassName }}
+  capacity:
+    storage: {{ .Values.persistence.storage }} # Sets PV's size
+  accessModes:
+    {{- with .Values.persistence.accessModes }}
+    {{- tpl . $ | nindent 4 }}
+    {{- end }}
+  hostPath:
+    path: {{ .Values.persistence.hostPath.path }} # Sets PV's host path

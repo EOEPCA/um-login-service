@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim # Create PVC
+metadata:
+  name: {{ include "postgres.name" . }}-volume-claim # Sets PVC's name
+  labels:
+    {{- include "postgres.labels" . | nindent 4 }}
+spec:
+  storageClassName: {{ .Values.persistence.storageClassName }}
+  accessModes:
+    {{- with .Values.persistence.accessModes }}
+    {{- tpl . $ | nindent 4 }}
+    {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.storage }} # Sets PVC's size
