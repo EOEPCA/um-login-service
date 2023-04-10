@@ -60,10 +60,12 @@ opendj:
   persistence:
     #persistence docker image and policy
     imagePullPolicy: Always
-    image: eoepca/um-login-persistence:v0.9.0
+    image: eoepca/um-login-persistence:v1.1.1
     #COIH Client ID and Secret for passport login
     coihClientIDv: ""
     coihClientSecretv: ""
+    umaResourceLifetime: UMA_RESOURCE_LIFETIME
+    umaResourceLifetimev: 2147483647
   # VolumeClaim values
   volumeClaim:
     name: um-login-service-opendj-pvc

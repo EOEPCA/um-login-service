@@ -36,3 +36,5 @@ spec:
           value: '{{ .Values.persistence.coihClientIDv }}'
         - name: {{ .Values.persistence.coihClientSecret }}
           value: {{ .Values.persistence.coihClientSecretv }}
+        - name: {{ .Values.persistence.umaResourceLifetime }}
+          value: {{ .Values.persistence.umaResourceLifetimev | quote }}
