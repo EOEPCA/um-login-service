@@ -139,4 +139,3 @@ nginx:
       hosts:
         - demoexample.gluu.org
   resources: {}
-
