@@ -10,6 +10,7 @@ configMap:
   postgresUser: keycloak
   postgresPassword: 123456
   pgPassword: 123
+  pgData: /var/lib/postgresql/data/keycloak
 
 # ---------------------------------------------
 # Variable used in pv and pvc template
@@ -67,7 +68,7 @@ deployment:
   volumes: |
     - name: postgresdata
       persistentVolumeClaim:
-        claimName: postgres-volume-claim
+        claimName: eoepca-userman-pvc
   # Liveness probe configuration
   livenessProbe: {}
     # httpGet:
@@ -124,3 +125,7 @@ serviceAccount:
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
+
+volumeClaim:
+  name: eoepca-userman-pvc
+  create: false
