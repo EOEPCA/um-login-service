@@ -34,7 +34,6 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "keycloak.labels" -}}
-app: {{ include "keycloak.name" . }}
 helm.sh/chart: {{ include "keycloak.chart" . }}
 {{ include "keycloak.selectorLabels" . }}
 {{- if .Chart.AppVersion }}

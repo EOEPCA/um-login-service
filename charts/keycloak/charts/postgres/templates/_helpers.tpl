@@ -34,7 +34,6 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "postgres.labels" -}}
-app: {{ include "postgres.name" . }}
 helm.sh/chart: {{ include "postgres.chart" . }}
 {{ include "postgres.selectorLabels" . }}
 {{- if .Chart.AppVersion }}

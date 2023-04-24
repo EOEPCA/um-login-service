@@ -52,7 +52,7 @@ deployment:
     - name: KEYCLOAK_ADMIN
       value: "admin"
     - name: KEYCLOAK_ADMIN_PASSWORD
-      value: "admin"
+      value: "admin_Abcd1234#"
     - name: KC_PROXY
       value: "edge"
     - name: "KC_HOSTNAME_STRICT"
@@ -116,24 +116,16 @@ ingress:
   enabled: true
   className: ""
   annotations:
-    traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.tls.certresolver: myresolver
+    cert-manager.io/cluster-issuer: letsencrypt
   hosts:
-    - host: keycloak.127-0-0-1.nip.io
+    - host: keycloak.local.eoepca.org
       paths:
         - path: /
           pathType: Prefix
-         
-  tls: {}
-    # certResolver: myresolver
-    # domains:
-    #   - main: keycloak.127-0-0-1.nip.io
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
-
-
+  tls:
+    - secretName: keycloak-tls-certificate
+      hosts:
+        - keycloak.local.eoepca.org
 # ---------------------------------------
 # Variable group used in ingress template
 # ---------------------------------------

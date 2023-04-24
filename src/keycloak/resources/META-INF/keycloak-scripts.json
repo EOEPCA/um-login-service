@@ -1,0 +1,9 @@
+{
+    "policies": [
+        {
+            "name": "Ownership policy script",
+            "fileName": "ownership-policy-script.js",
+            "description": "Defines that only the resource owner is allowed access"
+        }
+    ]
+}

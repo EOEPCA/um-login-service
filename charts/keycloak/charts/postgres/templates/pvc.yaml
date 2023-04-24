@@ -1,9 +1,15 @@
+{{ if .Values.volumeClaim.create }}
+---
 apiVersion: v1
-kind: PersistentVolumeClaim # Create PVC
+kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "postgres.name" . }}-volume-claim # Sets PVC's name
+  name: {{ .Values.volumeClaim.name }}
+  namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "postgres.labels" . | nindent 4 }}
+    eoepca_type: userman
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
   storageClassName: {{ .Values.persistence.storageClassName }}
   accessModes:
@@ -12,4 +18,8 @@ spec:
     {{- end }}
   resources:
     requests:
-      storage: {{ .Values.persistence.storage }} # Sets PVC's size
+      storage: {{ .Values.persistence.storage }}
+  selector:
+    matchLabels:
+      eoepca_type: userman
+{{ end }}
