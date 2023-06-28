@@ -202,11 +202,10 @@ The following Open-Source Software is required to support the deployment and int
 * Administration Service
 ** oxTrust - Gluu Inc. - https://github.com/GluuFederation/oxTrust
 * Back-end Service
-** OpenDJ/LDAP Distribution - https://github.com/GluuFederation/docker-opendj
+** OpenDJ/LDAP Distribution - https://github.com/GluuFederation/opendj
 * OIDC Compliant, extensible Relying Party
 ** Passport.js - https://github.com/jaredhanson/passport
 * Deployment, Configuration and Integration Tooling
 ** Persistence system load/backup/restore components - https://github.com/EOEPCA/um-login-persistence
 ** Kubernetes secret and config Tooling - https://github.com/GluuFederation/gluu-docker/tree/3.1.6/examples/kubernetes/minikube
 ** Reverse Proxy exposing API interfaces - Nginx/Ingress
-

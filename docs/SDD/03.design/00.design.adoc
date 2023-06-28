@@ -47,7 +47,7 @@ All information handled by this service is read/written to the LDAP instance dep
 === Applicable Resources
 
 * oxAuth (gluu) - https://gluu.org/docs/de/reference/oxauth/
-* oxAuth (gluu @ Github) - https://github.com/GluuFederation/docker-oxauth
+* oxAuth (gluu @ Github) - https://github.com/GluuFederation/oxauth
 
 == Administration Service
 === Overview and Purpose
@@ -88,7 +88,7 @@ All information handled by this service is read/written to the LDAP instance dep
 === Applicable Resources
 
 * oxTrust (gluu) - https://gluu.org/docs/de/reference/oxtrust/
-* oxTrust (gluu @ Github) - https://github.com/GluuFederation/docker-oxtrust
+* oxTrust (gluu @ Github) - https://github.com/GluuFederation/oxtrust
 
 == Back-End Service
 === Overview and Purpose
@@ -115,7 +115,7 @@ There is no configuration available for this service at this time
 === Applicable Resources
 
 - Persistance, LDAP - Gluu - https://gluu.org/docs/gluu-server/reference/persistence/#ldap
-- OpenDJ, docker - https://github.com/GluuFederation/docker-opendj
+- OpenDJ, docker - https://github.com/GluuFederation/opendj
 
 == Relying-Party Service
 === Overview and Purpose
@@ -145,7 +145,7 @@ Direct customization without the "persistance" module is not possible at this ti
 - Passport.js - http://www.passportjs.org/
 - Passport (Github) - https://github.com/jaredhanson/passport
 - oxPassport (gluu) - https://gluu.org/docs/de/reference/oxpassport/
-- oxPassport (gluu @ Github) - https://github.com/GluuFederation/docker-oxPassport
+- oxPassport (gluu @ Github) - https://github.com/GluuFederation/oxPassport
 
 == Logging
 === Design

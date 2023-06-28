@@ -48,7 +48,7 @@ spec:
       containers:
       - name: oxtrust
         imagePullPolicy: Always
-        image: gluufederation/oxtrust:4.1.1_02
+        image: eoepca/oxtrust:4.1.1_02
         ports:
         - containerPort: 8080
         envFrom:

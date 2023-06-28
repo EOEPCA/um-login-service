@@ -17,7 +17,7 @@ spec:
       containers:
       - name: {{ template "login-service.fullname" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        image: gluufederation/{{ .Values.image.repository }}:{{ .Values.image.tag }}
+        image: eoepca/{{ .Values.image.repository }}:{{ .Values.image.tag }}
         resources:
           requests:
             memory: {{ .Values.requests.memory }}
