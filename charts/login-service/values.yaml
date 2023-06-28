@@ -46,7 +46,7 @@ config:
   volumeClaim:
     name: um-login-service-config-pvc
 
-  image: gluufederation/config-init:4.1.1_02
+  image: eoepca/config-init:4.1.1_02
 
 opendj:
   enabled: true
@@ -56,7 +56,7 @@ opendj:
   gluuRedisEnabled: false
   #opendj docker image and policy
   imagePullPolicy: Always
-  image: gluufederation/wrends:4.1.1_01
+  image: eoepca/wrends:4.1.1_01
   persistence:
     #persistence docker image and policy
     imagePullPolicy: Always
@@ -80,7 +80,6 @@ oxpassport:
   enabled: true
   image:
     repository: eoepca/um-login-passport
-    # repository: gluufederation/oxpassport
     tag: v0.1.1
     # tag: 4.0.1_03
     pullPolicy: Always
@@ -89,7 +88,7 @@ oxauth:
   enabled: true
   dynamicStorage: true
   image:
-    # repository gluufederation/oxauth:4.1.1_03
+    # repository eoepca/oxauth:4.1.1_03
     repository: oxauth
     tag: 4.1.1_03
     pullPolicy: Always
@@ -108,7 +107,7 @@ oxtrust:
   gluuMaxRamFraction: 1
   dynamicStorage: true
   image:
-    # repository gluufederation/oxtrust:4.1.1_02
+    # repository eoepca/oxtrust:4.1.1_02
     repository: oxtrust
     tag: 4.1.1_02
     pullPolicy: Always

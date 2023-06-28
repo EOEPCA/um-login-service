@@ -18,7 +18,7 @@ spec:
       containers:
       - name: {{ include "oxtrust.name" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        image: gluufederation/{{ .Values.image.repository }}:{{ .Values.image.tag }}
+        image: eoepca/{{ .Values.image.repository }}:{{ .Values.image.tag }}
         resources:
           requests:
             memory: {{ .Values.requests.memory }}

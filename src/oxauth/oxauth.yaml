@@ -46,7 +46,7 @@ spec:
       containers:
       - name: oxauth
         imagePullPolicy: Always
-        image: gluufederation/oxauth:4.1.1_03
+        image: eoepca/oxauth:4.1.1_03
         ports:
         - containerPort: 8080
         envFrom:
