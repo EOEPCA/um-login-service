@@ -12,7 +12,7 @@ spec:
   tls:
     - hosts:
       - demoexample.gluu.org
-      secretName: login-tls-certificate
+      secretName: tls-certificate
   rules:
   - host: demoexample.gluu.org
     http:
@@ -38,7 +38,7 @@ spec:
   tls:
     - hosts:
       - demoexample.gluu.org
-      secretName: login-tls-certificate
+      secretName: tls-certificate
   rules:
   - host: demoexample.gluu.org
     http:
@@ -64,7 +64,7 @@ spec:
   tls:
     - hosts:
       - demoexample.gluu.org
-      secretName: login-tls-certificate
+      secretName: tls-certificate
   rules:
   - host: demoexample.gluu.org
     http:
@@ -90,7 +90,7 @@ spec:
   tls:
     - hosts:
       - demoexample.gluu.org
-      secretName: login-tls-certificate
+      secretName: tls-certificate
   rules:
   - host: demoexample.gluu.org
     http:
@@ -116,7 +116,7 @@ spec:
   tls:
     - hosts:
       - demoexample.gluu.org
-      secretName: login-tls-certificate
+      secretName: tls-certificate
   rules:
   - host: demoexample.gluu.org
     http:
@@ -142,7 +142,7 @@ spec:
   tls:
     - hosts:
       - demoexample.gluu.org
-      secretName: login-tls-certificate
+      secretName: tls-certificate
   rules:
   - host: demoexample.gluu.org
     http:
@@ -168,7 +168,7 @@ spec:
   tls:
     - hosts:
       - demoexample.gluu.org
-      secretName: login-tls-certificate
+      secretName: tls-certificate
   rules:
   - host: demoexample.gluu.org
     http:
@@ -192,7 +192,7 @@ spec:
   tls:
     - hosts:
       - demoexample.gluu.org
-      secretName: login-tls-certificate
+      secretName: tls-certificate
   rules:
   - host: demoexample.gluu.org
     http:
@@ -220,7 +220,7 @@ spec:
   tls:
     - hosts:
       - demoexample.gluu.org
-      secretName: login-tls-certificate
+      secretName: tls-certificate
   rules:
   - host: demoexample.gluu.org
     http:
