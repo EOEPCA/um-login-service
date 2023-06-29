@@ -134,7 +134,7 @@ nginx:
     hosts:
       - demoexample.gluu.org
     tls: 
-    - secretName: login-tls-certificate
+    - secretName: tls-certificate
       hosts:
         - demoexample.gluu.org
   resources: {}
