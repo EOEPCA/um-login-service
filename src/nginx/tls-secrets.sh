@@ -20,4 +20,4 @@ if [ ! -f ingress.key ]; then
     | base64 --decode > ingress.key
 fi
 
-kubectl create secret tls tls-certificate --key ingress.key --cert ingress.crt
+kubectl create secret tls gluu-tls-certificate --key ingress.key --cert ingress.crt
